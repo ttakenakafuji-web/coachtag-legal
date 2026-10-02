@@ -1,105 +1,401 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>CoachTag — Análise de vídeo de futebol para Mac e iPad</title>
-<meta name="description" content="Criado por um analista campeão da J1 League. Marque lances, desenhe táticas, rastreie jogadores com IA e exporte no Mac e no iPad.">
+<meta name="description" content="Criado por um analista campeão da J1 League. Marcação, desenho tático, rastreamento automático com IA e exportação no Mac e no iPad.">
 <meta property="og:title" content="CoachTag — Análise de vídeo de futebol para Mac e iPad">
-<meta property="og:description" content="Criado por um analista campeão da J1 League. Marque lances, desenhe táticas, rastreie jogadores com IA e exporte no Mac e no iPad.">
+<meta property="og:description" content="Criado por um analista campeão da J1 League. Marcação, desenho tático, rastreamento automático com IA e exportação no Mac e no iPad.">
 <meta property="og:image" content="https://ttakenakafuji-web.github.io/coachtag-legal/img/pt-2.jpg">
 <link rel="icon" href="img/icon.png">
-<link rel="alternate" hreflang="ja" href="https://ttakenakafuji-web.github.io/coachtag-legal/index.html">
+<link rel="alternate" hreflang="ja" href="https://claude.ai/code/artifact/c3b95d0e-bff5-4937-bc76-0c9412130ffd">
 <link rel="alternate" hreflang="en" href="https://ttakenakafuji-web.github.io/coachtag-legal/en.html">
 <link rel="alternate" hreflang="ko" href="https://ttakenakafuji-web.github.io/coachtag-legal/ko.html">
 <link rel="alternate" hreflang="pt-BR" href="https://ttakenakafuji-web.github.io/coachtag-legal/pt.html">
 <link rel="alternate" hreflang="zh-Hans" href="https://ttakenakafuji-web.github.io/coachtag-legal/zh.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
-:root{--ground:#10140f;--panel:#1a2018;--line:#2c3528;--ink:#f3f1e7;--dim:#a6b0a0;--faint:#6d7669;--accent:#f0a63a;--accent-ink:#181008;--good:#5fce8a}
-*{box-sizing:border-box}
-html{background:var(--ground)}
-body{margin:0;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Apple SD Gothic Neo","PingFang SC","Segoe UI",sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased;
- background:repeating-linear-gradient(100deg,rgba(255,255,255,.012) 0 2px,transparent 2px 120px),radial-gradient(ellipse 900px 500px at 82% -6%,rgba(240,166,58,.10),transparent 60%),var(--ground)}
-a{color:inherit}
-img{max-width:100%;height:auto;display:block}
-.wrap{max-width:1120px;margin:0 auto;padding:0 28px}
-header.nav{position:sticky;top:0;z-index:10;background:rgba(16,20,15,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.nav-in{max-width:1120px;margin:0 auto;padding:14px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px}
-.brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:19px;text-decoration:none}
-.brand img{width:30px;height:30px;border-radius:7px}
-.brand em{font-style:normal;color:var(--accent)}
-.langs{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:13px;color:var(--dim)}
-.langs a{text-decoration:none;color:var(--dim)}
-.langs a:hover{color:var(--ink)}
-.langs strong{color:var(--accent);font-weight:600}
-.hero{padding:76px 0 56px;display:grid;grid-template-columns:1fr 1.15fr;gap:52px;align-items:center}
-.eyebrow{font:600 12px ui-monospace,Menlo,monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:10px;margin-bottom:20px}
-.eyebrow:before{content:'';width:22px;height:1px;background:var(--accent)}
-h1{font-size:clamp(32px,4.3vw,52px);line-height:1.2;margin:0 0 20px;font-weight:900;letter-spacing:-.01em;text-wrap:balance}
-h1 em{font-style:normal;color:var(--accent)}
-.lede{color:var(--dim);font-size:16.5px;max-width:48ch;margin:0 0 30px}
-.cta{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-bottom:36px}
-.store-btn{display:inline-block;background:var(--accent);color:var(--accent-ink);text-decoration:none;font-weight:800;font-size:16px;padding:14px 26px;border-radius:10px}
-.store-btn:hover{filter:brightness(1.08)}
-.trial{font-size:13px;color:var(--good);border:1px solid rgba(95,206,138,.4);background:rgba(95,206,138,.08);padding:6px 12px;border-radius:999px}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}
-.stat{padding:16px 14px 0 0}
-.stat b{display:block;color:var(--accent);font:600 18px ui-monospace,Menlo,monospace;margin-bottom:4px}
-.stat span{font-size:12.5px;color:var(--dim);white-space:pre-line}
-.frame{border:1px solid var(--line);background:var(--panel);padding:8px;border-radius:14px;box-shadow:0 30px 80px rgba(0,0,0,.45)}
-.frame img{border-radius:8px}
-section{padding:70px 0}
-.kicker{font:600 12px ui-monospace,Menlo,monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:12px}
-h2{font-size:clamp(23px,2.6vw,32px);line-height:1.35;margin:0 0 40px;text-wrap:balance}
-.feat{display:grid;grid-template-columns:1fr 1.4fr;gap:44px;align-items:center;margin-bottom:64px}
-.feat:nth-child(even) .feat-text{order:2}
-.feat h3{font-size:22px;margin:0 0 12px}
-.feat p{color:var(--dim);margin:0;font-size:15px}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line);border:1px solid var(--line)}
-.cell{background:var(--ground);padding:28px 26px}
-.cell h3{font-size:16.5px;margin:0 0 8px}
-.cell p{margin:0;color:var(--dim);font-size:14px}
-.cred{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:48px}
-.cred blockquote{margin:0 0 14px;font-size:clamp(20px,2.2vw,26px);font-weight:800;line-height:1.5}
-.cred .who{font:12.5px ui-monospace,Menlo,monospace;color:var(--accent)}
-.cred p{color:var(--dim);margin:18px 0 0}
-.plans{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:820px}
-.plan{border:1px solid var(--line);background:var(--panel);border-radius:14px;padding:30px}
-.plan.pro{border-color:rgba(240,166,58,.55)}
-.plan h3{margin:0 0 4px;font-size:20px}
-.plan .price{font:600 22px ui-monospace,Menlo,monospace;color:var(--accent);margin-bottom:14px;min-height:1px}
-.plan ul{margin:0;padding:0;list-style:none;display:grid;gap:8px}
-.plan li{color:var(--dim);font-size:14.5px;display:flex;gap:10px}
-.plan li:before{content:'—';color:var(--accent)}
-.plans-note{color:var(--faint);font-size:13.5px;margin:18px 0 0}
-footer{border-top:1px solid var(--line);padding:40px 0 56px;color:var(--faint);font-size:13px}
-footer .links{display:flex;gap:20px;flex-wrap:wrap;margin-bottom:10px}
-footer a{color:var(--dim)}
-@media (max-width:860px){.nav-in{flex-wrap:wrap}.langs{width:100%}.hero{grid-template-columns:1fr;padding-top:40px}.feat{grid-template-columns:1fr;gap:20px}.feat:nth-child(even) .feat-text{order:0}.grid{grid-template-columns:1fr}.plans{grid-template-columns:1fr}.cred{padding:28px}.wrap,.nav-in{padding-left:16px;padding-right:16px}.stats{grid-template-columns:1fr}.stat{padding-bottom:12px}}
+  :root{
+    --ground:#10140f;
+    --ground-deep:#0a0d09;
+    --panel:#1a2018;
+    --panel-2:#212a1e;
+    --line:#2c3528;
+    --ink:#f3f1e7;
+    --ink-dim:#a6b0a0;
+    --ink-faint:#6d7669;
+    --accent:#f0a63a;
+    --accent-ink:#181008;
+    --good:#5fce8a;
+    --bad:#e9666a;
+    --display:'Inter', -apple-system, sans-serif;
+    --body:'Inter', -apple-system, sans-serif;
+    --mono:'JetBrains Mono', ui-monospace, monospace;
+  }
+
+  *{box-sizing:border-box;}
+  html{background:var(--ground);}
+  body{
+    margin:0;
+    background:var(--ground);
+    color:var(--ink);
+    font-family:var(--body);
+    line-height:1.75;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%;display:block;}
+
+  .wrap{max-width:1120px;margin:0 auto;padding:0 32px;}
+
+  /* subtle pitch-stripe texture on the ground */
+  body{
+    background-image:
+      repeating-linear-gradient(100deg, rgba(255,255,255,0.012) 0px, rgba(255,255,255,0.012) 2px, transparent 2px, transparent 120px),
+      radial-gradient(ellipse 900px 500px at 82% -6%, rgba(240,166,58,0.10), transparent 60%),
+      var(--ground);
+  }
+
+  a{color:inherit;}
+
+  ::selection{background:var(--accent);color:var(--accent-ink);}
+
+  /* ---------- nav ---------- */
+  header.nav{
+    position:sticky; top:env(safe-area-inset-top, 0px); z-index:40;
+    background:rgba(16,20,15,0.82);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 32px;
+    max-width:1120px; margin:0 auto;
+  }
+  .wordmark{
+    font-family:var(--display); font-weight:900; font-size:20px;
+    letter-spacing:0.01em;
+    display:flex; align-items:baseline; gap:8px;
+  }
+  .wordmark .dot{color:var(--accent);}
+  .status-badge{
+    font-family:var(--mono); font-size:11px; font-weight:600;
+    letter-spacing:0.06em; text-transform:uppercase;
+    color:var(--accent);
+    border:1px solid rgba(240,166,58,0.4);
+    padding:7px 14px;
+    background:rgba(240,166,58,0.08);
+    clip-path:polygon(10px 0, 100% 0, 100% 100%, 0 100%, 0 10px);
+  }
+
+  /* ---------- hero ---------- */
+  .hero{padding:88px 0 64px;}
+  .hero-grid{
+    display:grid; grid-template-columns:1.05fr 1fr; gap:56px; align-items:center;
+  }
+  .eyebrow{
+    font-family:var(--mono); font-size:12px; font-weight:600;
+    letter-spacing:0.14em; text-transform:uppercase;
+    color:var(--accent);
+    display:flex; align-items:center; gap:10px;
+    margin-bottom:22px;
+  }
+  .eyebrow::before{
+    content:''; width:22px; height:1px; background:var(--accent);
+  }
+  h1{
+    font-family:var(--display); font-weight:900;
+    font-size:clamp(34px, 4.4vw, 54px);
+    line-height:1.22;
+    letter-spacing:-0.01em;
+    margin:0 0 22px;
+    text-wrap:balance;
+  }
+  h1 .accent-line{color:var(--accent);}
+  .lede{
+    font-size:16.5px; color:var(--ink-dim); max-width:46ch;
+    margin:0 0 32px;
+  }
+  .hero-cta{display:flex; align-items:center; gap:20px; flex-wrap:wrap; margin-bottom:40px;}
+  .price-chip{
+    display:flex; align-items:baseline; gap:8px;
+    font-family:var(--mono);
+    border:1px solid var(--line);
+    background:var(--panel);
+    padding:14px 20px;
+    clip-path:polygon(12px 0, 100% 0, 100% 100%, 0 100%, 0 12px);
+  }
+  .price-chip .yen{font-size:24px; font-weight:600; color:var(--ink);}
+  .price-chip .note{font-size:11px; color:var(--ink-faint); letter-spacing:0.04em;}
+  .store-note{
+    font-size:13px; color:var(--ink-faint); font-family:var(--mono);
+  }
+
+  .stat-row{display:flex; gap:0; border-top:1px solid var(--line);}
+  .stat{
+    flex:1; padding:18px 16px 0 0; margin-right:16px; border-right:1px solid var(--line);
+  }
+  .stat:last-child{margin-right:0;}
+  .stat:last-child{border-right:none;}
+  .stat .num{
+    font-family:var(--mono); font-weight:600; font-size:19px; color:var(--accent);
+    display:block; margin-bottom:4px;
+  }
+  .stat .label{font-size:12.5px; color:var(--ink-dim);}
+
+  /* hero visual */
+  .hero-visual{position:relative;}
+  .frame{
+    position:relative;
+    border:1px solid var(--line);
+    background:var(--panel);
+    padding:10px;
+    clip-path:polygon(18px 0, 100% 0, 100% 100%, 0 100%, 0 18px);
+  }
+  .frame img{width:100%; display:block; clip-path:polygon(12px 0, 100% 0, 100% 100%, 0 100%, 0 12px);}
+  .frame-cap{
+    display:flex; justify-content:space-between; align-items:center;
+    font-family:var(--mono); font-size:11px; color:var(--ink-faint);
+    padding:10px 4px 2px;
+  }
+  .frame-cap .rec{color:var(--bad); display:flex; align-items:center; gap:6px;}
+  .frame-cap .rec::before{content:''; width:6px; height:6px; border-radius:50%; background:var(--bad);}
+
+  svg.telestrator{
+    position:absolute; inset:10px; width:calc(100% - 20px); height:calc(100% - 20px);
+    pointer-events:none;
+  }
+  svg.telestrator path, svg.telestrator ellipse{
+    fill:none; stroke:var(--accent); stroke-width:3;
+    stroke-linecap:round; stroke-linejoin:round;
+    filter:drop-shadow(0 0 6px rgba(240,166,58,0.55));
+  }
+  svg.telestrator .draw{
+    stroke-dasharray:340; stroke-dashoffset:340;
+    animation:draw-in 1.6s 0.7s cubic-bezier(.4,0,.2,1) forwards;
+  }
+  @media (prefers-reduced-motion: reduce){
+    svg.telestrator .draw{animation:none; stroke-dashoffset:0;}
+  }
+  @keyframes draw-in{to{stroke-dashoffset:0;}}
+
+  /* ---------- section shared ---------- */
+  section{padding:76px 0;}
+  .section-head{max-width:56ch; margin-bottom:48px;}
+  .kicker{
+    font-family:var(--mono); font-size:12px; font-weight:600;
+    letter-spacing:0.12em; text-transform:uppercase; color:var(--accent);
+    margin-bottom:14px; display:block;
+  }
+  h2{
+    font-family:var(--display); font-weight:700;
+    font-size:clamp(24px, 2.6vw, 32px);
+    line-height:1.32; margin:0; text-wrap:balance;
+  }
+  .section-lede{
+    font-size:14.5px; color:var(--ink-dim); max-width:50ch;
+    margin:16px 0 0;
+  }
+  .rule{border:none; border-top:1px solid var(--line); margin:0;}
+
+  /* ---------- workflow ---------- */
+  .workflow{display:grid; gap:2px; background:var(--line); border:1px solid var(--line);}
+  .step{
+    background:var(--ground); padding:34px 32px;
+    display:grid; grid-template-columns:64px 1fr; gap:24px; align-items:start;
+  }
+  .step .index{
+    font-family:var(--mono); font-size:28px; font-weight:600; color:var(--panel-2);
+    -webkit-text-stroke:1.4px var(--ink-faint);
+    color:transparent;
+    line-height:1;
+  }
+  .step h3{
+    font-family:var(--display); font-size:19px; font-weight:700; margin:0 0 8px;
+  }
+  .step p{margin:0; color:var(--ink-dim); font-size:14.5px; max-width:52ch;}
+  .step .tags{display:flex; gap:8px; margin-top:14px; flex-wrap:wrap;}
+  .tag-chip{
+    font-family:var(--mono); font-size:11px; font-weight:600;
+    padding:4px 9px; border-radius:3px;
+  }
+  .tag-chip.good{background:rgba(95,206,138,0.14); color:var(--good); border:1px solid rgba(95,206,138,0.35);}
+  .tag-chip.bad{background:rgba(233,102,106,0.14); color:var(--bad); border:1px solid rgba(233,102,106,0.35);}
+
+  /* ---------- credibility ---------- */
+  .credibility{
+    background:var(--panel); border:1px solid var(--line);
+    padding:56px; display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center;
+    clip-path:polygon(26px 0, 100% 0, 100% 100%, 0 100%, 0 26px);
+  }
+  .credibility .visual .frame{background:var(--ground);}
+  blockquote{
+    margin:0 0 24px; font-family:var(--display); font-weight:700;
+    font-size:clamp(20px, 2.1vw, 25px); line-height:1.5; color:var(--ink);
+    text-wrap:balance;
+  }
+  .quote-attr{
+    font-family:var(--mono); font-size:12px; color:var(--accent);
+    letter-spacing:0.04em;
+  }
+  .quote-attr .role{color:var(--ink-faint); display:block; margin-top:2px;}
+  .credibility p.body-copy{color:var(--ink-dim); font-size:14.5px; margin:20px 0 0;}
+
+  /* ---------- feature grid ---------- */
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:2px; background:var(--line); border:1px solid var(--line);}
+  .feat{background:var(--ground); padding:36px 32px;}
+  .feat h3{font-family:var(--display); font-size:17px; margin:0 0 10px;}
+  .feat p{margin:0; color:var(--ink-dim); font-size:14px;}
+  .feat .glyph{
+    width:34px; height:34px;
+    border:1px solid var(--line); display:flex; align-items:center; justify-content:center;
+    color:var(--accent); font-size:16px;
+  }
+  .feat-top{display:flex; align-items:center; justify-content:space-between; margin-bottom:18px;}
+  .feat > .glyph{margin-bottom:18px;}
+  .pro-badge{
+    font-family:var(--mono); font-size:10.5px; font-weight:600;
+    letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--accent); border:1px solid rgba(240,166,58,0.4);
+    padding:3px 8px; background:rgba(240,166,58,0.08);
+  }
+
+  /* ---------- pricing ---------- */
+  .pricing-card{
+    border:1px solid var(--line); background:var(--panel);
+    padding:48px; max-width:520px;
+    clip-path:polygon(24px 0, 100% 0, 100% 100%, 0 100%, 0 24px);
+  }
+  .pricing-top{display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:28px;}
+  .pricing-name{font-family:var(--display); font-weight:900; font-size:22px;}
+  .pricing-price{font-family:var(--mono); font-size:40px; font-weight:600; color:var(--accent); line-height:1;}
+  .pricing-price .unit{font-size:16px; color:var(--ink-dim); font-weight:500;}
+  .pricing-list{list-style:none; margin:0 0 32px; padding:0; display:grid; gap:12px;}
+  .pricing-list li{
+    display:flex; gap:10px; font-size:14px; color:var(--ink-dim);
+    align-items:baseline;
+  }
+  .pricing-list li::before{content:'—'; color:var(--accent); flex-shrink:0;}
+  .pricing-status{
+    font-family:var(--mono); font-size:12px; color:var(--ink-faint);
+    border-top:1px solid var(--line); padding-top:20px;
+  }
+  .future-note{
+    font-size:12.5px; color:var(--ink-faint); line-height:1.6;
+    margin:16px 0 0; padding-top:16px; border-top:1px dashed var(--line);
+  }
+
+  /* ---------- footer ---------- */
+  footer{border-top:1px solid var(--line); padding:48px 0 56px;}
+  .footer-inner{display:flex; justify-content:space-between; align-items:flex-end; gap:24px; flex-wrap:wrap;}
+  .footer-word{font-family:var(--display); font-weight:900; font-size:16px; margin-bottom:6px;}
+  .footer-sub{font-size:13px; color:var(--ink-faint);}
+  .footer-right{text-align:right; font-size:12.5px; color:var(--ink-faint); font-family:var(--mono);}
+
+  @media (max-width:860px){
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-visual{order:-1;}
+    .credibility{grid-template-columns:1fr; padding:32px;}
+    .grid2{grid-template-columns:1fr;}
+    .step{grid-template-columns:40px 1fr; padding:28px 20px;}
+    .footer-inner{flex-direction:column; align-items:flex-start;}
+    .footer-right{text-align:left;}
+    section{padding:56px 0;}
+    .wrap{padding:0 20px;}
+  }
+  /* ---------- store / LINE ---------- */
+  a.status-badge{text-decoration:none;}
+  a.status-badge:hover{background:rgba(240,166,58,0.16);}
+  .store-btn{
+    display:inline-flex; flex-direction:column; justify-content:center;
+    background:var(--accent); color:var(--accent-ink); text-decoration:none;
+    padding:12px 24px 13px;
+    clip-path:polygon(12px 0, 100% 0, 100% 100%, 0 100%, 0 12px);
+    transition:filter .15s;
+  }
+  .store-btn:hover{filter:brightness(1.08);}
+  .store-btn:focus-visible, .line-btn:focus-visible, a.status-badge:focus-visible{outline:2px solid var(--ink); outline-offset:3px;}
+  .store-btn .small{font-family:var(--mono); font-size:10.5px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; opacity:.75; line-height:1.3;}
+  .store-btn .big{font-family:var(--display); font-weight:900; font-size:18px; line-height:1.35;}
+  .pricing-cta{border-top:1px solid var(--line); padding-top:24px; display:flex; flex-direction:column; align-items:flex-start; gap:10px;}
+  .pricing-cta .store-note{font-size:12px;}
+
+  .footer-right a{color:var(--ink-dim);}
+  @media (max-width:860px){
+    .line-card{grid-template-columns:1fr; padding:28px 22px; gap:24px;}
+  }
+  /* ---------- iPad ---------- */
+  .ipad-card{
+    display:grid; grid-template-columns:1.1fr 1fr; gap:48px; align-items:center;
+    border:1px solid var(--line); background:var(--panel);
+    padding:48px;
+    clip-path:polygon(24px 0, 100% 0, 100% 100%, 0 100%, 0 24px);
+  }
+  .soon{
+    display:inline-block; font-family:var(--mono); font-size:11px; font-weight:600;
+    letter-spacing:0.08em; color:var(--good);
+    border:1px solid rgba(95,206,138,0.4); background:rgba(95,206,138,0.08);
+    padding:4px 10px; margin-bottom:14px;
+  }
+  .ipad-card h2{margin-bottom:14px;}
+  .ipad-card p{color:var(--ink-dim); font-size:14.5px; margin:0; max-width:48ch;}
+  .ipad-points{list-style:none; margin:0; padding:0; display:grid; gap:2px; background:var(--line); border:1px solid var(--line);}
+  .ipad-points li{background:var(--ground); padding:18px 20px;}
+  .ipad-points strong{display:block; font-family:var(--display); font-size:15.5px; margin-bottom:4px;}
+  .ipad-points span{font-size:13.5px; color:var(--ink-dim);}
+  .eyebrow .soon-inline{color:var(--good); letter-spacing:0.08em;}
+  @media (max-width:860px){
+    .ipad-card{grid-template-columns:1fr; padding:28px 22px; gap:28px;}
+  }
+  
+  img{height:auto;}
+  .wordmark{gap:0;}
+  .nav-langs{display:flex; flex-wrap:wrap; gap:4px 14px; font-size:13px; color:var(--ink-dim);}
+  .nav-langs a{text-decoration:none; color:var(--ink-dim);}
+  .nav-langs a:hover{color:var(--ink);}
+  .nav-langs strong{color:var(--accent); font-weight:600;}
+  .plans-grid{display:grid; grid-template-columns:1fr 1fr; gap:20px; max-width:860px;}
+  .plans-grid .pricing-card{max-width:none;}
+  .pricing-card.pro{border-color:rgba(240,166,58,0.55);}
+  .trial-note{color:var(--good); font-size:14px; margin:22px 0 0;}
+  @media (max-width:860px){ .nav-inner{flex-wrap:wrap; gap:8px;} .nav-langs{width:100%;} .plans-grid{grid-template-columns:1fr;} .pricing-card{padding:32px 26px;} }
 </style>
 </head>
 <body>
-<header class="nav"><div class="nav-in"><a class="brand" href="pt.html"><img src="img/icon.png" alt=""><span>Coach<em>Tag</em></span></a><nav class="langs"><a href="index.html" hreflang="ja">日本語</a><a href="en.html" hreflang="en">English</a><a href="ko.html" hreflang="ko">한국어</a><strong>Português (Brasil)</strong><a href="zh.html" hreflang="zh-Hans">简体中文</a></nav></div></header>
+<header class="nav"><div class="nav-inner"><div class="wordmark">Coach<span class="dot">Tag</span></div><nav class="nav-langs"><a href="https://claude.ai/code/artifact/c3b95d0e-bff5-4937-bc76-0c9412130ffd" hreflang="ja">日本語</a><a href="en.html" hreflang="en">English</a><a href="ko.html" hreflang="ko">한국어</a><strong>Português (Brasil)</strong><a href="zh.html" hreflang="zh-Hans">简体中文</a></nav></div></header>
 <main class="wrap">
-<div class="hero">
- <div>
-  <span class="eyebrow">Football Video Analysis for Mac & iPad</span>
-  <h1>Análise de nível profissional,<br><em>para todos os times.</em></h1>
-  <p class="lede">Criado por um analista profissional campeão da J1 League, o CoachTag reúne em um só app os recursos que os analistas realmente usam. Faça o mesmo trabalho sem equipamentos caros.</p>
-  <div class="cta"><a class="store-btn" href="https://apps.apple.com/app/coachtag/id6803831351" target="_blank" rel="noopener">Baixar na App Store</a><span class="trial">Primeiro mês grátis</span></div>
-  <div class="stats"><div class="stat"><b>Mac + iPad</b><span>Os mesmos dados
-nos dois</span></div><div class="stat"><b>5 idiomas</b><span>日本語 · English · 한국어
-Português · 简体中文</span></div><div class="stat"><b>0</b><span>Dados enviados para fora
-(tudo no dispositivo)</span></div></div>
- </div>
- <div class="frame"><img src="img/pt-2.jpg" alt="CoachTag" width="1600" height="877"></div>
-</div>
-<section><span class="kicker">Recursos</span><h2>Transforme o jogo em vídeos que explicam.</h2><div class="feat"><div class="feat-text"><h3>Marque lances com um toque</h3><p>Registre bons e maus momentos no ataque e na defesa, bolas paradas e mais, sem pausar. Adicione flags (pressão, roubada, finalização e mais) para classificar cada lance.</p></div><div class="frame"><img src="img/pt-1.jpg" alt="Marque lances com um toque" loading="lazy" width="1600" height="877"></div></div><div class="feat"><div class="feat-text"><h3>Toque no jogador para desenhar táticas</h3><p>Conexão, Holofote, setas, texto e zonas. O CoachTag detecta a cor do gramado para os desenhos ficarem nos pés dos jogadores.</p></div><div class="frame"><img src="img/pt-2.jpg" alt="Toque no jogador para desenhar táticas" loading="lazy" width="1600" height="877"></div></div><div class="feat"><div class="feat-text"><h3>A IA rastreia os jogadores</h3><p>O disco acompanha o jogador mesmo com a câmera em movimento. Use o Fantasma para levar o jogador aonde ele deveria estar.</p></div><div class="frame"><img src="img/pt-3.jpg" alt="A IA rastreia os jogadores" loading="lazy" width="1600" height="877"></div></div><div class="feat"><div class="feat-text"><h3>Tags × flags: tendências num relance</h3><p>Clique em uma célula da tabela para selecionar os lances e transformá-los em uma playlist.</p></div><div class="frame"><img src="img/pt-4.jpg" alt="Tags × flags: tendências num relance" loading="lazy" width="1600" height="877"></div></div></section>
-<section><h2>Tudo o que você precisa para analisar partidas.</h2><div class="grid"><div class="cell"><h3>Visão</h3><p>Mostre para onde o jogador olha com um cone dos pés ou da altura dos olhos.</p></div><div class="cell"><h3>Bolas altas e com efeito</h3><p>Setas que combinam altura e curva, com sombra no chão.</p></div><div class="cell"><h3>Congelamentos e quadros-chave</h3><p>Pause para explicar e anime os efeitos no tempo.</p></div><div class="cell"><h3>Playlists</h3><p>Reúna lances de várias partidas e veja tudo no quadro de tags.</p></div><div class="cell"><h3>Segundo ângulo</h3><p>Sincronize duas câmeras para revisar e exportar lado a lado.</p></div><div class="cell"><h3>Exportar e compartilhar</h3><p>Clipes com os desenhos gravados, para AirDrop, Fotos ou Arquivos.</p></div></div></section>
-<section><div class="cred"><blockquote>"Só os recursos que os analistas realmente usam, em um só app."</blockquote><div class="who">Desenvolvedor · Analista profissional (campeão da J1 League)</div><p>Seus vídeos nunca saem do seu dispositivo. Marcação, desenho e exportação acontecem no seu Mac ou iPad.</p></div></section>
-<section><h2>Planos</h2><div class="plans"><div class="plan"><h3>Básico</h3><div class="price"></div><ul><li>Marcação, flags e tabela</li><li>Playlists</li><li>Exportar e compartilhar</li></ul></div><div class="plan pro"><h3>Pro</h3><div class="price"></div><ul><li>Tudo do Básico</li><li>Desenho tático, Visão, Fantasma</li><li>Rastreamento automático com IA</li></ul></div></div><p class="plans-note">Os dois planos funcionam no Mac e no iPad. O primeiro mês é grátis.</p>
- <div class="cta" style="margin-top:28px"><a class="store-btn" href="https://apps.apple.com/app/coachtag/id6803831351" target="_blank" rel="noopener">Baixar na App Store</a></div></section>
+  <section class="hero"><div class="hero-grid">
+    <div>
+      <span class="eyebrow">Football Video Analysis for Mac &amp; iPad</span>
+      <h1>Análise profissional,<br><span class="accent-line">para todos os times.</span></h1>
+      <p class="lede">Um analista profissional campeão da J1 League reuniu em um só app apenas os recursos que realmente usa no trabalho. Faça o mesmo sem equipamentos de análise que custam milhares por ano.</p>
+      <div class="hero-cta"><a class="store-btn" href="https://apps.apple.com/app/coachtag/id6803831351" target="_blank" rel="noopener"><span class="small">Baixar na</span><span class="big">App Store</span></a><div class="price-chip"><span class="yen">1 mês</span><span class="note">de teste grátis · Mac e iPad</span></div></div>
+      <div class="stat-row"><div class="stat"><span class="num">0</span><span class="label">Privacidade na App Store<br>"Nenhum dado coletado"</span></div><div class="stat"><span class="num">Mac + iPad</span><span class="label">App Store<br>Categoria: Esportes</span></div><div class="stat"><span class="num">4+</span><span class="label">Sem restrição de idade<br>Ideal para as categorias de base</span></div></div>
+    </div>
+    <div class="hero-visual">
+      <div class="frame"><img src="img/pt-1.jpg" alt="Tela de marcação do CoachTag com botões de tag como AT Good e DF Bad ao lado do vídeo" width="1600" height="877"></div>
+      <div class="frame-cap"><span class="rec">Tela real do app</span><span>Contra-ataque · 00:13–00:20</span></div>
+    </div>
+  </div></section>
+  <hr class="rule">
+  <section><div class="section-head"><span class="kicker">Not in your average editor</span><h2>O que você não encontra em um editor de vídeo comum.</h2></div><div class="grid2"><div class="feat"><div class="feat-top"><div class="glyph">◎</div><span class="pro-badge">Pro</span></div><h3>Rastreamento automático</h3><p>A IA rastreia o jogador em que você tocou, mesmo com a câmera em movimento. Nada de redesenhar quadro a quadro. Um recurso comum só em softwares profissionais de análise, direto no app.</p></div><div class="feat"><div class="feat-top"><div class="glyph">◉</div><span class="pro-badge">Pro</span></div><h3>Desenhos que não cobrem os jogadores</h3><p>O CoachTag detecta a cor do gramado e mascara os desenhos para que nunca fiquem sobre os jogadores ou a bola. Zonas e linhas passam por baixo dos jogadores, com visual de transmissão de TV, e o vídeo exportado fica igual.</p></div><div class="feat"><div class="feat-top"><div class="glyph">▣</div><span class="pro-badge">Pro</span></div><h3>Fantasma</h3><p>Recorte um jogador e leve-o para onde ele deveria estar. O jogador na posição original desaparece naturalmente, para mostrar o posicionamento sem depender do que aconteceu.</p></div><div class="feat"><div class="feat-top"><div class="glyph">◫</div></div><h3>Segundo ângulo</h3><p>Sincronize duas câmeras para revisar e exportar lado a lado. Escolha um ângulo, misture os dois ou deixe sem som.</p></div><div class="feat"><div class="feat-top"><div class="glyph">⌘</div></div><h3>Feito para a privacidade</h3><p>Seus vídeos nunca são enviados para um servidor. Marcação, desenho e exportação acontecem no seu dispositivo. Na App Store: "Nenhum dado coletado".</p></div></div></section>
+  <section><div class="section-head"><span class="kicker">Workflow</span><h2>Marcação, desenho tático, exportação.<br>Todo o pós-jogo em um só app.</h2></div><div class="workflow"><div class="step"><div class="index">01</div><div><h3>Marcação</h3><p>Marque lances com um toque enquanto o vídeo roda: bons e maus momentos no ataque e na defesa, bolas paradas e mais. Ajuste o início e o fim (tempo antes e depois) ao seu jeito de marcar.</p><div class="tags"><span class="tag-chip good">AT Good</span><span class="tag-chip bad">AT Bad</span><span class="tag-chip good">DF Good</span><span class="tag-chip bad">DF Bad</span></div></div></div><div class="step"><div class="index">02</div><div><h3>Desenho tático</h3><p>Desenhe táticas nos lances marcados com setas, linhas, zonas, círculos, texto e cones de visão. Anime com quadros-chave e grave explicações em um congelamento.</p></div></div><div class="step"><div class="index">03</div><div><h3>Playlists</h3><p>Reúna tags em playlists e veja tudo no quadro de tags. Uma playlist pode reunir vários pacotes de partidas.</p></div></div><div class="step"><div class="index">04</div><div><h3>Exportar e compartilhar</h3><p>Exporte uma playlist como um único vídeo ou como clipes separados e envie direto para jogadores e comissão técnica por AirDrop ou pelo app Arquivos.</p></div></div></div></section>
+  <section id="ipad"><div class="ipad-card"><div><span class="soon">Agora no iPad</span><h2>Marque no banco,<br>finalize onde quiser.</h2><p>A versão para iPad tem os mesmos recursos do Mac, incluindo desenho tático e rastreamento automático. Marque durante jogos e treinos e desenhe com o dedo ou com o Apple Pencil.</p></div><ul class="ipad-points"><li><strong>Mesmas telas e controles do Mac</strong><span>O iPad usa as mesmas telas da versão para Mac, então não há nada novo para aprender.</span></li><li><strong>Leve os dados de um para o outro</strong><span>Abra no Mac um pacote (.ccpkg) marcado no iPad, ou o contrário, pelo iCloud Drive, Arquivos ou AirDrop.</span></li><li><strong>Troca de ângulo</strong><span>Alterne para o segundo ângulo enquanto marca.</span></li></ul></div></section>
+  <section><div class="credibility"><div><blockquote>"Quero que as crianças recebam o mesmo feedback que um profissional receberia. Por isso quero que o CoachTag tenha um preço ao alcance de todos."</blockquote><div class="quote-attr">Desenvolvedor do CoachTag<span class="role">Analista profissional campeão da J1 League</span></div><p class="body-copy">Reduzimos os recursos ao fluxo de trabalho realmente usado no dia a dia. O objetivo: fazer o mesmo trabalho só com um Mac ou um iPad, sem equipamentos profissionais caros.</p></div>
+    <div class="visual"><div class="frame"><img src="img/pt-2.jpg" alt="Tela de desenho tático do CoachTag com discos, linhas e holofote nos jogadores" loading="lazy" width="1600" height="877"></div></div></div></section>
+  <section>
+    <div class="section-head"><span class="kicker">Preços</span><h2>Comece com um mês grátis.</h2><p class="section-lede">Queremos que os jogadores da base recebam o mesmo feedback que um profissional. Por isso o CoachTag custa muito menos que um conjunto de equipamentos de análise.</p></div>
+    <div class="plans-grid"><div class="pricing-card"><div class="pricing-top"><div class="pricing-name">CoachTag Básico</div></div><ul class="pricing-list"><li>Marcação, flags e tabela tags × flags</li><li>Playlists e quadro de tags</li><li>Exportar e compartilhar</li><li>Funciona no Mac e no iPad</li></ul></div><div class="pricing-card pro"><div class="pricing-top"><div class="pricing-name">CoachTag Pro</div></div><ul class="pricing-list"><li>Tudo do Básico</li><li>Desenho tático, Visão e Fantasma</li><li>Rastreamento automático e desenho atrás dos jogadores</li><li>Sincronia de segundo ângulo</li></ul></div></div>
+    <p class="trial-note">O primeiro mês é grátis na primeira assinatura.</p>
+    <div class="pricing-cta" style="border-top:none;padding-top:14px;"><a class="store-btn" href="https://apps.apple.com/app/coachtag/id6803831351" target="_blank" rel="noopener"><span class="small">Baixar na</span><span class="big">App Store</span></a><span class="store-note">Procure "CoachTag" na App Store</span></div>
+    <p class="future-note">Assinatura mensal com renovação automática. É renovada automaticamente, a menos que seja cancelada pelo menos 24 horas antes do fim do período atual. Gerencie ou cancele quando quiser nas assinaturas do seu Apple ID.</p>
+  </section>
 </main>
-<footer><div class="wrap"><div class="links"><a href="support-pt.html">Suporte</a><a href="privacy-pt.html">Política de Privacidade</a></div>&copy; 2026 CoachTag</div></footer>
+<footer><div class="wrap footer-inner">
+  <div><div class="footer-word">CoachTag</div><div class="footer-sub">Análise de vídeo de futebol · Criado por um analista campeão da J1 League</div></div>
+  <div class="footer-right">Contato: <a href="support-pt.html">Suporte</a><br><a href="privacy-pt.html">Política de Privacidade</a><br>© 2026 Tatsuro Takenaka</div>
+</div></footer>
 </body>
 </html>
