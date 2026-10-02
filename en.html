@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CoachTag — Football video analysis for Mac & iPad</title>
+<meta name="description" content="Built by a J1 League title-winning pro analyst. Tag, draw tactics, auto-track players and export on Mac and iPad.">
+<meta property="og:title" content="CoachTag — Football video analysis for Mac & iPad">
+<meta property="og:description" content="Built by a J1 League title-winning pro analyst. Tag, draw tactics, auto-track players and export on Mac and iPad.">
+<meta property="og:image" content="https://ttakenakafuji-web.github.io/coachtag-legal/img/en-2.jpg">
+<link rel="icon" href="img/icon.png">
+<link rel="alternate" hreflang="ja" href="https://ttakenakafuji-web.github.io/coachtag-legal/index.html">
+<link rel="alternate" hreflang="en" href="https://ttakenakafuji-web.github.io/coachtag-legal/en.html">
+<link rel="alternate" hreflang="ko" href="https://ttakenakafuji-web.github.io/coachtag-legal/ko.html">
+<link rel="alternate" hreflang="pt-BR" href="https://ttakenakafuji-web.github.io/coachtag-legal/pt.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://ttakenakafuji-web.github.io/coachtag-legal/zh.html">
+<style>
+:root{--ground:#10140f;--panel:#1a2018;--line:#2c3528;--ink:#f3f1e7;--dim:#a6b0a0;--faint:#6d7669;--accent:#f0a63a;--accent-ink:#181008;--good:#5fce8a}
+*{box-sizing:border-box}
+html{background:var(--ground)}
+body{margin:0;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Apple SD Gothic Neo","PingFang SC","Segoe UI",sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased;
+ background:repeating-linear-gradient(100deg,rgba(255,255,255,.012) 0 2px,transparent 2px 120px),radial-gradient(ellipse 900px 500px at 82% -6%,rgba(240,166,58,.10),transparent 60%),var(--ground)}
+a{color:inherit}
+img{max-width:100%;height:auto;display:block}
+.wrap{max-width:1120px;margin:0 auto;padding:0 28px}
+header.nav{position:sticky;top:0;z-index:10;background:rgba(16,20,15,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav-in{max-width:1120px;margin:0 auto;padding:14px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:19px;text-decoration:none}
+.brand img{width:30px;height:30px;border-radius:7px}
+.brand em{font-style:normal;color:var(--accent)}
+.langs{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:13px;color:var(--dim)}
+.langs a{text-decoration:none;color:var(--dim)}
+.langs a:hover{color:var(--ink)}
+.langs strong{color:var(--accent);font-weight:600}
+.hero{padding:76px 0 56px;display:grid;grid-template-columns:1fr 1.15fr;gap:52px;align-items:center}
+.eyebrow{font:600 12px ui-monospace,Menlo,monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:10px;margin-bottom:20px}
+.eyebrow:before{content:'';width:22px;height:1px;background:var(--accent)}
+h1{font-size:clamp(32px,4.3vw,52px);line-height:1.2;margin:0 0 20px;font-weight:900;letter-spacing:-.01em;text-wrap:balance}
+h1 em{font-style:normal;color:var(--accent)}
+.lede{color:var(--dim);font-size:16.5px;max-width:48ch;margin:0 0 30px}
+.cta{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-bottom:36px}
+.store-btn{display:inline-block;background:var(--accent);color:var(--accent-ink);text-decoration:none;font-weight:800;font-size:16px;padding:14px 26px;border-radius:10px}
+.store-btn:hover{filter:brightness(1.08)}
+.trial{font-size:13px;color:var(--good);border:1px solid rgba(95,206,138,.4);background:rgba(95,206,138,.08);padding:6px 12px;border-radius:999px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}
+.stat{padding:16px 14px 0 0}
+.stat b{display:block;color:var(--accent);font:600 18px ui-monospace,Menlo,monospace;margin-bottom:4px}
+.stat span{font-size:12.5px;color:var(--dim);white-space:pre-line}
+.frame{border:1px solid var(--line);background:var(--panel);padding:8px;border-radius:14px;box-shadow:0 30px 80px rgba(0,0,0,.45)}
+.frame img{border-radius:8px}
+section{padding:70px 0}
+.kicker{font:600 12px ui-monospace,Menlo,monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:12px}
+h2{font-size:clamp(23px,2.6vw,32px);line-height:1.35;margin:0 0 40px;text-wrap:balance}
+.feat{display:grid;grid-template-columns:1fr 1.4fr;gap:44px;align-items:center;margin-bottom:64px}
+.feat:nth-child(even) .feat-text{order:2}
+.feat h3{font-size:22px;margin:0 0 12px}
+.feat p{color:var(--dim);margin:0;font-size:15px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line);border:1px solid var(--line)}
+.cell{background:var(--ground);padding:28px 26px}
+.cell h3{font-size:16.5px;margin:0 0 8px}
+.cell p{margin:0;color:var(--dim);font-size:14px}
+.cred{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:48px}
+.cred blockquote{margin:0 0 14px;font-size:clamp(20px,2.2vw,26px);font-weight:800;line-height:1.5}
+.cred .who{font:12.5px ui-monospace,Menlo,monospace;color:var(--accent)}
+.cred p{color:var(--dim);margin:18px 0 0}
+.plans{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:820px}
+.plan{border:1px solid var(--line);background:var(--panel);border-radius:14px;padding:30px}
+.plan.pro{border-color:rgba(240,166,58,.55)}
+.plan h3{margin:0 0 4px;font-size:20px}
+.plan .price{font:600 22px ui-monospace,Menlo,monospace;color:var(--accent);margin-bottom:14px;min-height:1px}
+.plan ul{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+.plan li{color:var(--dim);font-size:14.5px;display:flex;gap:10px}
+.plan li:before{content:'—';color:var(--accent)}
+.plans-note{color:var(--faint);font-size:13.5px;margin:18px 0 0}
+footer{border-top:1px solid var(--line);padding:40px 0 56px;color:var(--faint);font-size:13px}
+footer .links{display:flex;gap:20px;flex-wrap:wrap;margin-bottom:10px}
+footer a{color:var(--dim)}
+@media (max-width:860px){.nav-in{flex-wrap:wrap}.langs{width:100%}.hero{grid-template-columns:1fr;padding-top:40px}.feat{grid-template-columns:1fr;gap:20px}.feat:nth-child(even) .feat-text{order:0}.grid{grid-template-columns:1fr}.plans{grid-template-columns:1fr}.cred{padding:28px}.wrap,.nav-in{padding-left:16px;padding-right:16px}.stats{grid-template-columns:1fr}.stat{padding-bottom:12px}}
+</style>
+</head>
+<body>
+<header class="nav"><div class="nav-in"><a class="brand" href="en.html"><img src="img/icon.png" alt=""><span>Coach<em>Tag</em></span></a><nav class="langs"><a href="index.html" hreflang="ja">日本語</a><strong>English</strong><a href="ko.html" hreflang="ko">한국어</a><a href="pt.html" hreflang="pt-BR">Português (Brasil)</a><a href="zh.html" hreflang="zh-Hans">简体中文</a></nav></div></header>
+<main class="wrap">
+<div class="hero">
+ <div>
+  <span class="eyebrow">Football Video Analysis for Mac & iPad</span>
+  <h1>Pro-level analysis,<br><em>for every team.</em></h1>
+  <p class="lede">Built by a professional analyst who won the J1 League title, CoachTag packs the features analysts actually use into one app. Do the same work without expensive analysis gear.</p>
+  <div class="cta"><a class="store-btn" href="https://apps.apple.com/app/coachtag/id6803831351" target="_blank" rel="noopener">Download on the App Store</a><span class="trial">First month free</span></div>
+  <div class="stats"><div class="stat"><b>Mac + iPad</b><span>The same data
+on both</span></div><div class="stat"><b>5 languages</b><span>日本語 · English · 한국어
+Português · 简体中文</span></div><div class="stat"><b>0</b><span>Data sent off your device
+(all on-device)</span></div></div>
+ </div>
+ <div class="frame"><img src="img/en-2.jpg" alt="CoachTag" width="1600" height="877"></div>
+</div>
+<section><span class="kicker">Features</span><h2>Turn match footage into clear coaching video.</h2><div class="feat"><div class="feat-text"><h3>Tag in one tap as you watch</h3><p>Record good and bad moments in attack and defense, set pieces and more without pausing. Layer flags (press, win ball, shot and more) to sort every scene.</p></div><div class="frame"><img src="img/en-1.jpg" alt="Tag in one tap as you watch" loading="lazy" width="1600" height="877"></div></div><div class="feat"><div class="feat-text"><h3>Tap a player to draw tactics</h3><p>Connect, Spotlight, arrows, text and zones. CoachTag detects the pitch color so drawings sit at the players' feet.</p></div><div class="frame"><img src="img/en-2.jpg" alt="Tap a player to draw tactics" loading="lazy" width="1600" height="877"></div></div><div class="feat"><div class="feat-text"><h3>AI tracks players for you</h3><p>The disc follows the player even as the camera moves. Use Ghost to move a player to where they should be.</p></div><div class="frame"><img src="img/en-3.jpg" alt="AI tracks players for you" loading="lazy" width="1600" height="877"></div></div><div class="feat"><div class="feat-text"><h3>Tags × flags: trends at a glance</h3><p>Click a cell in the table to select the matching scenes and turn them into a playlist.</p></div><div class="frame"><img src="img/en-4.jpg" alt="Tags × flags: trends at a glance" loading="lazy" width="1600" height="877"></div></div></section>
+<section><h2>Everything you need for match analysis.</h2><div class="grid"><div class="cell"><h3>Vision</h3><p>Show where a player is looking with a cone from their feet or eye level.</p></div><div class="cell"><h3>Lofted and curling balls</h3><p>Arrows that combine height and curve, with a shadow on the ground.</p></div><div class="cell"><h3>Freeze frames and keyframes</h3><p>Pause to explain, and animate effects over time.</p></div><div class="cell"><h3>Playlists</h3><p>Collect clips across matches and see them all on the tag board.</p></div><div class="cell"><h3>Second angle</h3><p>Sync two cameras to review and export side by side.</p></div><div class="cell"><h3>Export and share</h3><p>Clips with drawings burned in, to AirDrop, Photos or Files.</p></div></div></section>
+<section><div class="cred"><blockquote>"Only the features analysts really use, in one app."</blockquote><div class="who">Developer · Pro analyst (J1 League title winner)</div><p>Your video never leaves your device. Tagging, drawing and exporting all happen on your Mac or iPad.</p></div></section>
+<section><h2>Plans</h2><div class="plans"><div class="plan"><h3>Basic</h3><div class="price"></div><ul><li>Tagging, flags and the table</li><li>Playlists</li><li>Export and share</li></ul></div><div class="plan pro"><h3>Pro</h3><div class="price"></div><ul><li>Everything in Basic</li><li>Tactical drawing, Vision, Ghost</li><li>AI auto-tracking</li></ul></div></div><p class="plans-note">Both plans work on Mac and iPad. Your first month is free.</p>
+ <div class="cta" style="margin-top:28px"><a class="store-btn" href="https://apps.apple.com/app/coachtag/id6803831351" target="_blank" rel="noopener">Download on the App Store</a></div></section>
+</main>
+<footer><div class="wrap"><div class="links"><a href="support-en.html">Support</a><a href="privacy-en.html">Privacy Policy</a></div>&copy; 2026 CoachTag</div></footer>
+</body>
+</html>
