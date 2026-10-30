@@ -318,6 +318,7 @@
     clip-path:polygon(12px 0, 100% 0, 100% 100%, 0 100%, 0 12px);
     transition:filter .15s;
   }
+  .store-btns{display:flex; gap:12px; flex-wrap:wrap;}
   .store-btn:hover{filter:brightness(1.08);}
   .store-btn:focus-visible, .line-btn:focus-visible, a.status-badge:focus-visible{outline:2px solid var(--ink); outline-offset:3px;}
   .store-btn .small{font-family:var(--mono); font-size:10.5px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; opacity:.75; line-height:1.3;}
@@ -371,10 +372,10 @@
 <main class="wrap">
   <section class="hero"><div class="hero-grid">
     <div>
-      <span class="eyebrow">วิเคราะห์วิดีโอฟุตบอลบน Mac และ iPad</span>
+      <span class="eyebrow">วิเคราะห์วิดีโอฟุตบอลบน Mac, iPad และ Windows</span>
       <h1>การวิเคราะห์ระดับมืออาชีพ<br><span class="accent-line">สำหรับทุกทีม</span></h1>
       <p class="lede">นักวิเคราะห์มืออาชีพผู้คว้าแชมป์ J1 League รวมเฉพาะฟีเจอร์ที่ใช้งานจริงไว้ในแอปเดียว ทำงานแบบเดียวกันได้โดยไม่ต้องใช้อุปกรณ์วิเคราะห์ราคาแพงที่ต้องจ่ายทุกปี</p>
-      <div class="hero-cta"><a class="store-btn" href="https://apps.apple.com/app/coachtag/id6803831351" target="_blank" rel="noopener"><span class="small">ดาวน์โหลดได้ที่</span><span class="big">App Store</span></a><div class="price-chip"><span class="yen">1 เดือน</span><span class="note">ทดลองใช้ฟรี · Mac และ iPad</span></div></div>
+      <div class="hero-cta"><div class="store-btns"><a class="store-btn" href="https://apps.apple.com/app/coachtag/id6803831351" target="_blank" rel="noopener"><span class="small">ดาวน์โหลดได้ที่</span><span class="big">App Store</span></a><a class="store-btn" href="https://apps.microsoft.com/detail/9N9VK3JVNZD3" target="_blank" rel="noopener"><span class="small">Windows</span><span class="big">Microsoft Store</span></a></div><div class="price-chip"><span class="yen">1 เดือน</span><span class="note">ทดลองใช้ฟรี · Mac, iPad และ Windows</span></div></div>
       <div class="stat-row"><div class="stat"><span class="num">0</span><span class="label">ป้ายความเป็นส่วนตัวของ App Store<br>"ไม่มีการเก็บข้อมูล"</span></div><div class="stat"><span class="num">Mac + iPad</span><span class="label">App Store<br>หมวดหมู่: กีฬา</span></div><div class="stat"><span class="num">4+</span><span class="label">ไม่จำกัดอายุ<br>เหมาะกับทีมเยาวชน</span></div></div>
     </div>
     <div class="hero-visual">
@@ -392,8 +393,8 @@
     <div class="section-head"><span class="kicker">ราคา</span><h2>เริ่มต้นด้วยการใช้ฟรี 1 เดือน</h2><p class="section-lede">เราอยากให้นักเตะเยาวชนได้รับฟีดแบ็กแบบเดียวกับนักเตะอาชีพ CoachTag จึงมีราคาถูกกว่าชุดอุปกรณ์วิเคราะห์มาก</p></div>
     <div class="plans-grid"><div class="pricing-card"><div class="pricing-top"><div class="pricing-name">CoachTag เบสิก</div></div><ul class="pricing-list"><li>การติดแท็ก แฟล็ก และตาราง แท็ก × แฟล็ก</li><li>เพลย์ลิสต์และกระดานแท็ก</li><li>การส่งออกและแชร์</li><li>ใช้ได้ทั้ง Mac และ iPad</li></ul></div><div class="pricing-card pro"><div class="pricing-top"><div class="pricing-name">CoachTag โปร</div></div><ul class="pricing-list"><li>ทุกอย่างในแผนเบสิก</li><li>การวาดแท็กติก มุมมอง และโกสต์</li><li>การติดตามอัตโนมัติด้วย AI และการวาดใต้ผู้เล่น</li><li>ซิงค์มุมกล้องที่สอง</li></ul></div></div>
     <p class="trial-note">เดือนแรกฟรีเมื่อสมัครสมาชิกครั้งแรก</p>
-    <div class="pricing-cta" style="border-top:none;padding-top:14px;"><a class="store-btn" href="https://apps.apple.com/app/coachtag/id6803831351" target="_blank" rel="noopener"><span class="small">ดาวน์โหลดได้ที่</span><span class="big">App Store</span></a><span class="store-note">ค้นหา "CoachTag" ใน App Store</span></div>
-    <p class="future-note">การสมัครสมาชิกรายเดือนแบบต่ออายุอัตโนมัติ จะต่ออายุโดยอัตโนมัติ เว้นแต่จะยกเลิกอย่างน้อย 24 ชั่วโมงก่อนสิ้นสุดรอบปัจจุบัน จัดการหรือยกเลิกได้ทุกเมื่อในการตั้งค่าการสมัครสมาชิกของ Apple ID</p>
+    <div class="pricing-cta" style="border-top:none;padding-top:14px;"><div class="store-btns"><a class="store-btn" href="https://apps.apple.com/app/coachtag/id6803831351" target="_blank" rel="noopener"><span class="small">ดาวน์โหลดได้ที่</span><span class="big">App Store</span></a><a class="store-btn" href="https://apps.microsoft.com/detail/9N9VK3JVNZD3" target="_blank" rel="noopener"><span class="small">Windows</span><span class="big">Microsoft Store</span></a></div><span class="store-note">ค้นหา "CoachTag" ใน App Store หรือ Microsoft Store</span></div>
+    <p class="future-note">การสมัครสมาชิกรายเดือนแบบต่ออายุอัตโนมัติ จะต่ออายุโดยอัตโนมัติ เว้นแต่จะยกเลิกอย่างน้อย 24 ชั่วโมงก่อนสิ้นสุดรอบปัจจุบัน จัดการหรือยกเลิกได้ทุกเมื่อในการตั้งค่าการสมัครสมาชิกของ Apple ID บน Windows การสมัครสมาชิกทำผ่าน Microsoft Store และแยกจากการสมัครสมาชิกของ App Store ยกเลิกได้ที่ account.microsoft.com/services อย่างน้อย 2 วันก่อนวันเรียกเก็บเงินครั้งถัดไป</p>
   </section>
 </main>
 <footer><div class="wrap footer-inner">
