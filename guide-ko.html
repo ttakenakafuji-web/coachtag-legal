@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>사용 가이드 | CoachTag</title>
+<style>
+  :root { color-scheme: light dark; --fg: #1b1e22; --bg: #ffffff; --muted: #6b7280; --line: #d9dde3; --card: #f4f6f8; --accent: #2563eb; --good: #16a34a; --bad: #dc2626; --blue: #2563eb; --amber: #d97706; --violet: #7c3aed; --pitch: #2f7a3b; --pitch2: #2a6e35; }
+  @media (prefers-color-scheme: dark) { :root { --fg: #e6e8eb; --bg: #14161a; --muted: #9aa1ab; --line: #343841; --card: #1d2026; --accent: #7db4ff; --good: #22c55e; --bad: #ef4444; --blue: #60a5fa; --amber: #f59e0b; --violet: #a78bfa; --pitch: #24602e; --pitch2: #1f5628; } }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif; word-break: keep-all; line-height: 1.8; max-width: 860px; margin: 0 auto; padding: 32px 16px 80px; color: var(--fg); background: var(--bg); }
+  a { color: var(--accent); }
+  .home { margin: 0 0 1em; font-weight: 600; } .home a { text-decoration: none; }
+  h1 { font-size: 1.7rem; margin-bottom: 0.25em; }
+  .lead { color: var(--muted); margin-bottom: 2em; }
+  section { margin-bottom: 3.5em; }
+  section h2 { font-size: 1.3rem; border-bottom: 1px solid var(--line); padding-bottom: 0.4em; margin-bottom: 0.8em; }
+  h3 { font-size: 1.08rem; margin: 1.8em 0 0.5em; }
+  ul, ol { padding-left: 1.4em; } li { margin-bottom: 0.4em; }
+  .toc { background: var(--card); border-radius: 10px; padding: 14px 20px; margin-bottom: 2.5em; }
+  .toc ol { margin: 0.3em 0 0; columns: 2 260px; } .toc li { margin-bottom: 0.15em; }
+  .btn { display: inline-block; border: 1px solid var(--line); background: var(--card); border-radius: 6px; padding: 0 7px; font-size: 0.9em; line-height: 1.6; white-space: nowrap; font-weight: 600; }
+  kbd { display: inline-block; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 4px; padding: 0 6px; font-family: ui-monospace, Menlo, monospace; font-size: 0.85em; background: var(--card); }
+  .note { border-left: 4px solid var(--accent); background: var(--card); padding: 10px 14px; border-radius: 0 8px 8px 0; margin: 1em 0; }
+  .note.pro { border-left-color: var(--amber); }
+  figure { margin: 1.2em 0; }
+  figcaption { font-size: 0.85rem; color: var(--muted); margin-top: 0.4em; }
+  .placeholder { aspect-ratio: 16 / 9; border: 2px dashed var(--line); border-radius: 10px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: var(--muted); font-size: 0.9rem; padding: 12px; background: var(--card); }
+  .placeholder strong { color: var(--fg); font-family: ui-monospace, Menlo, monospace; font-size: 0.85rem; }
+  table { border-collapse: collapse; width: 100%; font-size: 0.93rem; }
+  th, td { border-bottom: 1px solid var(--line); padding: 8px 6px; text-align: left; vertical-align: top; }
+  th { white-space: nowrap; }
+  .fig { background: var(--card); border-radius: 12px; padding: 14px; }
+  .fig svg { width: 100%; height: auto; display: block; overflow: visible; }
+  @media (max-width: 640px) { .fig { overflow-x: auto; } .fig svg { min-width: 620px; } }
+  svg text { fill: var(--fg); font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif; }
+  svg text[fill="#fff"] { fill: #fff; }
+  svg .m { fill: var(--muted); }
+  svg .b { fill: var(--bg); stroke: var(--line); stroke-width: 1.5; }
+  svg .bf { fill: var(--card); stroke: var(--line); stroke-width: 1.5; }
+  svg .ln { stroke: var(--muted); stroke-width: 2; fill: none; }
+  svg .dash { stroke: var(--muted); stroke-width: 1.6; fill: none; stroke-dasharray: 5 4; }
+  svg .ah { fill: var(--muted); }
+  svg .good { fill: var(--good); } svg .bad { fill: var(--bad); } svg .blue { fill: var(--blue); } svg .amber { fill: var(--amber); } svg .violet { fill: var(--violet); }
+  svg .wt { fill: #fff; font-weight: 700; }
+  svg .film { fill: #3b414b; } svg .film-hole { fill: #9aa1ab; }
+  svg .accent-stroke { stroke: var(--accent); stroke-width: 2.5; fill: none; }
+  svg .accent { fill: var(--accent); }
+
+  .vs { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 1em 0; }
+  @media (max-width: 640px) { .vs { grid-template-columns: 1fr; } }
+  .vs > div { background: var(--card); border-radius: 12px; padding: 14px; }
+  .vs .head { font-weight: 700; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+  .vs .tagline { font-size: 0.8rem; color: var(--muted); font-weight: 400; }
+  .vs .ours { outline: 2px solid var(--accent); }
+  .vs ol { font-size: 0.9rem; margin: 8px 0 0; }
+  .vs .verdict { font-size: 0.88rem; margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--line); }
+
+  .merits { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; margin: 1em 0; }
+  .merits div { background: var(--card); border-radius: 12px; padding: 12px 14px; font-size: 0.9rem; }
+  .merits .ic { font-size: 1.5rem; line-height: 1; }
+  .merits b { display: block; margin: 6px 0 2px; font-size: 0.98rem; }
+
+  .flow { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin: 1em 0; }
+  @media (max-width: 640px) { .flow { grid-template-columns: 1fr; } }
+  .flow a { display: block; text-decoration: none; color: inherit; background: var(--card); border-radius: 10px; padding: 10px; text-align: center; font-size: 0.85rem; position: relative; }
+  .flow .ic { font-size: 1.6rem; display: block; }
+  .flow b { display: block; font-size: 1rem; }
+  .flow .n { position: absolute; top: 6px; left: 8px; font-size: 0.75rem; color: var(--muted); font-weight: 700; }
+
+  .case { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 640px) { .case { grid-template-columns: 1fr; } }
+  .case > div { border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; font-size: 0.9rem; }
+  .case .head { font-weight: 700; margin-bottom: 4px; }
+  .case ol { margin: 6px 0 0; }
+  .case .ours { border: 2px solid var(--accent); }
+
+  footer { margin-top: 3em; font-size: 0.85rem; color: var(--muted); }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="ah"/></marker>
+    <marker id="ahA" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="accent"/></marker>
+    <marker id="ahW" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#fff"/></marker>
+  </defs>
+</svg>
+
+<p class="home"><a href="ko.html">← CoachTag</a> · <a href="support-ko.html">지원</a></p>
+<h1>CoachTag 사용 가이드</h1>
+<p class="lead">경기 영상에서 보고 싶은 장면을 모으고, 전술을 그려 넣어, 선수에게 보여 줄 영상을 만듭니다. CoachTag의 기본 흐름을 처음 사용하는 분을 위해 설명합니다.</p>
+
+<nav class="toc"><strong>목차</strong>
+<ol>
+<li><a href="#idea">먼저, CoachTag의 개념</a></li>
+<li><a href="#words">알아 두면 좋은 5가지 용어</a></li>
+<li><a href="#package">경기 영상 열기</a></li>
+<li><a href="#buttons">태그 버튼 준비하기</a></li>
+<li><a href="#tagging">보면서 태그 기록하기</a></li>
+<li><a href="#review">기록한 태그 다시 보기·좁히기</a></li>
+<li><a href="#playlist">플레이리스트로 정리하기</a></li>
+<li><a href="#effects">전술 그려 넣기(프로 요금제)</a></li>
+<li><a href="#export">동영상으로 내보내기</a></li>
+<li><a href="#clips">이미 잘라 둔 클립으로 시작하기</a></li>
+<li><a href="#keys">키 조작 목록</a></li>
+</ol>
+</nav>
+
+<section id="idea">
+<h2>1. 먼저, CoachTag의 개념</h2>
+<p>CoachTag는 영상을 <strong>“자르는”</strong> 것이 아니라 <strong>“표시하는”</strong> 방식으로 장면을 모으는 앱입니다. 이것이 일반적인 동영상 편집 프로그램과 가장 크게 다른 점입니다.</p>
+
+<h3>동영상 편집 프로그램과의 차이</h3>
+<div class="vs">
+  <div>
+    <div class="head">✂️ 일반적인 동영상 편집 프로그램</div>
+    <svg viewBox="0 0 360 230" role="img" aria-label="영상을 가위로 잘라 많은 파일로 나눈다">
+      <text x="0" y="14" font-size="13" class="m">경기 영상</text>
+            <g>
+        <rect x="0" y="24" width="96" height="40" rx="3" class="film"/>
+        <rect x="112" y="24" width="70" height="40" rx="3" class="film"/>
+        <rect x="198" y="24" width="60" height="40" rx="3" class="film"/>
+        <rect x="274" y="24" width="86" height="40" rx="3" class="film"/>
+        <g class="film-hole">
+          <rect x="6" y="28" width="6" height="5"/><rect x="22" y="28" width="6" height="5"/><rect x="38" y="28" width="6" height="5"/><rect x="54" y="28" width="6" height="5"/><rect x="70" y="28" width="6" height="5"/><rect x="86" y="28" width="6" height="5"/>
+          <rect x="6" y="55" width="6" height="5"/><rect x="22" y="55" width="6" height="5"/><rect x="38" y="55" width="6" height="5"/><rect x="54" y="55" width="6" height="5"/><rect x="70" y="55" width="6" height="5"/><rect x="86" y="55" width="6" height="5"/>
+          <rect x="118" y="28" width="6" height="5"/><rect x="134" y="28" width="6" height="5"/><rect x="150" y="28" width="6" height="5"/><rect x="166" y="28" width="6" height="5"/>
+          <rect x="118" y="55" width="6" height="5"/><rect x="134" y="55" width="6" height="5"/><rect x="150" y="55" width="6" height="5"/><rect x="166" y="55" width="6" height="5"/>
+          <rect x="204" y="28" width="6" height="5"/><rect x="220" y="28" width="6" height="5"/><rect x="236" y="28" width="6" height="5"/>
+          <rect x="204" y="55" width="6" height="5"/><rect x="220" y="55" width="6" height="5"/><rect x="236" y="55" width="6" height="5"/>
+          <rect x="280" y="28" width="6" height="5"/><rect x="296" y="28" width="6" height="5"/><rect x="312" y="28" width="6" height="5"/><rect x="328" y="28" width="6" height="5"/><rect x="344" y="28" width="6" height="5"/>
+          <rect x="280" y="55" width="6" height="5"/><rect x="296" y="55" width="6" height="5"/><rect x="312" y="55" width="6" height="5"/><rect x="328" y="55" width="6" height="5"/><rect x="344" y="55" width="6" height="5"/>
+        </g>
+      </g>
+      <text x="96" y="20" font-size="18">✂️</text>
+      <text x="178" y="20" font-size="18">✂️</text>
+      <text x="254" y="20" font-size="18">✂️</text>
+      <path d="M180 76 L180 102" class="ln" marker-end="url(#ah)"/>
+            <g font-size="12">
+        <rect x="20" y="112" width="96" height="26" rx="5" class="b"/><text x="30" y="130">🎞 clip_01.mp4</text>
+        <rect x="132" y="112" width="96" height="26" rx="5" class="b"/><text x="142" y="130">🎞 clip_02.mp4</text>
+        <rect x="244" y="112" width="96" height="26" rx="5" class="b"/><text x="254" y="130">🎞 clip_03.mp4</text>
+        <rect x="20" y="146" width="96" height="26" rx="5" class="b"/><text x="30" y="164">🎞 clip_04.mp4</text>
+        <rect x="132" y="146" width="96" height="26" rx="5" class="b"/><text x="142" y="164">🎞 clip_05.mp4</text>
+        <rect x="244" y="146" width="96" height="26" rx="5" class="b"/><text x="254" y="164" class="m">…… clip_48</text>
+      </g>
+      <text x="0" y="198" font-size="12.5" class="m">자를 때마다 파일이 늘고 용량도 늘어납니다.</text>
+      <text x="0" y="218" font-size="12.5" class="m">어떤 장면인지는 파일 이름에만 의존합니다.</text>
+    </svg>
+    <ol>
+      <li>경기를 끝까지 본다</li>
+      <li>다시 보면서 쓸 장면을 찾는다</li>
+      <li>하나씩 잘라 내보낸다</li>
+      <li>장면을 바꾸고 싶으면 다시 자른다</li>
+    </ol>
+    <div class="verdict">보는 작업과 자르는 작업이 <strong>따로</strong> 이루어져, 준비에 경기 시간의 몇 배가 걸립니다.</div>
+  </div>
+
+  <div class="ours">
+    <div class="head">🏷️ CoachTag</div>
+    <svg viewBox="0 0 360 230" role="img" aria-label="영상 하나를 그대로 두고 그 위에 색 표시를 붙여 나간다">
+      <text x="0" y="14" font-size="13" class="m">경기 영상(하나 그대로)</text>
+      <rect x="0" y="24" width="360" height="40" rx="3" class="film"/>
+      <g class="film-hole">
+        <rect x="6" y="28" width="348" height="5" opacity="0"/>
+      </g>
+      <g opacity="0.95">
+        <rect x="30" y="30" width="34" height="28" rx="3" class="good"/>
+        <rect x="96" y="30" width="22" height="28" rx="3" class="bad"/>
+        <rect x="150" y="30" width="44" height="28" rx="3" class="good"/>
+        <rect x="222" y="30" width="26" height="28" rx="3" class="blue"/>
+        <rect x="282" y="30" width="38" height="28" rx="3" class="good"/>
+      </g>
+            <g transform="translate(150 78)">
+        <rect x="0" y="0" width="30" height="30" rx="5" class="b"/><text x="10" y="21" font-size="15" font-weight="700">Q</text>
+        <rect x="38" y="0" width="30" height="30" rx="5" class="b"/><text x="47" y="21" font-size="15" font-weight="700">W</text>
+        <rect x="76" y="0" width="30" height="30" rx="5" class="b"/><text x="87" y="21" font-size="15" font-weight="700">E</text>
+      </g>
+      <path d="M165 76 L170 64" class="accent-stroke" marker-end="url(#ahA)"/>
+      <text x="0" y="98" font-size="12" class="m">보면서 키를</text>
+      <text x="0" y="114" font-size="12" class="m">누르기만 하면 표시</text>
+            <g font-size="12">
+        <rect x="20" y="126" width="320" height="58" rx="6" class="b"/>
+        <rect x="30" y="134" width="10" height="10" rx="2" class="good"/><text x="46" y="144">AT Good  12:05〜12:19</text>
+        <rect x="30" y="152" width="10" height="10" rx="2" class="bad"/><text x="46" y="162">AT Bad  18:40〜18:47</text>
+        <rect x="200" y="134" width="10" height="10" rx="2" class="good"/><text x="216" y="144">AT Good  31:12〜</text>
+        <rect x="200" y="152" width="10" height="10" rx="2" class="blue"/><text x="216" y="162">DF Good  44:02〜</text>
+        <text x="46" y="178" class="m">…… 표시 목록(수 KB)</text>
+      </g>
+      <text x="0" y="208" font-size="12.5" class="m">영상을 자르지 않아 파일도 용량도 늘지 않습니다.</text>
+      <text x="0" y="226" font-size="12.5" class="m">표시에 “종류”가 있어 나중에 한 번에 모을 수 있습니다.</text>
+    </svg>
+    <ol>
+      <li>경기를 보면서 장면마다 키를 누른다</li>
+      <li>경기가 끝나면 장면 목록이 이미 완성되어 있다</li>
+      <li>종류나 조건으로 좁혀서 모으기만 하면 된다</li>
+      <li>장면 길이를 바꿀 때도 표시만 고치면 된다</li>
+    </ol>
+    <div class="verdict">보는 작업과 모으는 작업이 <strong>동시에</strong> 끝납니다.</div>
+  </div>
+</div>
+
+<h3>“태그”는 영상에 붙이는 인덱스 스티커</h3>
+<p>책에 인덱스 스티커를 붙이는 것과 같습니다. 페이지(영상)는 그대로이고 스티커(태그)만 늘어납니다. 스티커 색으로 “공격·좋음”, “수비·나쁨” 같은 종류를 나눠 두면, 나중에 같은 색 스티커가 붙은 페이지만 펼칠 수 있습니다.</p>
+<div class="fig">
+<svg viewBox="0 0 760 250" role="img" aria-label="영상 타임라인 하나와 거기에 붙은 색 태그. 태그에는 종류, 시작점, 종료점, 플래그가 기록된다">
+  <text x="0" y="16" font-size="14" font-weight="700">경기 영상</text>
+  <text x="0" y="34" font-size="12" class="m">0:00</text>
+  <text x="725" y="34" font-size="12" class="m">90:00</text>
+  <rect x="0" y="42" width="760" height="18" rx="9" class="bf"/>
+    <rect x="70" y="40" width="40" height="22" rx="4" class="good"/>
+  <rect x="160" y="40" width="26" height="22" rx="4" class="bad"/>
+  <rect x="250" y="40" width="58" height="22" rx="4" class="good"/>
+  <rect x="380" y="40" width="30" height="22" rx="4" class="blue"/>
+  <rect x="470" y="40" width="44" height="22" rx="4" class="good"/>
+  <rect x="580" y="40" width="22" height="22" rx="4" class="bad"/>
+  <rect x="660" y="40" width="36" height="22" rx="4" class="blue"/>
+    <path d="M250 64 L210 108" class="dash"/>
+  <path d="M308 64 L560 108" class="dash"/>
+  <rect x="200" y="108" width="370" height="128" rx="10" class="b"/>
+  <rect x="200" y="108" width="370" height="30" rx="10" class="good"/>
+  <rect x="200" y="126" width="370" height="12" class="good"/>
+  <text x="214" y="129" font-size="14" class="wt">태그 1개의 내용</text>
+  <g font-size="13">
+    <text x="214" y="162" class="m">종류</text><text x="290" y="162">AT Good(공격·좋음)</text>
+    <text x="214" y="184" class="m">시간</text><text x="290" y="184">31:12 〜 31:26</text>
+    <text x="214" y="206" class="m">플래그</text>
+    <rect x="290" y="193" width="64" height="20" rx="10" class="amber"/><text x="301" y="208" font-size="12" class="wt">크로스</text>
+    <rect x="360" y="193" width="72" height="20" rx="10" class="violet"/><text x="371" y="208" font-size="12" class="wt">슈팅</text>
+    <text x="214" y="228" class="m">메모</text><text x="290" y="228">오른쪽 측면 세 번째 선수의 움직임</text>
+  </g>
+  <text x="590" y="150" font-size="12.5" class="m">영상을 복사하지 않고,</text>
+  <text x="590" y="170" font-size="12.5" class="m">“언제부터 언제까지”와</text>
+  <text x="590" y="190" font-size="12.5" class="m">“어떤 장면인지”만 기록.</text>
+  <text x="0" y="150" font-size="12.5" class="m">나중에 길이를 고치거나</text>
+  <text x="0" y="170" font-size="12.5" class="m">지워도 괜찮습니다.</text>
+  <text x="0" y="190" font-size="12.5" class="m">원본 영상은 그대로.</text>
+</svg>
+</div>
+
+<h3>예: “크로스에서 이어진 슈팅을 모두 보여 주고 싶을” 때</h3>
+<div class="case">
+  <div>
+    <div class="head">✂️ 동영상 편집 프로그램이라면</div>
+    <ol>
+      <li>90분 영상을 다시 보며 크로스에서 이어진 슈팅을 찾는다</li>
+      <li>찾을 때마다 시작과 끝을 정해 자른다</li>
+      <li>자른 것을 나열해 내보낸다</li>
+      <li>다음 경기에서도 처음부터 다시</li>
+    </ol>
+  </div>
+  <div class="ours">
+    <div class="head">🏷️ CoachTag라면</div>
+    <ol>
+      <li>(경기를 보면서 기록한 태그가 이미 있다)</li>
+      <li>표에서 “AT Good × 크로스”를 클릭 → 해당 장면이 모두 선택된다</li>
+      <li>플레이리스트에 추가해 내보낸다</li>
+      <li>몇 경기 분량이든 같은 조작으로 모을 수 있다</li>
+    </ol>
+  </div>
+</div>
+
+<h3>CoachTag의 장점</h3>
+<div class="merits">
+  <div><span class="ic">⏱️</span><b>다 보고 나면 이미 모여 있습니다</b>경기를 보면서 태그를 기록하므로 다시 보며 찾는 시간이 필요 없습니다. 경기 중이나 하프타임에도 쓸 수 있습니다.</div>
+  <div><span class="ic">🔎</span><b>조건으로 한 번에 꺼낼 수 있습니다</b>“수비·나쁨”만, “세트피스 × CK”만처럼 종류와 플래그로 순식간에 좁힐 수 있습니다.</div>
+  <div><span class="ic">💾</span><b>파일도 용량도 늘지 않습니다</b>태그는 표시일 뿐이므로 수백 개를 기록해도 영상 하나 분량 그대로입니다. 잘라 낸 파일을 관리할 필요가 없습니다.</div>
+  <div><span class="ic">↩️</span><b>몇 번이든 다시 할 수 있습니다</b>장면을 늘리거나 줄이고 싶을 때는 표시만 고치면 됩니다. 원본 영상은 언제나 그대로입니다.</div>
+  <div><span class="ic">📚</span><b>여러 경기에 걸쳐 모을 수 있습니다</b>여러 경기의 태그를 하나의 플레이리스트에 담습니다. “이번 시즌 실점 장면”도 바로 만들 수 있습니다.</div>
+  <div><span class="ic">✏️</span><b>그린 내용도 그대로 내보내기</b>장면에 화살표나 존을 그려 넣고, 영상에 입힌 동영상으로 선수에게 전달할 수 있습니다.</div>
+</div>
+
+<h3>전체 흐름</h3>
+<div class="flow">
+  <a href="#package"><span class="n">1</span><span class="ic">📂</span><b>열기</b>경기 영상을 패키지로</a>
+  <a href="#tagging"><span class="n">2</span><span class="ic">🏷️</span><b>기록</b>보면서 태그 기록</a>
+  <a href="#playlist"><span class="n">3</span><span class="ic">📋</span><b>모으기</b>플레이리스트로 정리</a>
+  <a href="#effects"><span class="n">4</span><span class="ic">✏️</span><b>그리기</b>전술 그려 넣기</a>
+  <a href="#export"><span class="n">5</span><span class="ic">🎬</span><b>내보내기</b>선수에게 보여 줄 영상으로</a>
+</div>
+</section>
+
+<section id="words">
+<h2>2. 알아 두면 좋은 5가지 용어</h2>
+<div class="fig">
+<svg viewBox="0 0 760 300" role="img" aria-label="패키지는 영상, 태그, 그림을 한 경기 분량으로 담은 상자. 플레이리스트는 여러 패키지의 장면을 참조한다">
+    <rect x="0" y="10" width="300" height="130" rx="12" class="b"/>
+  <text x="14" y="34" font-size="14" font-weight="700">📦 패키지(10라운드 vs A)</text>
+  <g font-size="12.5">
+    <rect x="14" y="46" width="272" height="22" rx="4" class="film"/>
+    <text x="22" y="62" fill="#fff">🎞 경기 영상</text>
+    <rect x="14" y="76" width="34" height="18" rx="3" class="good"/>
+    <rect x="58" y="76" width="22" height="18" rx="3" class="bad"/>
+    <rect x="92" y="76" width="44" height="18" rx="3" class="good"/>
+    <rect x="148" y="76" width="26" height="18" rx="3" class="blue"/>
+    <rect x="186" y="76" width="34" height="18" rx="3" class="good"/>
+    <text x="230" y="90" class="m">🏷 태그</text>
+    <text x="14" y="122" class="m">✏️ 그림, 플래그, 메모도 함께 저장</text>
+  </g>
+    <rect x="0" y="160" width="300" height="130" rx="12" class="b"/>
+  <text x="14" y="184" font-size="14" font-weight="700">📦 패키지(11라운드 vs B)</text>
+  <g font-size="12.5">
+    <rect x="14" y="196" width="272" height="22" rx="4" class="film"/>
+    <text x="22" y="212" fill="#fff">🎞 경기 영상</text>
+    <rect x="30" y="226" width="40" height="18" rx="3" class="good"/>
+    <rect x="84" y="226" width="22" height="18" rx="3" class="blue"/>
+    <rect x="124" y="226" width="30" height="18" rx="3" class="bad"/>
+    <rect x="170" y="226" width="40" height="18" rx="3" class="good"/>
+    <text x="230" y="240" class="m">🏷 태그</text>
+    <text x="14" y="272" class="m">1경기 = 1패키지(.ccpkg)</text>
+  </g>
+    <rect x="440" y="60" width="320" height="180" rx="12" class="b"/>
+  <text x="456" y="86" font-size="14" font-weight="700">📋 플레이리스트 “좋은 공격 장면”</text>
+  <g font-size="12.5">
+    <rect x="456" y="100" width="288" height="26" rx="5" class="bf"/><rect x="456" y="100" width="8" height="26" rx="2" class="good"/><text x="474" y="118">① vs A 12:05  AT Good</text>
+    <rect x="456" y="132" width="288" height="26" rx="5" class="bf"/><rect x="456" y="132" width="8" height="26" rx="2" class="good"/><text x="474" y="150">② vs A 51:40  AT Good</text>
+    <rect x="456" y="164" width="288" height="26" rx="5" class="bf"/><rect x="456" y="164" width="8" height="26" rx="2" class="good"/><text x="474" y="182">③ vs B 08:22  AT Good</text>
+    <rect x="456" y="196" width="288" height="26" rx="5" class="bf"/><rect x="456" y="196" width="8" height="26" rx="2" class="good"/><text x="474" y="214">④ vs B 77:10  AT Good</text>
+  </g>
+  <path d="M114 86 C 300 86, 330 113, 452 113" class="dash" marker-end="url(#ah)"/>
+  <path d="M206 86 C 330 90, 340 145, 452 145" class="dash" marker-end="url(#ah)"/>
+  <path d="M50 236 C 300 236, 330 177, 452 177" class="dash" marker-end="url(#ah)"/>
+  <path d="M190 236 C 330 236, 350 209, 452 209" class="dash" marker-end="url(#ah)"/>
+  <text x="320" y="266" font-size="12" class="m">영상은 복사하지 않고</text>
+  <text x="320" y="284" font-size="12" class="m">원본 패키지를 참조</text>
+</svg>
+</div>
+<table>
+<tr><th>📦 패키지<br><small>.ccpkg</small></th><td>경기 영상과 거기에 기록한 태그, 그림을 하나로 묶은 저장 파일입니다. 경기마다 하나씩 만듭니다. Mac, iPad, Windows 어디서든 그대로 열 수 있습니다.</td></tr>
+<tr><th>🏷️ 태그</th><td>“이 장면”을 가리키는 시간 표시입니다. <span class="btn">AT Good</span>(공격·좋음) 같은 <strong>버튼</strong>을 누르면 그 종류의 태그가 하나 기록됩니다. 어떤 버튼을 준비할지는 자유롭게 정할 수 있습니다.</td></tr>
+<tr><th>📌 플래그</th><td>태그에 덧붙이는 추가 정보입니다. 예를 들어 “AT Good” 태그에 “슈팅”, “크로스” 등을 붙여 두면 나중에 “슈팅으로 끝난 좋은 공격”만 모을 수 있습니다.</td></tr>
+<tr><th>📋 플레이리스트</th><td>선택한 태그를 보여 주고 싶은 순서로 나열한 목록입니다. 여러 경기(패키지)의 태그를 하나로 모을 수 있습니다. 영상은 복사하지 않고 원본 패키지를 참조합니다.</td></tr>
+<tr><th>✏️ 이펙트 모드</th><td>한 장면에 들어가 화살표, 존, 선수를 따라가는 마커 등을 그려 넣는 모드입니다. 그린 내용은 내보낼 때 영상에 입혀집니다.</td></tr>
+</table>
+</section>
+
+<section id="package">
+<h2>3. 경기 영상 열기(패키지 만들기)</h2>
+<div class="fig">
+<svg viewBox="0 0 760 170" role="img" aria-label="동영상 파일을 선택하면 패키지 안으로 복사 또는 이동되어 태그, 그림과 함께 저장된다">
+  <rect x="0" y="40" width="150" height="90" rx="10" class="b"/>
+  <text x="50" y="82" font-size="34">🎞</text>
+  <text x="18" y="118" font-size="12.5">match.mp4</text>
+  <text x="0" y="24" font-size="13" class="m">가지고 있는 동영상 파일</text>
+
+  <path d="M160 85 L 300 85" class="ln" marker-end="url(#ah)"/>
+  <text x="178" y="72" font-size="13" font-weight="700">동영상 열기</text>
+  <text x="172" y="108" font-size="12" class="m">복사 또는 이동</text>
+
+  <rect x="320" y="10" width="300" height="150" rx="14" class="b" style="stroke: var(--accent); stroke-width: 2.5"/>
+  <text x="336" y="36" font-size="14" font-weight="700">📦 10라운드 vs A.ccpkg</text>
+  <rect x="336" y="50" width="268" height="28" rx="5" class="film"/><text x="346" y="69" font-size="12.5" fill="#fff">🎞 경기 영상</text>
+  <rect x="336" y="86" width="130" height="28" rx="5" class="bf"/><text x="346" y="105" font-size="12.5">🏷 태그·플래그</text>
+  <rect x="474" y="86" width="130" height="28" rx="5" class="bf"/><text x="484" y="105" font-size="12.5">✏️ 그림</text>
+  <text x="336" y="144" font-size="12" class="m">작업하면 자동으로 저장됩니다</text>
+
+  <text x="640" y="70" font-size="12.5" class="m">Mac, iPad,</text>
+  <text x="640" y="90" font-size="12.5" class="m">Windows에서</text>
+  <text x="640" y="110" font-size="12.5" class="m">그대로 열기</text>
+</svg>
+</div>
+<ol>
+<li><span class="btn">동영상 열기</span>를 누르고 경기 동영상 파일을 선택합니다.</li>
+<li>패키지 이름과 저장 위치를 묻는 창이 나오면 정합니다(예: “10라운드 vs ○○”).</li>
+<li>동영상을 패키지 안으로 <strong>복사</strong>할지 <strong>이동</strong>할지 선택합니다(Mac, Windows). 원래 위치에도 동영상을 남기려면 “복사”를 선택하세요.</li>
+</ol>
+<div class="note">전반·후반 등으로 동영상이 여러 파일로 나뉘어 있으면, 한꺼번에 선택해 파일 이름 순서로 이어서 열 수 있습니다.<br>두 번째부터는 <span class="btn">패키지 열기</span>로 태그와 그림까지 그대로 이어서 작업할 수 있습니다.</div>
+</section>
+
+<section id="buttons">
+<h2>4. 태그 버튼 준비하기</h2>
+<p>영상 아래에 있는 버튼이 태그를 기록하는 버튼입니다. 팀의 분석 관점에 맞게 다시 만드는 것을 추천합니다.</p>
+<div class="fig">
+<svg viewBox="0 0 760 150" role="img" aria-label="태그 버튼 예시. 종류마다 색과 키가 지정되어 있다">
+  <text x="0" y="16" font-size="13" class="m">태그 버튼(예)</text>
+  <g font-size="13">
+    <rect x="0" y="28" width="118" height="44" rx="8" class="good"/><text x="12" y="56" class="wt">AT Good</text><rect x="88" y="36" width="22" height="22" rx="4" fill="#0003"/><text x="94" y="52" class="wt" font-size="12">Q</text>
+    <rect x="126" y="28" width="118" height="44" rx="8" class="bad"/><text x="138" y="56" class="wt">AT Bad</text><rect x="214" y="36" width="22" height="22" rx="4" fill="#0003"/><text x="219" y="52" class="wt" font-size="12">W</text>
+    <rect x="252" y="28" width="118" height="44" rx="8" class="blue"/><text x="264" y="56" class="wt">DF Good</text><rect x="340" y="36" width="22" height="22" rx="4" fill="#0003"/><text x="347" y="52" class="wt" font-size="12">E</text>
+    <rect x="378" y="28" width="118" height="44" rx="8" class="amber"/><text x="390" y="56" class="wt">DF Bad</text><rect x="466" y="36" width="22" height="22" rx="4" fill="#0003"/><text x="472" y="52" class="wt" font-size="12">R</text>
+  </g>
+  <text x="0" y="98" font-size="13" class="m">플래그 버튼(예)</text>
+  <g font-size="12.5">
+    <rect x="0" y="108" width="74" height="28" rx="14" class="bf"/><text x="22" y="127">슈팅</text>
+    <rect x="82" y="108" width="62" height="28" rx="14" class="bf"/><text x="96" y="127">크로스</text>
+    <rect x="152" y="108" width="54" height="28" rx="14" class="bf"/><text x="171" y="127">CK</text>
+    <rect x="214" y="108" width="54" height="28" rx="14" class="bf"/><text x="233" y="127">FK</text>
+  </g>
+  <g font-size="12.5" class="m">
+    <text x="530" y="42" class="m">← 이름, 색, 키(한 글자)는</text>
+    <text x="530" y="62" class="m">   자유롭게 정할 수 있음</text>
+    <text x="300" y="127" class="m">← 태그에 덧붙이는 추가 정보</text>
+  </g>
+</svg>
+</div>
+<ol>
+<li><span class="btn">⚙️ 태그 설정</span>을 엽니다.</li>
+<li>“태그” 탭에서 버튼 이름, 색, 키보드 단축키(한 글자)를 정합니다. <span class="btn">+ 태그 추가</span>로 늘릴 수 있습니다.</li>
+<li>필요하면 “플래그” 탭에서 추가 정보 버튼(슈팅, 크로스 등)도 만듭니다.</li>
+</ol>
+
+<h3>태그 기록 방식은 2가지</h3>
+<div class="vs">
+  <div>
+    <div class="head">👆 원클릭</div>
+    <svg viewBox="0 0 360 120" role="img" aria-label="누른 순간의 앞뒤 몇 초가 태그가 된다">
+      <rect x="0" y="50" width="360" height="10" rx="5" class="bf"/>
+      <rect x="110" y="44" width="150" height="22" rx="4" class="good" opacity="0.9"/>
+      <path d="M190 18 L190 44" class="accent-stroke" marker-end="url(#ahA)"/>
+      <text x="166" y="14" font-size="12.5" font-weight="700">누른 순간</text>
+      <path d="M112 84 L188 84" class="ln" marker-start="url(#ah)" marker-end="url(#ah)"/>
+      <path d="M192 84 L258 84" class="ln" marker-start="url(#ah)" marker-end="url(#ah)"/>
+      <text x="118" y="104" font-size="12" class="m">리드 타임</text>
+      <text x="198" y="104" font-size="12" class="m">래그 타임</text>
+    </svg>
+    <p style="font-size:0.9rem;margin:6px 0 0">누른 순간의 <strong>앞뒤 몇 초</strong>가 자동으로 태그가 됩니다. 몇 초 전부터 몇 초 후까지인지는 설정할 수 있습니다. “슈팅 순간”처럼 기준이 되는 한 시점이 있는 장면에 적합합니다.</p>
+  </div>
+  <div>
+    <div class="head">✌️ 시작 → 종료 클릭</div>
+    <svg viewBox="0 0 360 120" role="img" aria-label="첫 번째로 시작점, 두 번째로 종료점이 정해진다">
+      <rect x="0" y="50" width="360" height="10" rx="5" class="bf"/>
+      <rect x="80" y="44" width="200" height="22" rx="4" class="good" opacity="0.9"/>
+      <path d="M82 18 L82 44" class="accent-stroke" marker-end="url(#ahA)"/>
+      <path d="M278 18 L278 44" class="accent-stroke" marker-end="url(#ahA)"/>
+      <text x="50" y="14" font-size="12.5" font-weight="700">첫 번째</text>
+      <text x="250" y="14" font-size="12.5" font-weight="700">두 번째</text>
+      <text x="96" y="96" font-size="12" class="m">누른 때부터 다시 누를 때까지</text>
+    </svg>
+    <p style="font-size:0.9rem;margin:6px 0 0">첫 번째로 시작이, 두 번째(같은 버튼)로 끝이 정해집니다. “공격이 시작되어 공을 잃을 때까지”처럼 길이가 제각각인 장면에 적합합니다.</p>
+  </div>
+</div>
+<p>기록 방식은 <span class="btn">⚙️ 태그 설정</span>에서 전체 기본값과 태그별 개별 설정을 모두 선택할 수 있습니다.</p>
+<div class="note">자주 쓰는 버튼 구성을 “프리셋”으로 저장해 두면 다음 경기에서도 같은 버튼을 불러올 수 있습니다.</div>
+</section>
+
+<section id="tagging">
+<h2>5. 보면서 태그 기록하기</h2>
+<p>영상을 재생하다가 장면이 나오면 버튼(또는 지정한 키)을 누르기만 하면 됩니다.</p>
+<div class="fig">
+<svg viewBox="0 0 760 200" role="img" aria-label="재생 중에 키를 누르면 타임라인에 띠가 늘고 오른쪽 목록에도 태그가 나열된다">
+    <rect x="0" y="0" width="470" height="120" rx="8" fill="var(--pitch)"/>
+  <rect x="20" y="14" width="430" height="92" fill="none" stroke="#ffffff80" stroke-width="1.5"/>
+  <line x1="235" y1="14" x2="235" y2="106" stroke="#ffffff80" stroke-width="1.5"/>
+  <circle cx="235" cy="60" r="16" fill="none" stroke="#ffffff80" stroke-width="1.5"/>
+  <g fill="#fff"><circle cx="160" cy="50" r="4"/><circle cx="200" cy="80" r="4"/><circle cx="290" cy="44" r="4"/><circle cx="320" cy="76" r="4"/></g>
+  <g fill="#111"><circle cx="250" cy="58" r="4"/><circle cx="345" cy="58" r="4"/><circle cx="380" cy="86" r="4"/></g>
+  <text x="14" y="26" font-size="14" fill="#fff">▶</text>
+    <rect x="0" y="132" width="470" height="12" rx="6" class="bf"/>
+  <rect x="60" y="130" width="28" height="16" rx="3" class="good"/>
+  <rect x="150" y="130" width="18" height="16" rx="3" class="bad"/>
+  <rect x="236" y="130" width="34" height="16" rx="3" class="good"/>
+  <line x1="300" y1="126" x2="300" y2="150" stroke="var(--accent)" stroke-width="2.5"/>
+    <g font-size="12">
+    <rect x="0" y="160" width="90" height="34" rx="6" class="good"/><text x="10" y="182" class="wt">AT Good  Q</text>
+    <rect x="96" y="160" width="90" height="34" rx="6" class="bad"/><text x="106" y="182" class="wt">AT Bad  W</text>
+    <rect x="192" y="160" width="90" height="34" rx="6" class="blue"/><text x="202" y="182" class="wt">DF Good  E</text>
+    <rect x="288" y="160" width="90" height="34" rx="6" class="amber"/><text x="298" y="182" class="wt">DF Bad  R</text>
+  </g>
+  <text x="392" y="172" font-size="12" class="m">누르면</text>
+  <text x="392" y="188" font-size="12" class="m">띠가 늘어남</text>
+    <rect x="500" y="0" width="260" height="194" rx="8" class="b"/>
+  <text x="514" y="24" font-size="13" font-weight="700">태그 목록</text>
+  <g font-size="12.5">
+    <rect x="514" y="38" width="232" height="30" rx="5" class="bf"/><rect x="514" y="38" width="6" height="30" class="good"/><text x="528" y="58">AT Good   02:14</text><text x="700" y="58">✏️ ➕</text>
+    <rect x="514" y="74" width="232" height="30" rx="5" class="bf"/><rect x="514" y="74" width="6" height="30" class="bad"/><text x="528" y="94">AT Bad    05:31</text><text x="700" y="94">✏️ ➕</text>
+    <rect x="514" y="110" width="232" height="30" rx="5" class="bf" style="stroke: var(--accent); stroke-width: 2"/><rect x="514" y="110" width="6" height="30" class="good"/><text x="528" y="130">AT Good   08:47</text><text x="700" y="130">✏️ ➕</text>
+    <text x="528" y="164" class="m">클릭하면 그 장면을 재생</text>
+  </g>
+</svg>
+</div>
+<ul>
+<li><kbd>Space</kbd>로 재생/일시 정지, <kbd>←</kbd> <kbd>→</kbd>로 3초 뒤로/앞으로, <kbd>J</kbd> <kbd>K</kbd> <kbd>L</kbd>로 되감기/정지/빨리 감기를 합니다.</li>
+<li>잘못 기록했다면 목록에서 선택해 삭제하거나, <kbd>⌘</kbd>+<kbd>Z</kbd>(Windows는 <kbd>Ctrl</kbd>+<kbd>Z</kbd>)로 취소할 수 있습니다.</li>
+<li>태그를 선택한 상태에서 플래그 버튼을 누르면 그 태그에 플래그가 붙습니다(다시 누르면 해제됩니다).</li>
+<li>화면을 크게 보고 싶을 때 <span class="btn">⛶ 전체 화면</span>으로 전환하면, 자주 쓰는 버튼만 영상 위에 떠서 표시됩니다.</li>
+</ul>
+<div class="note">처음부터 완벽을 목표로 하기보다 “일단 넉넉히 기록하고 나중에 고르는” 정도를 추천합니다. 태그는 표시일 뿐이므로 늘어나도 문제없습니다.</div>
+</section>
+
+<section id="review">
+<h2>6. 기록한 태그 다시 보기·좁히기</h2>
+<p><span class="btn">📊 표</span>를 열면 태그 × 플래그 개수를 표로 볼 수 있습니다. 숫자를 클릭하면 그 조건에 맞는 태그가 한꺼번에 선택됩니다.</p>
+<div class="fig">
+<svg viewBox="0 0 760 210" role="img" aria-label="태그와 플래그 집계표. AT Good이면서 크로스인 칸을 클릭하면 해당하는 4개가 선택된다">
+  <g font-size="13">
+    <rect x="0" y="0" width="460" height="200" rx="8" class="b"/>
+    <text x="16" y="28" class="m">태그 \ 플래그</text>
+    <text x="156" y="28" font-weight="700">슈팅</text><text x="240" y="28" font-weight="700">크로스</text><text x="320" y="28" font-weight="700">CK</text><text x="390" y="28" font-weight="700">합계</text>
+    <line x1="0" y1="40" x2="460" y2="40" stroke="var(--line)"/>
+    <rect x="16" y="54" width="10" height="10" rx="2" class="good"/><text x="32" y="64">AT Good</text><text x="168" y="64">7</text>
+    <rect x="228" y="46" width="66" height="26" rx="5" class="accent" opacity="0.2"/><rect x="228" y="46" width="66" height="26" rx="5" class="accent-stroke"/><text x="256" y="64" font-weight="700">4</text>
+    <text x="330" y="64">1</text><text x="400" y="64">12</text>
+    <rect x="16" y="88" width="10" height="10" rx="2" class="bad"/><text x="32" y="98">AT Bad</text><text x="168" y="98">2</text><text x="256" y="98">5</text><text x="330" y="98">0</text><text x="400" y="98">9</text>
+    <rect x="16" y="122" width="10" height="10" rx="2" class="blue"/><text x="32" y="132">DF Good</text><text x="168" y="132">0</text><text x="256" y="132">1</text><text x="330" y="132">3</text><text x="400" y="132">6</text>
+    <rect x="16" y="156" width="10" height="10" rx="2" class="amber"/><text x="32" y="166">DF Bad</text><text x="168" y="166">3</text><text x="256" y="166">2</text><text x="330" y="166">2</text><text x="400" y="166">8</text>
+    <text x="276" y="80" font-size="18">👆</text>
+  </g>
+  <path d="M470 60 L 520 60" class="ln" marker-end="url(#ah)"/>
+  <rect x="530" y="0" width="230" height="200" rx="8" class="b"/>
+  <text x="544" y="26" font-size="13" font-weight="700">4개 선택됨</text>
+  <g font-size="12.5">
+    <rect x="544" y="38" width="202" height="28" rx="5" class="bf" style="stroke: var(--accent); stroke-width: 2"/><rect x="544" y="38" width="6" height="28" class="good"/><text x="558" y="57">AT Good 12:05 크로스</text>
+    <rect x="544" y="72" width="202" height="28" rx="5" class="bf" style="stroke: var(--accent); stroke-width: 2"/><rect x="544" y="72" width="6" height="28" class="good"/><text x="558" y="91">AT Good 31:12 크로스</text>
+    <rect x="544" y="106" width="202" height="28" rx="5" class="bf" style="stroke: var(--accent); stroke-width: 2"/><rect x="544" y="106" width="6" height="28" class="good"/><text x="558" y="125">AT Good 58:40 크로스</text>
+    <rect x="544" y="140" width="202" height="28" rx="5" class="bf" style="stroke: var(--accent); stroke-width: 2"/><rect x="544" y="140" width="6" height="28" class="good"/><text x="558" y="159">AT Good 83:02 크로스</text>
+    <text x="544" y="190" class="m">→ 한꺼번에 플레이리스트로</text>
+  </g>
+</svg>
+</div>
+<ul>
+<li>목록의 태그를 클릭하면 그 장면만 재생됩니다.</li>
+<li>목록 위의 정렬(타임라인 순, 태그 순, 라벨 순)로 같은 종류의 태그를 모아서 볼 수 있습니다.</li>
+</ul>
+</section>
+
+<section id="playlist">
+<h2>7. 플레이리스트로 정리하기</h2>
+<p>선수에게 보여 주고 싶은 장면을 모아 나열하는 것이 플레이리스트입니다. 플레이리스트를 열면 영상 아래에 <strong>태그 보드</strong>가 나타납니다.</p>
+<div class="fig">
+<svg viewBox="0 0 760 220" role="img" aria-label="태그 보드. 종류별 행에 장면이 길이에 맞는 띠로 나열된다. 드래그로 재정렬하고 행별로 연속 재생할 수 있다">
+  <g font-size="13">
+    <rect x="0" y="0" width="760" height="210" rx="8" class="b"/>
+    <text x="14" y="24" font-weight="700">태그 보드</text>
+        <g>
+      <rect x="10" y="38" width="740" height="44" rx="6" class="bf"/>
+      <text x="22" y="66" font-weight="700">▶</text><rect x="44" y="54" width="10" height="10" rx="2" class="good"/><text x="60" y="64">AT Good</text>
+      <rect x="150" y="44" width="110" height="32" rx="5" class="good"/><text x="160" y="65" font-size="12" class="wt">vs A 12:05</text>
+      <rect x="266" y="44" width="80" height="32" rx="5" class="good"/><text x="274" y="65" font-size="12" class="wt">vs A 51:40</text>
+      <rect x="352" y="44" width="140" height="32" rx="5" class="good"/><text x="362" y="65" font-size="12" class="wt">vs B 08:22</text>
+      <rect x="498" y="44" width="90" height="32" rx="5" class="good" opacity="0.35"/>
+    </g>
+    <g>
+      <rect x="10" y="90" width="740" height="44" rx="6" class="bf"/>
+      <text x="22" y="118" font-weight="700">▶</text><rect x="44" y="106" width="10" height="10" rx="2" class="bad"/><text x="60" y="116">AT Bad</text>
+      <rect x="150" y="96" width="84" height="32" rx="5" class="bad"/><text x="160" y="117" font-size="12" class="wt">vs A 18:40</text>
+      <rect x="240" y="96" width="120" height="32" rx="5" class="bad"/><text x="250" y="117" font-size="12" class="wt">vs B 63:15</text>
+    </g>
+    <g>
+      <rect x="10" y="142" width="740" height="44" rx="6" class="bf"/>
+      <text x="22" y="170" font-weight="700">▶</text><text x="44" y="168">미분류</text>
+      <rect x="150" y="148" width="90" height="32" rx="5" class="m" opacity="0.6"/><text x="160" y="169" font-size="12" class="wt">슬라이드</text>
+      <rect x="246" y="148" width="96" height="32" rx="5" class="violet"/><text x="254" y="169" font-size="12" class="wt">vs B 77:10</text>
+    </g>
+        <path d="M300 156 C 380 140, 480 110, 540 80" class="accent-stroke" stroke-dasharray="6 4" marker-end="url(#ahA)"/>
+    <text x="560" y="24" font-size="12.5" class="m">드래그로 재정렬·행 이동</text>
+    <text x="14" y="204" font-size="12" class="m">▶로 그 행만 왼쪽부터 연속 재생 / 띠 길이 = 장면 길이</text>
+  </g>
+</svg>
+</div>
+<ol>
+<li><span class="btn">새 플레이리스트</span>로 플레이리스트를 만듭니다.</li>
+<li>태그 목록의 <span class="btn">➕</span>(또는 선택한 태그의 <span class="btn">플레이리스트에 추가</span>)로 장면을 추가합니다. 다른 경기의 패키지를 열어 같은 플레이리스트에 추가할 수도 있습니다.</li>
+<li>태그 보드에서 띠를 드래그해 재정렬하거나 다른 행으로 옮깁니다. 행은 <span class="btn">➕ 행 추가</span>로 늘릴 수 있습니다.</li>
+<li>행의 <span class="btn">▶</span>로 그 행만 순서대로 연속 재생할 수 있습니다. <span class="btn">슬라이드 삽입</span>으로 장면 사이에 설명용 페이지를 넣을 수도 있습니다.</li>
+</ol>
+<div class="note">플레이리스트는 원본 패키지를 참조합니다. 패키지를 이동하거나 삭제하면 그 장면을 재생할 수 없으니 주의하세요. 다른 사람에게 전달할 때는 <span class="btn">📦 독립 플레이리스트로 만들기</span>로 패키지 없이도 열 수 있는 형태로 만들 수 있습니다.</div>
+</section>
+
+<section id="effects">
+<h2>8. 전술 그려 넣기(프로 요금제)</h2>
+<div class="note pro">이펙트 모드는 프로 요금제 기능입니다.</div>
+<div class="fig">
+<svg viewBox="0 0 760 260" role="img" aria-label="이펙트 모드. 왼쪽 도구로 선수를 따라가는 디스크, 화살표, 존을 영상 위에 그린다">
+    <rect x="0" y="0" width="56" height="220" rx="8" class="b"/>
+  <g font-size="12" text-anchor="middle">
+    <rect x="8" y="10" width="40" height="40" rx="6" class="accent" opacity="0.18"/><text x="28" y="36" font-size="18">⭕</text>
+    <text x="28" y="80" font-size="18">📍</text>
+    <text x="28" y="122" font-size="18">↗️</text>
+    <text x="28" y="164" font-size="18">⬛</text>
+    <text x="28" y="204" font-size="18">⏸</text>
+  </g>
+    <rect x="68" y="0" width="600" height="220" rx="8" fill="var(--pitch)"/>
+  <g fill="var(--pitch2)"><rect x="68" y="0" width="60" height="220"/><rect x="188" y="0" width="60" height="220"/><rect x="308" y="0" width="60" height="220"/><rect x="428" y="0" width="60" height="220"/><rect x="548" y="0" width="60" height="220"/></g>
+  <rect x="88" y="16" width="560" height="188" fill="none" stroke="#ffffff90" stroke-width="1.5"/>
+  <rect x="548" y="60" width="100" height="100" fill="none" stroke="#ffffff90" stroke-width="1.5"/>
+    <polygon points="430,70 540,60 540,150 430,160" fill="#facc15" opacity="0.28" stroke="#facc15" stroke-width="2"/>
+    <g fill="#fff"><circle cx="260" cy="120" r="6"/><circle cx="350" cy="70" r="6"/><circle cx="400" cy="170" r="6"/><circle cx="470" cy="110" r="6"/></g>
+  <g fill="#1f2937"><circle cx="420" cy="90" r="6"/><circle cx="500" cy="130" r="6"/><circle cx="520" cy="80" r="6"/><circle cx="380" cy="120" r="6"/></g>
+    <path d="M200 160 C 230 150, 245 135, 258 124" stroke="#fff" stroke-width="2" stroke-dasharray="4 4" fill="none" opacity="0.8"/>
+  <ellipse cx="260" cy="128" rx="18" ry="7" fill="none" stroke="#38bdf8" stroke-width="3"/>
+    <path d="M270 112 C 330 60, 400 50, 462 100" stroke="#fff" stroke-width="3.5" fill="none" marker-end="url(#ahW)"/>
+    <g font-size="12.5">
+    <rect x="160" y="182" width="150" height="24" rx="12" fill="#000a"/><text x="172" y="199" fill="#fff">선수 클릭 → 자동 추적</text>
+    <rect x="300" y="26" width="112" height="24" rx="12" fill="#000a"/><text x="312" y="43" fill="#fff">화살표로 움직임을</text>
+    <rect x="442" y="168" width="104" height="24" rx="12" fill="#000a"/><text x="454" y="185" fill="#fff">존으로 공간을</text>
+  </g>
+    <rect x="68" y="230" width="600" height="26" rx="6" class="bf"/>
+  <rect x="120" y="236" width="300" height="6" rx="3" fill="#38bdf8"/>
+  <rect x="250" y="246" width="250" height="6" rx="3" class="m"/>
+  <rect x="400" y="236" width="18" height="16" rx="2" class="amber"/>
+  <text x="680" y="248" font-size="12" class="m">표시 시간</text>
+  <text x="680" y="40" font-size="12" class="m">⭕ 디스크</text>
+  <text x="680" y="60" font-size="12" class="m">📍 스포트라이트</text>
+  <text x="680" y="80" font-size="12" class="m">↗️ 화살표</text>
+  <text x="680" y="100" font-size="12" class="m">⬛ 존</text>
+  <text x="680" y="120" font-size="12" class="m">⏸ 정지 화면</text>
+</svg>
+</div>
+<ol>
+<li>태그 목록(또는 플레이리스트의 장면)에서 <span class="btn">✏️</span>를 누르면 그 장면의 이펙트 모드로 들어갑니다.</li>
+<li>왼쪽 도구에서 디스크, 스포트라이트, 화살표, 존 등을 골라 영상 위에 그립니다. 디스크와 스포트라이트는 <strong>선수를 클릭하기만 하면 자동으로 따라갑니다</strong>.</li>
+<li>아래 타임라인에서 그린 내용을 표시할 시간을 조정합니다. 설명하고 싶은 순간에 영상을 멈추는 “정지 화면”도 넣을 수 있습니다.</li>
+<li>그린 내용은 자동으로 저장됩니다. <span class="btn">이펙트 모드 종료</span>로 원래 화면으로 돌아갑니다.</li>
+</ol>
+</section>
+
+<section id="export">
+<h2>9. 동영상으로 내보내기</h2>
+<div class="fig">
+<svg viewBox="0 0 760 230" role="img" aria-label="내보내기 방법은 3가지. 한 장면만, 플레이리스트를 하나로, 장면별 개별 파일로">
+  <g font-size="13">
+        <text x="0" y="18" font-weight="700">한 장면만</text>
+    <rect x="0" y="30" width="60" height="30" rx="4" class="good"/>
+    <path d="M70 45 L 120 45" class="ln" marker-end="url(#ah)"/>
+    <rect x="130" y="28" width="110" height="34" rx="6" class="b"/><text x="142" y="50">🎬 mp4 1개</text>
+
+        <text x="0" y="98" font-weight="700">플레이리스트를 하나로</text>
+    <rect x="0" y="110" width="50" height="30" rx="4" class="good"/>
+    <rect x="54" y="110" width="36" height="30" rx="4" class="good"/>
+    <rect x="94" y="110" width="30" height="30" rx="4" class="m" opacity="0.6"/>
+    <rect x="128" y="110" width="56" height="30" rx="4" class="good"/>
+    <path d="M194 125 L 244 125" class="ln" marker-end="url(#ah)"/>
+    <rect x="254" y="108" width="230" height="34" rx="6" class="b"/><text x="266" y="130">🎬 이어 붙인 mp4 1개(그림 포함)</text>
+
+        <text x="0" y="178" font-weight="700">장면별 개별 파일</text>
+    <rect x="0" y="190" width="50" height="30" rx="4" class="good"/>
+    <rect x="54" y="190" width="36" height="30" rx="4" class="good"/>
+    <rect x="94" y="190" width="56" height="30" rx="4" class="good"/>
+    <path d="M160 205 L 210 205" class="ln" marker-end="url(#ah)"/>
+    <rect x="220" y="186" width="300" height="38" rx="6" class="b"/>
+    <text x="230" y="210">🗂 폴더</text>
+    <text x="310" y="210" font-size="12" class="m">01.mp4 · 02.mp4 · 03.mp4</text>
+  </g>
+  <g font-size="12.5" class="m">
+    <text x="560" y="40" class="m">그린 내용은 영상에</text>
+    <text x="560" y="58" class="m">입혀집니다</text>
+    <text x="560" y="110" class="m">원본 영상과 태그는</text>
+    <text x="560" y="128" class="m">그대로 남습니다</text>
+    <text x="560" y="180" class="m">내보낸 파일은</text>
+    <text x="560" y="198" class="m">어느 기기에서나 재생 가능</text>
+  </g>
+</svg>
+</div>
+<ul>
+<li>한 장면만: 태그의 <span class="btn">🎬 이 클립 내보내기</span></li>
+<li>플레이리스트 전체를 하나로: <span class="btn">🎬 동영상으로 내보내기</span> 태그 보드에서 행에 체크해 두면 그 행만 대상이 됩니다.</li>
+<li>장면별로 각각의 파일로: <span class="btn">🗂 클립별로 내보내기</span></li>
+</ul>
+</section>
+
+<section id="clips">
+<h2>10. 이미 잘라 둔 클립으로 시작하기</h2>
+<p>장면별로 잘라 둔 동영상 파일이 이미 있다면 태그를 기록하는 단계를 건너뛸 수 있습니다.</p>
+<div class="fig">
+<svg viewBox="0 0 760 130" role="img" aria-label="여러 동영상 파일을 선택하면 파일 하나가 장면 하나인 플레이리스트가 된다">
+  <g font-size="12.5">
+    <rect x="0" y="10" width="140" height="28" rx="5" class="b"/><text x="10" y="29">🎞 1실점.mp4</text>
+    <rect x="0" y="46" width="140" height="28" rx="5" class="b"/><text x="10" y="65">🎞 2실점.mp4</text>
+    <rect x="0" y="82" width="140" height="28" rx="5" class="b"/><text x="10" y="101">🎞 CK수비.mp4</text>
+  </g>
+  <path d="M152 60 L 260 60" class="ln" marker-end="url(#ah)"/>
+  <text x="160" y="32" font-size="12" font-weight="700">동영상으로</text><text x="160" y="50" font-size="12" font-weight="700">플레이리스트 만들기</text>
+  <rect x="272" y="0" width="300" height="122" rx="10" class="b"/>
+  <text x="286" y="24" font-size="13" font-weight="700">📋 플레이리스트</text>
+  <g font-size="12">
+    <text x="286" y="46" class="m">미분류</text>
+    <rect x="336" y="34" width="70" height="18" rx="3" class="m" opacity="0.7"/><text x="342" y="47" class="wt" font-size="11">1실점</text>
+    <rect x="410" y="34" width="56" height="18" rx="3" class="m" opacity="0.7"/><text x="416" y="47" class="wt" font-size="11">2실점</text>
+    <rect x="470" y="34" width="86" height="18" rx="3" class="m" opacity="0.7"/><text x="476" y="47" class="wt" font-size="11">CK수비</text>
+    <text x="286" y="78" class="m">파일 1개 = 장면 1개. 이후에는</text>
+    <text x="286" y="96" class="m">재정렬, 그리기, 내보내기로</text>
+  </g>
+</svg>
+</div>
+<ol>
+<li><span class="btn">동영상으로 플레이리스트 만들기</span>를 누르고 동영상 파일을 한꺼번에 선택합니다.</li>
+<li>파일 하나가 장면 하나가 되어 플레이리스트가 만들어집니다.</li>
+<li>이후에는 <a href="#playlist">7</a>~<a href="#export">9</a>와 같은 방법으로 재정렬, 그리기, 내보내기를 할 수 있습니다.</li>
+</ol>
+</section>
+
+<section id="keys">
+<h2>11. 키 조작 목록</h2>
+<table>
+<tr><th>Space</th><td>재생 / 일시 정지</td></tr>
+<tr><th>← / →</th><td>3초 뒤로 / 3초 앞으로</td></tr>
+<tr><th>J / K / L</th><td>되감기 / 정지 / 빨리 감기</td></tr>
+<tr><th>I / O</th><td>시작점 / 종료점 기록</td></tr>
+<tr><th>설정한 한 글자</th><td>그 태그의 버튼을 누른 것과 같음</td></tr>
+<tr><th>⌘Z / ⌘⇧Z</th><td>실행 취소 / 다시 실행(Windows는 Ctrl)</td></tr>
+</table>
+<p>iPad에서는 화면의 버튼을 탭해서 조작합니다.</p>
+<p>이 내용은 앱 메뉴의 “도움말” > “CoachTag 사용법”(iPad는 “⚙️ 설정”)에서도 볼 수 있습니다. 궁금한 점이 있으면 <a href="support-ko.html">지원</a> 페이지에서 편하게 문의해 주세요.</p>
+</section>
+
+<footer>&copy; 2026 CoachTag</footer>
+</body>
+</html>
