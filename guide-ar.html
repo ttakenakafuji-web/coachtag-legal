@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>دليل الاستخدام | CoachTag</title>
+<style>
+  :root { color-scheme: light dark; --fg: #1b1e22; --bg: #ffffff; --muted: #6b7280; --line: #d9dde3; --card: #f4f6f8; --accent: #2563eb; --good: #16a34a; --bad: #dc2626; --blue: #2563eb; --amber: #d97706; --violet: #7c3aed; --pitch: #2f7a3b; --pitch2: #2a6e35; }
+  @media (prefers-color-scheme: dark) { :root { --fg: #e6e8eb; --bg: #14161a; --muted: #9aa1ab; --line: #343841; --card: #1d2026; --accent: #7db4ff; --good: #22c55e; --bad: #ef4444; --blue: #60a5fa; --amber: #f59e0b; --violet: #a78bfa; --pitch: #24602e; --pitch2: #1f5628; } }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Geeza Pro", "Segoe UI", "Noto Sans Arabic", Tahoma, sans-serif; line-height: 1.8; max-width: 860px; margin: 0 auto; padding: 32px 16px 80px; color: var(--fg); background: var(--bg); }
+  a { color: var(--accent); }
+  .home { margin: 0 0 1em; font-weight: 600; } .home a { text-decoration: none; }
+  h1 { font-size: 1.7rem; margin-bottom: 0.25em; }
+  .lead { color: var(--muted); margin-bottom: 2em; }
+  section { margin-bottom: 3.5em; }
+  section h2 { font-size: 1.3rem; border-bottom: 1px solid var(--line); padding-bottom: 0.4em; margin-bottom: 0.8em; }
+  h3 { font-size: 1.08rem; margin: 1.8em 0 0.5em; }
+  ul, ol { padding-left: 1.4em; } li { margin-bottom: 0.4em; }
+  .toc { background: var(--card); border-radius: 10px; padding: 14px 20px; margin-bottom: 2.5em; }
+  .toc ol { margin: 0.3em 0 0; columns: 2 260px; } .toc li { margin-bottom: 0.15em; }
+  .btn { display: inline-block; border: 1px solid var(--line); background: var(--card); border-radius: 6px; padding: 0 7px; font-size: 0.9em; line-height: 1.6; white-space: nowrap; font-weight: 600; }
+  kbd { display: inline-block; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 4px; padding: 0 6px; font-family: ui-monospace, Menlo, monospace; font-size: 0.85em; background: var(--card); }
+  .note { border-left: 4px solid var(--accent); background: var(--card); padding: 10px 14px; border-radius: 0 8px 8px 0; margin: 1em 0; }
+  .note.pro { border-left-color: var(--amber); }
+  figure { margin: 1.2em 0; }
+  figcaption { font-size: 0.85rem; color: var(--muted); margin-top: 0.4em; }
+  .placeholder { aspect-ratio: 16 / 9; border: 2px dashed var(--line); border-radius: 10px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: var(--muted); font-size: 0.9rem; padding: 12px; background: var(--card); }
+  .placeholder strong { color: var(--fg); font-family: ui-monospace, Menlo, monospace; font-size: 0.85rem; }
+  table { border-collapse: collapse; width: 100%; font-size: 0.93rem; }
+  th, td { border-bottom: 1px solid var(--line); padding: 8px 6px; text-align: left; vertical-align: top; }
+  th { white-space: nowrap; }
+  .fig { background: var(--card); border-radius: 12px; padding: 14px; }
+  .fig svg { width: 100%; height: auto; display: block; overflow: visible; }
+  @media (max-width: 640px) { .fig { overflow-x: auto; } .fig svg { min-width: 620px; } }
+  svg text { unicode-bidi: plaintext; fill: var(--fg); font-family: -apple-system, BlinkMacSystemFont, "Geeza Pro", "Segoe UI", "Noto Sans Arabic", Tahoma, sans-serif; }
+  svg text[fill="#fff"] { fill: #fff; }
+  svg .m { fill: var(--muted); }
+  svg .b { fill: var(--bg); stroke: var(--line); stroke-width: 1.5; }
+  svg .bf { fill: var(--card); stroke: var(--line); stroke-width: 1.5; }
+  svg .ln { stroke: var(--muted); stroke-width: 2; fill: none; }
+  svg .dash { stroke: var(--muted); stroke-width: 1.6; fill: none; stroke-dasharray: 5 4; }
+  svg .ah { fill: var(--muted); }
+  svg .good { fill: var(--good); } svg .bad { fill: var(--bad); } svg .blue { fill: var(--blue); } svg .amber { fill: var(--amber); } svg .violet { fill: var(--violet); }
+  svg .wt { fill: #fff; font-weight: 700; }
+  svg .film { fill: #3b414b; } svg .film-hole { fill: #9aa1ab; }
+  svg .accent-stroke { stroke: var(--accent); stroke-width: 2.5; fill: none; }
+  svg .accent { fill: var(--accent); }
+
+  .vs { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 1em 0; }
+  @media (max-width: 640px) { .vs { grid-template-columns: 1fr; } }
+  .vs > div { background: var(--card); border-radius: 12px; padding: 14px; }
+  .vs .head { font-weight: 700; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+  .vs .tagline { font-size: 0.8rem; color: var(--muted); font-weight: 400; }
+  .vs .ours { outline: 2px solid var(--accent); }
+  .vs ol { font-size: 0.9rem; margin: 8px 0 0; }
+  .vs .verdict { font-size: 0.88rem; margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--line); }
+
+  .merits { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; margin: 1em 0; }
+  .merits div { background: var(--card); border-radius: 12px; padding: 12px 14px; font-size: 0.9rem; }
+  .merits .ic { font-size: 1.5rem; line-height: 1; }
+  .merits b { display: block; margin: 6px 0 2px; font-size: 0.98rem; }
+
+  .flow { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin: 1em 0; }
+  @media (max-width: 640px) { .flow { grid-template-columns: 1fr; } }
+  .flow a { display: block; text-decoration: none; color: inherit; background: var(--card); border-radius: 10px; padding: 10px; text-align: center; font-size: 0.85rem; position: relative; }
+  .flow .ic { font-size: 1.6rem; display: block; }
+  .flow b { display: block; font-size: 1rem; }
+  .flow .n { position: absolute; top: 6px; left: 8px; font-size: 0.75rem; color: var(--muted); font-weight: 700; }
+
+  .case { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 640px) { .case { grid-template-columns: 1fr; } }
+  .case > div { border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; font-size: 0.9rem; }
+  .case .head { font-weight: 700; margin-bottom: 4px; }
+  .case ol { margin: 6px 0 0; }
+  .case .ours { border: 2px solid var(--accent); }
+
+  footer { margin-top: 3em; font-size: 0.85rem; color: var(--muted); }
+
+  ul, ol { padding-left: 0; padding-right: 1.4em; }
+  th, td { text-align: right; }
+  .note { border-left: 0; border-right: 4px solid var(--accent); border-radius: 8px 0 0 8px; }
+  .note.pro { border-right-color: var(--amber); }
+  .flow .n { left: auto; right: 8px; }
+  .fig, .vs svg, .fig svg { direction: ltr; }
+  kbd { direction: ltr; unicode-bidi: isolate; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="ah"/></marker>
+    <marker id="ahA" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="accent"/></marker>
+    <marker id="ahW" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#fff"/></marker>
+  </defs>
+</svg>
+
+<p class="home"><a href="ar.html">→ CoachTag</a> · <a href="support-ar.html">الدعم</a></p>
+<h1>دليل استخدام CoachTag</h1>
+<p class="lead">اجمع اللقطات التي تريدها من فيديو المباراة، وارسم عليها خططك، وأنشئ فيديو تعرضه على لاعبيك. يشرح هذا الدليل خطوات CoachTag الأساسية للمستخدمين الجدد.</p>
+
+<nav class="toc"><strong>المحتويات</strong>
+<ol>
+<li><a href="#idea">أولًا، فكرة CoachTag</a></li>
+<li><a href="#words">خمسة مصطلحات مهمة</a></li>
+<li><a href="#package">فتح فيديو المباراة</a></li>
+<li><a href="#buttons">تجهيز أزرار الوسوم</a></li>
+<li><a href="#tagging">إضافة الوسوم أثناء المشاهدة</a></li>
+<li><a href="#review">مراجعة الوسوم وتصفيتها</a></li>
+<li><a href="#playlist">إنشاء قائمة تشغيل</a></li>
+<li><a href="#effects">رسم الخطط (الخطة الاحترافية)</a></li>
+<li><a href="#export">التصدير كفيديو</a></li>
+<li><a href="#clips">البدء من مقاطع جاهزة</a></li>
+<li><a href="#keys">اختصارات لوحة المفاتيح</a></li>
+</ol>
+</nav>
+
+<section id="idea">
+<h2>1. أولًا، فكرة CoachTag</h2>
+<p>يجمع CoachTag اللقطات عن طريق <strong>«وضع علامات»</strong> على الفيديو، لا عن طريق <strong>«قصّه»</strong>. وهذا هو أكبر فرق بينه وبين برامج تحرير الفيديو المعتادة.</p>
+
+<h3>الفرق عن برامج تحرير الفيديو</h3>
+<div class="vs">
+  <div>
+    <div class="head">✂️ برنامج تحرير فيديو معتاد</div>
+    <svg viewBox="0 0 360 230" role="img" aria-label="قص الفيديو بالمقص إلى ملفات كثيرة">
+      <text x="0" y="14" font-size="13" class="m">فيديو المباراة</text>
+            <g>
+        <rect x="0" y="24" width="96" height="40" rx="3" class="film"/>
+        <rect x="112" y="24" width="70" height="40" rx="3" class="film"/>
+        <rect x="198" y="24" width="60" height="40" rx="3" class="film"/>
+        <rect x="274" y="24" width="86" height="40" rx="3" class="film"/>
+        <g class="film-hole">
+          <rect x="6" y="28" width="6" height="5"/><rect x="22" y="28" width="6" height="5"/><rect x="38" y="28" width="6" height="5"/><rect x="54" y="28" width="6" height="5"/><rect x="70" y="28" width="6" height="5"/><rect x="86" y="28" width="6" height="5"/>
+          <rect x="6" y="55" width="6" height="5"/><rect x="22" y="55" width="6" height="5"/><rect x="38" y="55" width="6" height="5"/><rect x="54" y="55" width="6" height="5"/><rect x="70" y="55" width="6" height="5"/><rect x="86" y="55" width="6" height="5"/>
+          <rect x="118" y="28" width="6" height="5"/><rect x="134" y="28" width="6" height="5"/><rect x="150" y="28" width="6" height="5"/><rect x="166" y="28" width="6" height="5"/>
+          <rect x="118" y="55" width="6" height="5"/><rect x="134" y="55" width="6" height="5"/><rect x="150" y="55" width="6" height="5"/><rect x="166" y="55" width="6" height="5"/>
+          <rect x="204" y="28" width="6" height="5"/><rect x="220" y="28" width="6" height="5"/><rect x="236" y="28" width="6" height="5"/>
+          <rect x="204" y="55" width="6" height="5"/><rect x="220" y="55" width="6" height="5"/><rect x="236" y="55" width="6" height="5"/>
+          <rect x="280" y="28" width="6" height="5"/><rect x="296" y="28" width="6" height="5"/><rect x="312" y="28" width="6" height="5"/><rect x="328" y="28" width="6" height="5"/><rect x="344" y="28" width="6" height="5"/>
+          <rect x="280" y="55" width="6" height="5"/><rect x="296" y="55" width="6" height="5"/><rect x="312" y="55" width="6" height="5"/><rect x="328" y="55" width="6" height="5"/><rect x="344" y="55" width="6" height="5"/>
+        </g>
+      </g>
+      <text x="96" y="20" font-size="18">✂️</text>
+      <text x="178" y="20" font-size="18">✂️</text>
+      <text x="254" y="20" font-size="18">✂️</text>
+      <path d="M180 76 L180 102" class="ln" marker-end="url(#ah)"/>
+            <g font-size="12">
+        <rect x="20" y="112" width="96" height="26" rx="5" class="b"/><text x="30" y="130">🎞 clip_01.mp4</text>
+        <rect x="132" y="112" width="96" height="26" rx="5" class="b"/><text x="142" y="130">🎞 clip_02.mp4</text>
+        <rect x="244" y="112" width="96" height="26" rx="5" class="b"/><text x="254" y="130">🎞 clip_03.mp4</text>
+        <rect x="20" y="146" width="96" height="26" rx="5" class="b"/><text x="30" y="164">🎞 clip_04.mp4</text>
+        <rect x="132" y="146" width="96" height="26" rx="5" class="b"/><text x="142" y="164">🎞 clip_05.mp4</text>
+        <rect x="244" y="146" width="96" height="26" rx="5" class="b"/><text x="254" y="164" class="m">…… clip_48</text>
+      </g>
+      <text x="0" y="198" font-size="12.5" class="m">كل قص يضيف ملفًا ويستهلك مساحة أكبر.</text>
+      <text x="0" y="218" font-size="12.5" class="m">اسم الملف وحده يدل على محتوى اللقطة.</text>
+    </svg>
+    <ol>
+      <li>مشاهدة المباراة كاملة</li>
+      <li>إعادة المشاهدة والبحث عن اللقطات المطلوبة</li>
+      <li>قصها وتصديرها واحدة تلو الأخرى</li>
+      <li>لتغيير لقطة، يجب القص من جديد</li>
+    </ol>
+    <div class="verdict">المشاهدة والقص عملان <strong>منفصلان</strong>، لذا يستغرق التحضير أضعاف مدة المباراة.</div>
+  </div>
+
+  <div class="ours">
+    <div class="head">🏷️ CoachTag</div>
+    <svg viewBox="0 0 360 230" role="img" aria-label="يبقى الفيديو ملفًا واحدًا وتضاف فوقه علامات ملونة">
+      <text x="0" y="14" font-size="13" class="m">فيديو المباراة (يبقى كاملًا)</text>
+      <rect x="0" y="24" width="360" height="40" rx="3" class="film"/>
+      <g class="film-hole">
+        <rect x="6" y="28" width="348" height="5" opacity="0"/>
+      </g>
+      <g opacity="0.95">
+        <rect x="30" y="30" width="34" height="28" rx="3" class="good"/>
+        <rect x="96" y="30" width="22" height="28" rx="3" class="bad"/>
+        <rect x="150" y="30" width="44" height="28" rx="3" class="good"/>
+        <rect x="222" y="30" width="26" height="28" rx="3" class="blue"/>
+        <rect x="282" y="30" width="38" height="28" rx="3" class="good"/>
+      </g>
+            <g transform="translate(150 78)">
+        <rect x="0" y="0" width="30" height="30" rx="5" class="b"/><text x="10" y="21" font-size="15" font-weight="700">Q</text>
+        <rect x="38" y="0" width="30" height="30" rx="5" class="b"/><text x="47" y="21" font-size="15" font-weight="700">W</text>
+        <rect x="76" y="0" width="30" height="30" rx="5" class="b"/><text x="87" y="21" font-size="15" font-weight="700">E</text>
+      </g>
+      <path d="M165 76 L170 64" class="accent-stroke" marker-end="url(#ahA)"/>
+      <text x="0" y="98" font-size="12" class="m">اضغط مفتاحًا أثناء</text>
+      <text x="0" y="114" font-size="12" class="m">المشاهدة لوضع علامة</text>
+            <g font-size="12">
+        <rect x="20" y="126" width="320" height="58" rx="6" class="b"/>
+        <rect x="30" y="134" width="10" height="10" rx="2" class="good"/><text x="46" y="144">AT Good  12:05〜12:19</text>
+        <rect x="30" y="152" width="10" height="10" rx="2" class="bad"/><text x="46" y="162">AT Bad  18:40〜18:47</text>
+        <rect x="200" y="134" width="10" height="10" rx="2" class="good"/><text x="216" y="144">AT Good  31:12〜</text>
+        <rect x="200" y="152" width="10" height="10" rx="2" class="blue"/><text x="216" y="162">DF Good  44:02〜</text>
+        <text x="46" y="178" class="m">…… قائمة العلامات (بضعة KB)</text>
+      </g>
+      <text x="0" y="208" font-size="12.5" class="m">لا قص، فلا زيادة في الملفات ولا في المساحة.</text>
+      <text x="0" y="226" font-size="12.5" class="m">لكل علامة نوع، فتُجمع لاحقًا بخطوة واحدة.</text>
+    </svg>
+    <ol>
+      <li>اضغط مفتاحًا لكل لقطة أثناء المشاهدة</li>
+      <li>عند انتهاء المباراة تكون قائمة اللقطات جاهزة</li>
+      <li>صفِّ حسب النوع أو الشرط ثم اجمع</li>
+      <li>لتغيير طول اللقطة، عدّل الوسم فقط</li>
+    </ol>
+    <div class="verdict">تنتهي المشاهدة والجمع <strong>في الوقت نفسه</strong>.</div>
+  </div>
+</div>
+
+<h3>«الوسم» ملصق صغير على الفيديو</h3>
+<p>الأمر يشبه الملصقات الصغيرة في كتاب: تبقى الصفحات (الفيديو) كما هي، وتزداد الملصقات (الوسوم) فقط. إذا ميّزت الأنواع بالألوان مثل «هجوم، جيد» و«دفاع، سيئ»، يمكنك لاحقًا فتح الصفحات التي تحمل اللون نفسه فقط.</p>
+<div class="fig">
+<svg viewBox="0 0 760 250" role="img" aria-label="مخطط زمني واحد للفيديو عليه وسوم ملونة. يسجل كل وسم النوع والبداية والنهاية والعلامات">
+  <text x="0" y="16" font-size="14" font-weight="700">فيديو المباراة</text>
+  <text x="0" y="34" font-size="12" class="m">0:00</text>
+  <text x="725" y="34" font-size="12" class="m">90:00</text>
+  <rect x="0" y="42" width="760" height="18" rx="9" class="bf"/>
+    <rect x="70" y="40" width="40" height="22" rx="4" class="good"/>
+  <rect x="160" y="40" width="26" height="22" rx="4" class="bad"/>
+  <rect x="250" y="40" width="58" height="22" rx="4" class="good"/>
+  <rect x="380" y="40" width="30" height="22" rx="4" class="blue"/>
+  <rect x="470" y="40" width="44" height="22" rx="4" class="good"/>
+  <rect x="580" y="40" width="22" height="22" rx="4" class="bad"/>
+  <rect x="660" y="40" width="36" height="22" rx="4" class="blue"/>
+    <path d="M250 64 L210 108" class="dash"/>
+  <path d="M308 64 L560 108" class="dash"/>
+  <rect x="200" y="108" width="370" height="128" rx="10" class="b"/>
+  <rect x="200" y="108" width="370" height="30" rx="10" class="good"/>
+  <rect x="200" y="126" width="370" height="12" class="good"/>
+  <text x="214" y="129" font-size="14" class="wt">محتوى وسم واحد</text>
+  <g font-size="13">
+    <text x="214" y="162" class="m">النوع</text><text x="290" y="162">AT Good (هجوم، جيد)</text>
+    <text x="214" y="184" class="m">الوقت</text><text x="290" y="184">31:12 〜 31:26</text>
+    <text x="214" y="206" class="m">العلامات</text>
+    <rect x="290" y="193" width="64" height="20" rx="10" class="amber"/><text x="301" y="208" font-size="12" class="wt">عرضية</text>
+    <rect x="360" y="193" width="72" height="20" rx="10" class="violet"/><text x="371" y="208" font-size="12" class="wt">تسديدة</text>
+    <text x="214" y="228" class="m">ملاحظة</text><text x="290" y="228">تحرك اللاعب الثالث على الجهة اليمنى</text>
+  </g>
+  <text x="590" y="150" font-size="12.5" class="m">ليس نسخة من الفيديو،</text>
+  <text x="590" y="170" font-size="12.5" class="m">بل تسجيل للبداية والنهاية</text>
+  <text x="590" y="190" font-size="12.5" class="m">ونوع اللقطة فقط.</text>
+  <text x="0" y="150" font-size="12.5" class="m">يمكنك تعديل طوله أو</text>
+  <text x="0" y="170" font-size="12.5" class="m">حذفه لاحقًا، ويبقى</text>
+  <text x="0" y="190" font-size="12.5" class="m">الفيديو الأصلي سليمًا.</text>
+</svg>
+</div>
+
+<h3>مثال: عندما تريد عرض كل التسديدات التي جاءت من عرضيات</h3>
+<div class="case">
+  <div>
+    <div class="head">✂️ مع برنامج تحرير فيديو</div>
+    <ol>
+      <li>إعادة مشاهدة 90 دقيقة للبحث عن التسديدات بعد العرضيات</li>
+      <li>في كل مرة، تحديد البداية والنهاية ثم القص</li>
+      <li>ترتيب المقاطع وتصديرها</li>
+      <li>في المباراة التالية، من البداية مجددًا</li>
+    </ol>
+  </div>
+  <div class="ours">
+    <div class="head">🏷️ مع CoachTag</div>
+    <ol>
+      <li>(الوسوم التي أضفتها أثناء المشاهدة موجودة بالفعل)</li>
+      <li>في الجدول، انقر «AT Good × عرضية» ← تُحدَّد كل اللقطات المطابقة</li>
+      <li>أضفها إلى قائمة تشغيل وصدّرها</li>
+      <li>اجمع من أي عدد من المباريات بالطريقة نفسها</li>
+    </ol>
+  </div>
+</div>
+
+<h3>مزايا CoachTag</h3>
+<div class="merits">
+  <div><span class="ic">⏱️</span><b>انتهت المشاهدة، واكتمل الجمع</b>تضيف الوسوم أثناء المشاهدة، فلا تضيع وقتًا في إعادة البحث. ويمكن استخدامه أثناء المباراة وبين الشوطين أيضًا.</div>
+  <div><span class="ic">🔎</span><b>استخراج اللقطات حسب الشرط</b>صفِّ فورًا حسب النوع والعلامة، مثل «دفاع، سيئ» فقط أو «كرات ثابتة × CK» فقط.</div>
+  <div><span class="ic">💾</span><b>لا زيادة في الملفات أو المساحة</b>الوسوم مجرد علامات، فحتى المئات منها تبقي الفيديو واحدًا. لا توجد ملفات مقصوصة لإدارتها.</div>
+  <div><span class="ic">↩️</span><b>أعد المحاولة كما تشاء</b>لإطالة لقطة أو تقصيرها، عدّل الوسم فقط. ويبقى الفيديو الأصلي سليمًا دائمًا.</div>
+  <div><span class="ic">📚</span><b>اجمع من عدة مباريات</b>ضع وسوم عدة مباريات في قائمة تشغيل واحدة. حتى «أهداف استقبلناها هذا الموسم» تُجهَّز بسرعة.</div>
+  <div><span class="ic">✏️</span><b>الرسومات تُصدَّر مع الفيديو</b>ارسم الأسهم والمناطق على اللقطة، وسلّم اللاعبين فيديو مدمجة فيه الرسومات.</div>
+</div>
+
+<h3>سير العمل</h3>
+<div class="flow">
+  <a href="#package"><span class="n">1</span><span class="ic">📂</span><b>فتح</b>فيديو المباراة في حزمة</a>
+  <a href="#tagging"><span class="n">2</span><span class="ic">🏷️</span><b>وسم</b>وسوم أثناء المشاهدة</a>
+  <a href="#playlist"><span class="n">3</span><span class="ic">📋</span><b>جمع</b>إنشاء قائمة تشغيل</a>
+  <a href="#effects"><span class="n">4</span><span class="ic">✏️</span><b>رسم</b>رسم الخطط</a>
+  <a href="#export"><span class="n">5</span><span class="ic">🎬</span><b>تصدير</b>فيديو للاعبين</a>
+</div>
+</section>
+
+<section id="words">
+<h2>2. خمسة مصطلحات مهمة</h2>
+<div class="fig">
+<svg viewBox="0 0 760 300" role="img" aria-label="الحزمة صندوق يضم فيديو مباراة ووسومها ورسوماتها. وتشير قائمة التشغيل إلى لقطات من عدة حزم">
+    <rect x="0" y="10" width="300" height="130" rx="12" class="b"/>
+  <text x="14" y="34" font-size="14" font-weight="700">📦 حزمة (الجولة 10 vs A)</text>
+  <g font-size="12.5">
+    <rect x="14" y="46" width="272" height="22" rx="4" class="film"/>
+    <text x="22" y="62" fill="#fff">🎞 فيديو المباراة</text>
+    <rect x="14" y="76" width="34" height="18" rx="3" class="good"/>
+    <rect x="58" y="76" width="22" height="18" rx="3" class="bad"/>
+    <rect x="92" y="76" width="44" height="18" rx="3" class="good"/>
+    <rect x="148" y="76" width="26" height="18" rx="3" class="blue"/>
+    <rect x="186" y="76" width="34" height="18" rx="3" class="good"/>
+    <text x="230" y="90" class="m">🏷 وسوم</text>
+    <text x="14" y="122" class="m">✏️ تُحفظ الرسومات والعلامات والملاحظات معًا</text>
+  </g>
+    <rect x="0" y="160" width="300" height="130" rx="12" class="b"/>
+  <text x="14" y="184" font-size="14" font-weight="700">📦 حزمة (الجولة 11 vs B)</text>
+  <g font-size="12.5">
+    <rect x="14" y="196" width="272" height="22" rx="4" class="film"/>
+    <text x="22" y="212" fill="#fff">🎞 فيديو المباراة</text>
+    <rect x="30" y="226" width="40" height="18" rx="3" class="good"/>
+    <rect x="84" y="226" width="22" height="18" rx="3" class="blue"/>
+    <rect x="124" y="226" width="30" height="18" rx="3" class="bad"/>
+    <rect x="170" y="226" width="40" height="18" rx="3" class="good"/>
+    <text x="230" y="240" class="m">🏷 وسوم</text>
+    <text x="14" y="272" class="m">مباراة واحدة = حزمة واحدة (‎.ccpkg‎)</text>
+  </g>
+    <rect x="440" y="60" width="320" height="180" rx="12" class="b"/>
+  <text x="456" y="86" font-size="14" font-weight="700">📋 قائمة تشغيل «هجمات جيدة»</text>
+  <g font-size="12.5">
+    <rect x="456" y="100" width="288" height="26" rx="5" class="bf"/><rect x="456" y="100" width="8" height="26" rx="2" class="good"/><text x="474" y="118">① vs A 12:05  AT Good</text>
+    <rect x="456" y="132" width="288" height="26" rx="5" class="bf"/><rect x="456" y="132" width="8" height="26" rx="2" class="good"/><text x="474" y="150">② vs A 51:40  AT Good</text>
+    <rect x="456" y="164" width="288" height="26" rx="5" class="bf"/><rect x="456" y="164" width="8" height="26" rx="2" class="good"/><text x="474" y="182">③ vs B 08:22  AT Good</text>
+    <rect x="456" y="196" width="288" height="26" rx="5" class="bf"/><rect x="456" y="196" width="8" height="26" rx="2" class="good"/><text x="474" y="214">④ vs B 77:10  AT Good</text>
+  </g>
+  <path d="M114 86 C 300 86, 330 113, 452 113" class="dash" marker-end="url(#ah)"/>
+  <path d="M206 86 C 330 90, 340 145, 452 145" class="dash" marker-end="url(#ah)"/>
+  <path d="M50 236 C 300 236, 330 177, 452 177" class="dash" marker-end="url(#ah)"/>
+  <path d="M190 236 C 330 236, 350 209, 452 209" class="dash" marker-end="url(#ah)"/>
+  <text x="320" y="266" font-size="12" class="m">لا يُنسخ الفيديو،</text>
+  <text x="320" y="284" font-size="12" class="m">بل تشير إلى الحزم الأصلية</text>
+</svg>
+</div>
+<table>
+<tr><th>📦 حزمة<br><small>‎.ccpkg‎</small></th><td>ملف محفوظ يجمع فيديو المباراة مع وسومها ورسوماتها. أنشئ حزمة لكل مباراة. وتُفتح كما هي على Mac وiPad وWindows.</td></tr>
+<tr><th>🏷️ وسم</th><td>علامة زمنية تعني «هذه اللقطة». عند الضغط على <strong>زر</strong> مثل <span class="btn">AT Good</span> (هجوم، جيد) يُضاف وسم من ذلك النوع. وأنت تحدد الأزرار التي تريدها.</td></tr>
+<tr><th>📌 علامة</th><td>معلومة إضافية تُلحق بالوسم. مثلًا، أضف «تسديدة» أو «عرضية» إلى وسم «AT Good»، ويمكنك لاحقًا جمع «الهجمات الجيدة التي انتهت بتسديدة» فقط.</td></tr>
+<tr><th>📋 قائمة تشغيل</th><td>قائمة بالوسوم المختارة بالترتيب الذي تريد عرضها به. ويمكنها جمع وسوم عدة مباريات (حزم). لا يُنسخ الفيديو، بل تشير إلى الحزم الأصلية.</td></tr>
+<tr><th>✏️ وضع المؤثرات</th><td>وضع للدخول إلى لقطة واحدة ورسم الأسهم والمناطق والعلامات التي تتبع اللاعبين وغيرها. وتُدمج الرسومات في الفيديو عند التصدير.</td></tr>
+</table>
+</section>
+
+<section id="package">
+<h2>3. فتح فيديو المباراة (إنشاء حزمة)</h2>
+<div class="fig">
+<svg viewBox="0 0 760 170" role="img" aria-label="عند اختيار ملف فيديو يُنسخ أو يُنقل إلى الحزمة ويُحفظ مع الوسوم والرسومات">
+  <rect x="0" y="40" width="150" height="90" rx="10" class="b"/>
+  <text x="50" y="82" font-size="34">🎞</text>
+  <text x="18" y="118" font-size="12.5">match.mp4</text>
+  <text x="0" y="24" font-size="13" class="m">ملف الفيديو لديك</text>
+
+  <path d="M160 85 L 300 85" class="ln" marker-end="url(#ah)"/>
+  <text x="178" y="72" font-size="13" font-weight="700">فتح فيديو</text>
+  <text x="172" y="108" font-size="12" class="m">نسخ أو نقل</text>
+
+  <rect x="320" y="10" width="300" height="150" rx="14" class="b" style="stroke: var(--accent); stroke-width: 2.5"/>
+  <text x="336" y="36" font-size="14" font-weight="700">📦 الجولة 10 vs A‎.ccpkg‎</text>
+  <rect x="336" y="50" width="268" height="28" rx="5" class="film"/><text x="346" y="69" font-size="12.5" fill="#fff">🎞 فيديو المباراة</text>
+  <rect x="336" y="86" width="130" height="28" rx="5" class="bf"/><text x="346" y="105" font-size="12.5">🏷 الوسوم والعلامات</text>
+  <rect x="474" y="86" width="130" height="28" rx="5" class="bf"/><text x="484" y="105" font-size="12.5">✏️ الرسومات</text>
+  <text x="336" y="144" font-size="12" class="m">يُحفظ عملك تلقائيًا</text>
+
+  <text x="640" y="70" font-size="12.5" class="m">تُفتح كما هي</text>
+  <text x="640" y="90" font-size="12.5" class="m">على Mac وiPad</text>
+  <text x="640" y="110" font-size="12.5" class="m">وWindows</text>
+</svg>
+</div>
+<ol>
+<li>اضغط <span class="btn">فتح فيديو</span> واختر ملف فيديو المباراة.</li>
+<li>حدد اسم الحزمة ومكان الحفظ عند السؤال (مثل «الجولة 10 vs ○○»).</li>
+<li>اختر <strong>نسخ</strong> الفيديو إلى الحزمة أو <strong>نقله</strong> إليها (Mac وWindows). للاحتفاظ بالفيديو في مكانه الأصلي أيضًا، اختر «نسخ».</li>
+</ol>
+<div class="note">إذا كان الفيديو مقسمًا إلى عدة ملفات، مثل الشوطين الأول والثاني، فحددها معًا لتُفتح موصولة حسب ترتيب أسماء الملفات.<br>في المرة التالية، استخدم <span class="btn">فتح حزمة</span> لمتابعة العمل مع الوسوم والرسومات.</div>
+</section>
+
+<section id="buttons">
+<h2>4. تجهيز أزرار الوسوم</h2>
+<p>الأزرار الموجودة أسفل الفيديو هي أزرار إضافة الوسوم. ننصح بإعادة إنشائها بما يناسب محاور التحليل في فريقك.</p>
+<div class="fig">
+<svg viewBox="0 0 760 150" role="img" aria-label="مثال على أزرار الوسوم، لكل نوع لون ومفتاح">
+  <text x="0" y="16" font-size="13" class="m">أزرار الوسوم (مثال)</text>
+  <g font-size="13">
+    <rect x="0" y="28" width="118" height="44" rx="8" class="good"/><text x="12" y="56" class="wt">AT Good</text><rect x="88" y="36" width="22" height="22" rx="4" fill="#0003"/><text x="94" y="52" class="wt" font-size="12">Q</text>
+    <rect x="126" y="28" width="118" height="44" rx="8" class="bad"/><text x="138" y="56" class="wt">AT Bad</text><rect x="214" y="36" width="22" height="22" rx="4" fill="#0003"/><text x="219" y="52" class="wt" font-size="12">W</text>
+    <rect x="252" y="28" width="118" height="44" rx="8" class="blue"/><text x="264" y="56" class="wt">DF Good</text><rect x="340" y="36" width="22" height="22" rx="4" fill="#0003"/><text x="347" y="52" class="wt" font-size="12">E</text>
+    <rect x="378" y="28" width="118" height="44" rx="8" class="amber"/><text x="390" y="56" class="wt">DF Bad</text><rect x="466" y="36" width="22" height="22" rx="4" fill="#0003"/><text x="472" y="52" class="wt" font-size="12">R</text>
+  </g>
+  <text x="0" y="98" font-size="13" class="m">أزرار العلامات (مثال)</text>
+  <g font-size="12.5">
+    <rect x="0" y="108" width="74" height="28" rx="14" class="bf"/><text x="37" y="127" text-anchor="middle">تسديدة</text>
+    <rect x="82" y="108" width="62" height="28" rx="14" class="bf"/><text x="113" y="127" text-anchor="middle">عرضية</text>
+    <rect x="152" y="108" width="54" height="28" rx="14" class="bf"/><text x="171" y="127">CK</text>
+    <rect x="214" y="108" width="54" height="28" rx="14" class="bf"/><text x="233" y="127">FK</text>
+  </g>
+  <g font-size="12.5" class="m">
+    <text x="530" y="42" class="m">يمكنك اختيار الاسم واللون</text>
+    <text x="530" y="62" class="m">والمفتاح (حرف واحد)</text>
+    <text x="300" y="127" class="m">معلومات إضافية تُلحق بالوسم</text>
+  </g>
+</svg>
+</div>
+<ol>
+<li>افتح <span class="btn">⚙️ إعدادات الوسوم</span>.</li>
+<li>في تبويب «الوسوم»، حدد اسم الزر ولونه واختصار لوحة المفاتيح (حرف واحد). استخدم <span class="btn">+ إضافة وسم</span> لإضافة المزيد.</li>
+<li>عند الحاجة، أنشئ أزرار المعلومات الإضافية (تسديدة، عرضية…) في تبويب «العلامات».</li>
+</ol>
+
+<h3>طريقتان لإضافة الوسوم</h3>
+<div class="vs">
+  <div>
+    <div class="head">👆 نقرة واحدة</div>
+    <svg viewBox="0 0 360 120" role="img" aria-label="تصبح الثواني المحيطة بلحظة الضغط وسمًا">
+      <rect x="0" y="50" width="360" height="10" rx="5" class="bf"/>
+      <rect x="110" y="44" width="150" height="22" rx="4" class="good" opacity="0.9"/>
+      <path d="M190 18 L190 44" class="accent-stroke" marker-end="url(#ahA)"/>
+      <text x="166" y="14" font-size="12.5" font-weight="700">لحظة الضغط</text>
+      <path d="M112 84 L188 84" class="ln" marker-start="url(#ah)" marker-end="url(#ah)"/>
+      <path d="M192 84 L258 84" class="ln" marker-start="url(#ah)" marker-end="url(#ah)"/>
+      <text x="118" y="104" font-size="12" class="m">الوقت قبل</text>
+      <text x="198" y="104" font-size="12" class="m">الوقت بعد</text>
+    </svg>
+    <p style="font-size:0.9rem;margin:6px 0 0">تصبح <strong>الثواني المحيطة</strong> بلحظة الضغط وسمًا تلقائيًا. ويمكنك تحديد عدد الثواني قبلها وبعدها. مناسبة للقطات ذات نقطة واضحة، مثل «لحظة التسديد».</p>
+  </div>
+  <div>
+    <div class="head">✌️ نقرة البداية ← النهاية</div>
+    <svg viewBox="0 0 360 120" role="img" aria-label="تحدد الضغطة الأولى البداية والثانية النهاية">
+      <rect x="0" y="50" width="360" height="10" rx="5" class="bf"/>
+      <rect x="80" y="44" width="200" height="22" rx="4" class="good" opacity="0.9"/>
+      <path d="M82 18 L82 44" class="accent-stroke" marker-end="url(#ahA)"/>
+      <path d="M278 18 L278 44" class="accent-stroke" marker-end="url(#ahA)"/>
+      <text x="50" y="14" font-size="12.5" font-weight="700">الضغطة 1</text>
+      <text x="250" y="14" font-size="12.5" font-weight="700">الضغطة 2</text>
+      <text x="96" y="96" font-size="12" class="m">من ضغطة إلى الضغطة التالية</text>
+    </svg>
+    <p style="font-size:0.9rem;margin:6px 0 0">تحدد الضغطة الأولى البداية، والضغطة الثانية (على الزر نفسه) النهاية. مناسبة للقطات مختلفة الطول، مثل «من بداية الهجوم حتى فقدان الكرة».</p>
+  </div>
+</div>
+<p>في <span class="btn">⚙️ إعدادات الوسوم</span> يمكنك اختيار الطريقة الافتراضية العامة وطريقة كل وسم على حدة.</p>
+<div class="note">احفظ تشكيلة الأزرار التي تستخدمها كثيرًا كـ«قالب»، ويمكنك استدعاء الأزرار نفسها في المباراة التالية.</div>
+</section>
+
+<section id="tagging">
+<h2>5. إضافة الوسوم أثناء المشاهدة</h2>
+<p>شغّل الفيديو، وعند حدوث اللقطة اضغط الزر (أو المفتاح المحدد) فقط.</p>
+<div class="fig">
+<svg viewBox="0 0 760 200" role="img" aria-label="عند الضغط على مفتاح أثناء التشغيل يُضاف شريط إلى المخطط الزمني ووسم إلى القائمة على اليمين">
+    <rect x="0" y="0" width="470" height="120" rx="8" fill="var(--pitch)"/>
+  <rect x="20" y="14" width="430" height="92" fill="none" stroke="#ffffff80" stroke-width="1.5"/>
+  <line x1="235" y1="14" x2="235" y2="106" stroke="#ffffff80" stroke-width="1.5"/>
+  <circle cx="235" cy="60" r="16" fill="none" stroke="#ffffff80" stroke-width="1.5"/>
+  <g fill="#fff"><circle cx="160" cy="50" r="4"/><circle cx="200" cy="80" r="4"/><circle cx="290" cy="44" r="4"/><circle cx="320" cy="76" r="4"/></g>
+  <g fill="#111"><circle cx="250" cy="58" r="4"/><circle cx="345" cy="58" r="4"/><circle cx="380" cy="86" r="4"/></g>
+  <text x="14" y="26" font-size="14" fill="#fff">▶</text>
+    <rect x="0" y="132" width="470" height="12" rx="6" class="bf"/>
+  <rect x="60" y="130" width="28" height="16" rx="3" class="good"/>
+  <rect x="150" y="130" width="18" height="16" rx="3" class="bad"/>
+  <rect x="236" y="130" width="34" height="16" rx="3" class="good"/>
+  <line x1="300" y1="126" x2="300" y2="150" stroke="var(--accent)" stroke-width="2.5"/>
+    <g font-size="12">
+    <rect x="0" y="160" width="90" height="34" rx="6" class="good"/><text x="10" y="182" class="wt">AT Good  Q</text>
+    <rect x="96" y="160" width="90" height="34" rx="6" class="bad"/><text x="106" y="182" class="wt">AT Bad  W</text>
+    <rect x="192" y="160" width="90" height="34" rx="6" class="blue"/><text x="202" y="182" class="wt">DF Good  E</text>
+    <rect x="288" y="160" width="90" height="34" rx="6" class="amber"/><text x="298" y="182" class="wt">DF Bad  R</text>
+  </g>
+  <text x="392" y="172" font-size="12" class="m">اضغط ليُضاف</text>
+  <text x="392" y="188" font-size="12" class="m">شريط جديد</text>
+    <rect x="500" y="0" width="260" height="194" rx="8" class="b"/>
+  <text x="514" y="24" font-size="13" font-weight="700">قائمة الوسوم</text>
+  <g font-size="12.5">
+    <rect x="514" y="38" width="232" height="30" rx="5" class="bf"/><rect x="514" y="38" width="6" height="30" class="good"/><text x="528" y="58">AT Good   02:14</text><text x="700" y="58">✏️ ➕</text>
+    <rect x="514" y="74" width="232" height="30" rx="5" class="bf"/><rect x="514" y="74" width="6" height="30" class="bad"/><text x="528" y="94">AT Bad    05:31</text><text x="700" y="94">✏️ ➕</text>
+    <rect x="514" y="110" width="232" height="30" rx="5" class="bf" style="stroke: var(--accent); stroke-width: 2"/><rect x="514" y="110" width="6" height="30" class="good"/><text x="528" y="130">AT Good   08:47</text><text x="700" y="130">✏️ ➕</text>
+    <text x="528" y="164" class="m">انقر لتشغيل اللقطة</text>
+  </g>
+</svg>
+</div>
+<ul>
+<li><kbd>Space</kbd> للتشغيل والإيقاف المؤقت، و<kbd>←</kbd> <kbd>→</kbd> للرجوع والتقدم 3 ثوانٍ، و<kbd>J</kbd> <kbd>K</kbd> <kbd>L</kbd> للترجيع والإيقاف والتقديم السريع.</li>
+<li>إذا أخطأت، حدد الوسم في القائمة واحذفه، أو تراجع باستخدام <kbd>⌘</kbd>+<kbd>Z</kbd> (<kbd>Ctrl</kbd>+<kbd>Z</kbd> في Windows).</li>
+<li>عند تحديد وسم، اضغط زر علامة لإضافتها إليه (اضغط مرة أخرى لإزالتها).</li>
+<li>لرؤية الصورة أكبر، استخدم <span class="btn">⛶ ملء الشاشة</span>، وستظهر الأزرار الأكثر استخدامًا فقط فوق الفيديو.</li>
+</ul>
+<div class="note">لا تسعَ إلى الكمال في البداية، فالأفضل أن تضيف وسومًا كثيرة ثم تختار لاحقًا. الوسوم مجرد علامات، فلا ضرر من كثرتها.</div>
+</section>
+
+<section id="review">
+<h2>6. مراجعة الوسوم وتصفيتها</h2>
+<p>افتح <span class="btn">📊 جدول</span> لرؤية أعداد الوسوم × العلامات. انقر رقمًا لتحديد كل الوسوم المطابقة له.</p>
+<div class="fig">
+<svg viewBox="0 0 760 210" role="img" aria-label="جدول الوسوم والعلامات. النقر على خلية AT Good وعرضية يحدد الوسوم الأربعة المطابقة">
+  <g font-size="13">
+    <rect x="0" y="0" width="460" height="200" rx="8" class="b"/>
+    <text x="16" y="28" class="m">وسم \ علامة</text>
+    <text x="172" y="28" font-weight="700" text-anchor="middle">تسديدة</text><text x="261" y="28" font-weight="700" text-anchor="middle">عرضية</text><text x="320" y="28" font-weight="700">CK</text><text x="390" y="28" font-weight="700">المجموع</text>
+    <line x1="0" y1="40" x2="460" y2="40" stroke="var(--line)"/>
+    <rect x="16" y="54" width="10" height="10" rx="2" class="good"/><text x="32" y="64">AT Good</text><text x="168" y="64">7</text>
+    <rect x="228" y="46" width="66" height="26" rx="5" class="accent" opacity="0.2"/><rect x="228" y="46" width="66" height="26" rx="5" class="accent-stroke"/><text x="256" y="64" font-weight="700">4</text>
+    <text x="330" y="64">1</text><text x="400" y="64">12</text>
+    <rect x="16" y="88" width="10" height="10" rx="2" class="bad"/><text x="32" y="98">AT Bad</text><text x="168" y="98">2</text><text x="256" y="98">5</text><text x="330" y="98">0</text><text x="400" y="98">9</text>
+    <rect x="16" y="122" width="10" height="10" rx="2" class="blue"/><text x="32" y="132">DF Good</text><text x="168" y="132">0</text><text x="256" y="132">1</text><text x="330" y="132">3</text><text x="400" y="132">6</text>
+    <rect x="16" y="156" width="10" height="10" rx="2" class="amber"/><text x="32" y="166">DF Bad</text><text x="168" y="166">3</text><text x="256" y="166">2</text><text x="330" y="166">2</text><text x="400" y="166">8</text>
+    <text x="276" y="80" font-size="18">👆</text>
+  </g>
+  <path d="M470 60 L 520 60" class="ln" marker-end="url(#ah)"/>
+  <rect x="530" y="0" width="230" height="200" rx="8" class="b"/>
+  <text x="544" y="26" font-size="13" font-weight="700">تم تحديد 4</text>
+  <g font-size="12.5">
+    <rect x="544" y="38" width="202" height="28" rx="5" class="bf" style="stroke: var(--accent); stroke-width: 2"/><rect x="544" y="38" width="6" height="28" class="good"/><text x="558" y="57">AT Good 12:05 عرضية</text>
+    <rect x="544" y="72" width="202" height="28" rx="5" class="bf" style="stroke: var(--accent); stroke-width: 2"/><rect x="544" y="72" width="6" height="28" class="good"/><text x="558" y="91">AT Good 31:12 عرضية</text>
+    <rect x="544" y="106" width="202" height="28" rx="5" class="bf" style="stroke: var(--accent); stroke-width: 2"/><rect x="544" y="106" width="6" height="28" class="good"/><text x="558" y="125">AT Good 58:40 عرضية</text>
+    <rect x="544" y="140" width="202" height="28" rx="5" class="bf" style="stroke: var(--accent); stroke-width: 2"/><rect x="544" y="140" width="6" height="28" class="good"/><text x="558" y="159">AT Good 83:02 عرضية</text>
+    <text x="544" y="190" class="m">إلى قائمة التشغيل</text>
+  </g>
+</svg>
+</div>
+<ul>
+<li>انقر وسمًا في القائمة لتشغيل تلك اللقطة فقط.</li>
+<li>استخدم الترتيب أعلى القائمة (ترتيب المخطط الزمني، حسب الوسم، حسب التسمية) لعرض الوسوم من النوع نفسه معًا.</li>
+</ul>
+</section>
+
+<section id="playlist">
+<h2>7. إنشاء قائمة تشغيل</h2>
+<p>تجمع قائمة التشغيل اللقطات التي تريد عرضها على لاعبيك وترتبها. عند فتحها تظهر <strong>لوحة الوسوم</strong> أسفل الفيديو.</p>
+<div class="fig">
+<svg viewBox="0 0 760 220" role="img" aria-label="لوحة الوسوم. تظهر اللقطات أشرطة بحسب طولها في صفوف حسب النوع. اسحب لإعادة الترتيب وشغّل كل صف بالتتابع">
+  <g font-size="13">
+    <rect x="0" y="0" width="760" height="210" rx="8" class="b"/>
+    <text x="14" y="24" font-weight="700">لوحة الوسوم</text>
+        <g>
+      <rect x="10" y="38" width="740" height="44" rx="6" class="bf"/>
+      <text x="22" y="66" font-weight="700">▶</text><rect x="44" y="54" width="10" height="10" rx="2" class="good"/><text x="60" y="64">AT Good</text>
+      <rect x="150" y="44" width="110" height="32" rx="5" class="good"/><text x="160" y="65" font-size="12" class="wt">vs A 12:05</text>
+      <rect x="266" y="44" width="80" height="32" rx="5" class="good"/><text x="274" y="65" font-size="12" class="wt">vs A 51:40</text>
+      <rect x="352" y="44" width="140" height="32" rx="5" class="good"/><text x="362" y="65" font-size="12" class="wt">vs B 08:22</text>
+      <rect x="498" y="44" width="90" height="32" rx="5" class="good" opacity="0.35"/>
+    </g>
+    <g>
+      <rect x="10" y="90" width="740" height="44" rx="6" class="bf"/>
+      <text x="22" y="118" font-weight="700">▶</text><rect x="44" y="106" width="10" height="10" rx="2" class="bad"/><text x="60" y="116">AT Bad</text>
+      <rect x="150" y="96" width="84" height="32" rx="5" class="bad"/><text x="160" y="117" font-size="12" class="wt">vs A 18:40</text>
+      <rect x="240" y="96" width="120" height="32" rx="5" class="bad"/><text x="250" y="117" font-size="12" class="wt">vs B 63:15</text>
+    </g>
+    <g>
+      <rect x="10" y="142" width="740" height="44" rx="6" class="bf"/>
+      <text x="22" y="170" font-weight="700">▶</text><text x="44" y="168">غير مصنّف</text>
+      <rect x="150" y="148" width="90" height="32" rx="5" class="m" opacity="0.6"/><text x="160" y="169" font-size="12" class="wt">شريحة</text>
+      <rect x="246" y="148" width="96" height="32" rx="5" class="violet"/><text x="254" y="169" font-size="12" class="wt">vs B 77:10</text>
+    </g>
+        <path d="M300 156 C 380 140, 480 110, 540 80" class="accent-stroke" stroke-dasharray="6 4" marker-end="url(#ahA)"/>
+    <text x="560" y="24" font-size="12.5" class="m">اسحب لإعادة الترتيب أو نقل الصف</text>
+    <text x="14" y="204" font-size="12" class="m">▶ يشغّل الصف من اليسار إلى اليمين / طول الشريط = طول اللقطة</text>
+  </g>
+</svg>
+</div>
+<ol>
+<li>أنشئ قائمة تشغيل باستخدام <span class="btn">قائمة تشغيل جديدة</span>.</li>
+<li>أضف اللقطات باستخدام <span class="btn">➕</span> في قائمة الوسوم (أو <span class="btn">إضافة إلى قائمة التشغيل</span> للوسوم المحددة). ويمكنك أيضًا فتح حزمة مباراة أخرى والإضافة إلى القائمة نفسها.</li>
+<li>اسحب الأشرطة في لوحة الوسوم لإعادة ترتيبها أو نقلها إلى صف آخر. أضف صفوفًا باستخدام <span class="btn">➕ إضافة صف</span>.</li>
+<li>اضغط <span class="btn">▶</span> في صف لتشغيله وحده بالتتابع. واستخدم <span class="btn">إدراج شريحة</span> لوضع صفحة شرح بين اللقطات.</li>
+</ol>
+<div class="note">تشير قائمة التشغيل إلى الحزم الأصلية، لذا فإن نقل حزمة أو حذفها يمنع تشغيل لقطاتها. عند تسليمها لشخص آخر، استخدم <span class="btn">📦 جعلها مستقلة</span> لتُفتح دون الحزم.</div>
+</section>
+
+<section id="effects">
+<h2>8. رسم الخطط (الخطة الاحترافية)</h2>
+<div class="note pro">وضع المؤثرات ميزة في الخطة الاحترافية.</div>
+<div class="fig">
+<svg viewBox="0 0 760 260" role="img" aria-label="وضع المؤثرات. باستخدام الأدوات على اليسار، ارسم فوق الفيديو أقراصًا تتبع اللاعبين وأسهمًا ومناطق">
+    <rect x="0" y="0" width="56" height="220" rx="8" class="b"/>
+  <g font-size="12" text-anchor="middle">
+    <rect x="8" y="10" width="40" height="40" rx="6" class="accent" opacity="0.18"/><text x="28" y="36" font-size="18">⭕</text>
+    <text x="28" y="80" font-size="18">📍</text>
+    <text x="28" y="122" font-size="18">↗️</text>
+    <text x="28" y="164" font-size="18">⬛</text>
+    <text x="28" y="204" font-size="18">⏸</text>
+  </g>
+    <rect x="68" y="0" width="600" height="220" rx="8" fill="var(--pitch)"/>
+  <g fill="var(--pitch2)"><rect x="68" y="0" width="60" height="220"/><rect x="188" y="0" width="60" height="220"/><rect x="308" y="0" width="60" height="220"/><rect x="428" y="0" width="60" height="220"/><rect x="548" y="0" width="60" height="220"/></g>
+  <rect x="88" y="16" width="560" height="188" fill="none" stroke="#ffffff90" stroke-width="1.5"/>
+  <rect x="548" y="60" width="100" height="100" fill="none" stroke="#ffffff90" stroke-width="1.5"/>
+    <polygon points="430,70 540,60 540,150 430,160" fill="#facc15" opacity="0.28" stroke="#facc15" stroke-width="2"/>
+    <g fill="#fff"><circle cx="260" cy="120" r="6"/><circle cx="350" cy="70" r="6"/><circle cx="400" cy="170" r="6"/><circle cx="470" cy="110" r="6"/></g>
+  <g fill="#1f2937"><circle cx="420" cy="90" r="6"/><circle cx="500" cy="130" r="6"/><circle cx="520" cy="80" r="6"/><circle cx="380" cy="120" r="6"/></g>
+    <path d="M200 160 C 230 150, 245 135, 258 124" stroke="#fff" stroke-width="2" stroke-dasharray="4 4" fill="none" opacity="0.8"/>
+  <ellipse cx="260" cy="128" rx="18" ry="7" fill="none" stroke="#38bdf8" stroke-width="3"/>
+    <path d="M270 112 C 330 60, 400 50, 462 100" stroke="#fff" stroke-width="3.5" fill="none" marker-end="url(#ahW)"/>
+    <g font-size="12.5">
+    <rect x="160" y="182" width="190" height="24" rx="12" fill="#000a"/><text x="172" y="199" fill="#fff">انقر لاعبًا ← تتبع تلقائي</text>
+    <rect x="300" y="26" width="158" height="24" rx="12" fill="#000a"/><text x="312" y="43" fill="#fff">الأسهم تبيّن الحركة</text>
+    <rect x="442" y="168" width="140" height="24" rx="12" fill="#000a"/><text x="454" y="185" fill="#fff">المناطق تبيّن المساحة</text>
+  </g>
+    <rect x="68" y="230" width="600" height="26" rx="6" class="bf"/>
+  <rect x="120" y="236" width="300" height="6" rx="3" fill="#38bdf8"/>
+  <rect x="250" y="246" width="250" height="6" rx="3" class="m"/>
+  <rect x="400" y="236" width="18" height="16" rx="2" class="amber"/>
+  <text x="680" y="248" font-size="12" class="m">وقت العرض</text>
+  <text x="680" y="40" font-size="12" class="m">⭕ قرص</text>
+  <text x="680" y="60" font-size="12" class="m">📍 إضاءة</text>
+  <text x="680" y="80" font-size="12" class="m">↗️ سهم</text>
+  <text x="680" y="100" font-size="12" class="m">⬛ منطقة</text>
+  <text x="680" y="120" font-size="12" class="m">⏸ تجميد</text>
+</svg>
+</div>
+<ol>
+<li>اضغط <span class="btn">✏️</span> في قائمة الوسوم (أو في لقطة بقائمة التشغيل) للدخول إلى وضع المؤثرات لتلك اللقطة.</li>
+<li>اختر أداة من اليسار مثل القرص أو الإضاءة أو السهم أو المنطقة، وارسم فوق الفيديو. يتبع القرص والإضاءة <strong>اللاعب تلقائيًا بمجرد النقر عليه</strong>.</li>
+<li>اضبط وقت ظهور الرسومات في المخطط الزمني بالأسفل. ويمكنك أيضًا إضافة «تجميد» لإيقاف الفيديو عند اللحظة التي تريد شرحها.</li>
+<li>تُحفظ الرسومات تلقائيًا. اضغط <span class="btn">الخروج من وضع المؤثرات</span> للعودة إلى الشاشة السابقة.</li>
+</ol>
+</section>
+
+<section id="export">
+<h2>9. التصدير كفيديو</h2>
+<div class="fig">
+<svg viewBox="0 0 760 230" role="img" aria-label="ثلاث طرق للتصدير: لقطة واحدة، أو قائمة التشغيل في فيديو واحد، أو ملف لكل لقطة">
+  <g font-size="13">
+        <text x="0" y="18" font-weight="700">لقطة واحدة</text>
+    <rect x="0" y="30" width="60" height="30" rx="4" class="good"/>
+    <path d="M70 45 L 120 45" class="ln" marker-end="url(#ah)"/>
+    <rect x="130" y="28" width="110" height="34" rx="6" class="b"/><text x="142" y="50">🎬 ملف mp4 واحد</text>
+
+        <text x="0" y="98" font-weight="700">قائمة التشغيل في فيديو واحد</text>
+    <rect x="0" y="110" width="50" height="30" rx="4" class="good"/>
+    <rect x="54" y="110" width="36" height="30" rx="4" class="good"/>
+    <rect x="94" y="110" width="30" height="30" rx="4" class="m" opacity="0.6"/>
+    <rect x="128" y="110" width="56" height="30" rx="4" class="good"/>
+    <path d="M194 125 L 244 125" class="ln" marker-end="url(#ah)"/>
+    <rect x="254" y="108" width="230" height="34" rx="6" class="b"/><text x="266" y="130">🎬 ملف mp4 واحد مع الرسومات</text>
+
+        <text x="0" y="178" font-weight="700">ملف منفصل لكل لقطة</text>
+    <rect x="0" y="190" width="50" height="30" rx="4" class="good"/>
+    <rect x="54" y="190" width="36" height="30" rx="4" class="good"/>
+    <rect x="94" y="190" width="56" height="30" rx="4" class="good"/>
+    <path d="M160 205 L 210 205" class="ln" marker-end="url(#ah)"/>
+    <rect x="220" y="186" width="300" height="38" rx="6" class="b"/>
+    <text x="230" y="210">🗂 مجلد</text>
+    <text x="310" y="210" font-size="12" class="m">01.mp4 · 02.mp4 · 03.mp4</text>
+  </g>
+  <g font-size="12.5" class="m">
+    <text x="560" y="40" class="m">تُدمج الرسومات</text>
+    <text x="560" y="58" class="m">في الفيديو</text>
+    <text x="560" y="110" class="m">يبقى الفيديو الأصلي</text>
+    <text x="560" y="128" class="m">والوسوم كما هي</text>
+    <text x="560" y="180" class="m">تعمل الملفات المصدّرة</text>
+    <text x="560" y="198" class="m">على أي جهاز</text>
+  </g>
+</svg>
+</div>
+<ul>
+<li>لقطة واحدة فقط: <span class="btn">🎬 تصدير هذا المقطع</span> في الوسم</li>
+<li>قائمة التشغيل كلها في فيديو واحد: <span class="btn">🎬 تصدير كفيديو</span> حدد صفوفًا في لوحة الوسوم لتصديرها وحدها.</li>
+<li>ملف منفصل لكل لقطة: <span class="btn">🗂 تصدير المقاطع بشكل منفصل</span></li>
+</ul>
+</section>
+
+<section id="clips">
+<h2>10. البدء من مقاطع جاهزة</h2>
+<p>إذا كانت لديك ملفات فيديو مقصوصة حسب اللقطات، يمكنك تخطي خطوات إضافة الوسوم.</p>
+<div class="fig">
+<svg viewBox="0 0 760 130" role="img" aria-label="عند اختيار عدة ملفات فيديو تُنشأ قائمة تشغيل بلقطة واحدة لكل ملف">
+  <g font-size="12.5">
+    <rect x="0" y="10" width="140" height="28" rx="5" class="b"/><text x="10" y="29">🎞 هدف 1.mp4</text>
+    <rect x="0" y="46" width="140" height="28" rx="5" class="b"/><text x="10" y="65">🎞 هدف 2.mp4</text>
+    <rect x="0" y="82" width="140" height="28" rx="5" class="b"/><text x="10" y="101">🎞 دفاع CK.mp4</text>
+  </g>
+  <path d="M152 60 L 260 60" class="ln" marker-end="url(#ah)"/>
+  <text x="160" y="32" font-size="12" font-weight="700">قائمة جديدة</text><text x="160" y="50" font-size="12" font-weight="700">من فيديوهات</text>
+  <rect x="272" y="0" width="300" height="122" rx="10" class="b"/>
+  <text x="286" y="24" font-size="13" font-weight="700">📋 قائمة تشغيل</text>
+  <g font-size="12">
+    <text x="286" y="46" class="m">غير مصنّف</text>
+    <rect x="336" y="34" width="70" height="18" rx="3" class="m" opacity="0.7"/><text x="342" y="47" class="wt" font-size="11">هدف 1</text>
+    <rect x="410" y="34" width="56" height="18" rx="3" class="m" opacity="0.7"/><text x="416" y="47" class="wt" font-size="11">هدف 2</text>
+    <rect x="470" y="34" width="86" height="18" rx="3" class="m" opacity="0.7"/><text x="476" y="47" class="wt" font-size="11">دفاع CK</text>
+    <text x="286" y="78" class="m">ملف واحد = لقطة واحدة. ثم</text>
+    <text x="286" y="96" class="m">الترتيب والرسم والتصدير</text>
+  </g>
+</svg>
+</div>
+<ol>
+<li>اضغط <span class="btn">قائمة تشغيل جديدة من فيديوهات</span> وحدد ملفات الفيديو معًا.</li>
+<li>يصبح كل ملف لقطة واحدة، وتصبح قائمة التشغيل جاهزة.</li>
+<li>بعد ذلك يمكنك الترتيب والرسم والتصدير كما في الأقسام <a href="#playlist">7</a> إلى <a href="#export">9</a>.</li>
+</ol>
+</section>
+
+<section id="keys">
+<h2>11. اختصارات لوحة المفاتيح</h2>
+<table>
+<tr><th>Space</th><td>تشغيل / إيقاف مؤقت</td></tr>
+<tr><th>← / →</th><td>رجوع 3 ثوانٍ / تقدم 3 ثوانٍ</td></tr>
+<tr><th>J / K / L</th><td>ترجيع / إيقاف / تقديم سريع</td></tr>
+<tr><th>I / O</th><td>تحديد البداية / النهاية</td></tr>
+<tr><th>الحرف الذي حددته</th><td>مثل الضغط على زر ذلك الوسم</td></tr>
+<tr><th>⌘Z / ⌘⇧Z</th><td>تراجع / إعادة (Ctrl في Windows)</td></tr>
+</table>
+<p>على iPad، انقر الأزرار على الشاشة.</p>
+<p>يمكنك أيضًا العثور على هذا المحتوى في التطبيق من قائمة «مساعدة» > «طريقة استخدام CoachTag» («⚙️ الإعدادات» على iPad). إذا كان لديك أي سؤال، فتواصل معنا عبر صفحة <a href="support-ar.html">الدعم</a>.</p>
+</section>
+
+<footer>&copy; 2026 CoachTag</footer>
+</body>
+</html>

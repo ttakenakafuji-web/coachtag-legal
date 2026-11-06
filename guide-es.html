@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía de uso | CoachTag</title>
+<style>
+  :root { color-scheme: light dark; --fg: #1b1e22; --bg: #ffffff; --muted: #6b7280; --line: #d9dde3; --card: #f4f6f8; --accent: #2563eb; --good: #16a34a; --bad: #dc2626; --blue: #2563eb; --amber: #d97706; --violet: #7c3aed; --pitch: #2f7a3b; --pitch2: #2a6e35; }
+  @media (prefers-color-scheme: dark) { :root { --fg: #e6e8eb; --bg: #14161a; --muted: #9aa1ab; --line: #343841; --card: #1d2026; --accent: #7db4ff; --good: #22c55e; --bad: #ef4444; --blue: #60a5fa; --amber: #f59e0b; --violet: #a78bfa; --pitch: #24602e; --pitch2: #1f5628; } }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; line-height: 1.8; max-width: 860px; margin: 0 auto; padding: 32px 16px 80px; color: var(--fg); background: var(--bg); }
+  a { color: var(--accent); }
+  .home { margin: 0 0 1em; font-weight: 600; } .home a { text-decoration: none; }
+  h1 { font-size: 1.7rem; margin-bottom: 0.25em; }
+  .lead { color: var(--muted); margin-bottom: 2em; }
+  section { margin-bottom: 3.5em; }
+  section h2 { font-size: 1.3rem; border-bottom: 1px solid var(--line); padding-bottom: 0.4em; margin-bottom: 0.8em; }
+  h3 { font-size: 1.08rem; margin: 1.8em 0 0.5em; }
+  ul, ol { padding-left: 1.4em; } li { margin-bottom: 0.4em; }
+  .toc { background: var(--card); border-radius: 10px; padding: 14px 20px; margin-bottom: 2.5em; }
+  .toc ol { margin: 0.3em 0 0; columns: 2 260px; } .toc li { margin-bottom: 0.15em; }
+  .btn { display: inline-block; border: 1px solid var(--line); background: var(--card); border-radius: 6px; padding: 0 7px; font-size: 0.9em; line-height: 1.6; white-space: nowrap; font-weight: 600; }
+  kbd { display: inline-block; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 4px; padding: 0 6px; font-family: ui-monospace, Menlo, monospace; font-size: 0.85em; background: var(--card); }
+  .note { border-left: 4px solid var(--accent); background: var(--card); padding: 10px 14px; border-radius: 0 8px 8px 0; margin: 1em 0; }
+  .note.pro { border-left-color: var(--amber); }
+  figure { margin: 1.2em 0; }
+  figcaption { font-size: 0.85rem; color: var(--muted); margin-top: 0.4em; }
+  .placeholder { aspect-ratio: 16 / 9; border: 2px dashed var(--line); border-radius: 10px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: var(--muted); font-size: 0.9rem; padding: 12px; background: var(--card); }
+  .placeholder strong { color: var(--fg); font-family: ui-monospace, Menlo, monospace; font-size: 0.85rem; }
+  table { border-collapse: collapse; width: 100%; font-size: 0.93rem; }
+  th, td { border-bottom: 1px solid var(--line); padding: 8px 6px; text-align: left; vertical-align: top; }
+  th { white-space: nowrap; }
+  .fig { background: var(--card); border-radius: 12px; padding: 14px; }
+  .fig svg { width: 100%; height: auto; display: block; overflow: visible; }
+  @media (max-width: 640px) { .fig { overflow-x: auto; } .fig svg { min-width: 620px; } }
+  svg text { fill: var(--fg); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+  svg text[fill="#fff"] { fill: #fff; }
+  svg .m { fill: var(--muted); }
+  svg .b { fill: var(--bg); stroke: var(--line); stroke-width: 1.5; }
+  svg .bf { fill: var(--card); stroke: var(--line); stroke-width: 1.5; }
+  svg .ln { stroke: var(--muted); stroke-width: 2; fill: none; }
+  svg .dash { stroke: var(--muted); stroke-width: 1.6; fill: none; stroke-dasharray: 5 4; }
+  svg .ah { fill: var(--muted); }
+  svg .good { fill: var(--good); } svg .bad { fill: var(--bad); } svg .blue { fill: var(--blue); } svg .amber { fill: var(--amber); } svg .violet { fill: var(--violet); }
+  svg .wt { fill: #fff; font-weight: 700; }
+  svg .film { fill: #3b414b; } svg .film-hole { fill: #9aa1ab; }
+  svg .accent-stroke { stroke: var(--accent); stroke-width: 2.5; fill: none; }
+  svg .accent { fill: var(--accent); }
+
+  .vs { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 1em 0; }
+  @media (max-width: 640px) { .vs { grid-template-columns: 1fr; } }
+  .vs > div { background: var(--card); border-radius: 12px; padding: 14px; }
+  .vs .head { font-weight: 700; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+  .vs .tagline { font-size: 0.8rem; color: var(--muted); font-weight: 400; }
+  .vs .ours { outline: 2px solid var(--accent); }
+  .vs ol { font-size: 0.9rem; margin: 8px 0 0; }
+  .vs .verdict { font-size: 0.88rem; margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--line); }
+
+  .merits { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; margin: 1em 0; }
+  .merits div { background: var(--card); border-radius: 12px; padding: 12px 14px; font-size: 0.9rem; }
+  .merits .ic { font-size: 1.5rem; line-height: 1; }
+  .merits b { display: block; margin: 6px 0 2px; font-size: 0.98rem; }
+
+  .flow { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin: 1em 0; }
+  @media (max-width: 640px) { .flow { grid-template-columns: 1fr; } }
+  .flow a { display: block; text-decoration: none; color: inherit; background: var(--card); border-radius: 10px; padding: 10px; text-align: center; font-size: 0.85rem; position: relative; }
+  .flow .ic { font-size: 1.6rem; display: block; }
+  .flow b { display: block; font-size: 1rem; }
+  .flow .n { position: absolute; top: 6px; left: 8px; font-size: 0.75rem; color: var(--muted); font-weight: 700; }
+
+  .case { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 640px) { .case { grid-template-columns: 1fr; } }
+  .case > div { border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; font-size: 0.9rem; }
+  .case .head { font-weight: 700; margin-bottom: 4px; }
+  .case ol { margin: 6px 0 0; }
+  .case .ours { border: 2px solid var(--accent); }
+
+  footer { margin-top: 3em; font-size: 0.85rem; color: var(--muted); }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="ah"/></marker>
+    <marker id="ahA" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="accent"/></marker>
+    <marker id="ahW" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#fff"/></marker>
+  </defs>
+</svg>
+
+<p class="home"><a href="es.html">← CoachTag</a> · <a href="support-es.html">Soporte</a></p>
+<h1>Guía de uso de CoachTag</h1>
+<p class="lead">Reúne las jugadas que quieres del vídeo del partido, dibuja la táctica y crea un vídeo para mostrar a tus jugadores. Esta guía explica el flujo básico de CoachTag para quienes empiezan.</p>
+
+<nav class="toc"><strong>Índice</strong>
+<ol>
+<li><a href="#idea">Primero, la idea de CoachTag</a></li>
+<li><a href="#words">Cinco términos que conviene conocer</a></li>
+<li><a href="#package">Abrir el vídeo del partido</a></li>
+<li><a href="#buttons">Preparar los botones de etiqueta</a></li>
+<li><a href="#tagging">Etiquetar mientras ves el partido</a></li>
+<li><a href="#review">Revisar y filtrar las etiquetas</a></li>
+<li><a href="#playlist">Crear una lista de reproducción</a></li>
+<li><a href="#effects">Dibujar la táctica (plan Pro)</a></li>
+<li><a href="#export">Exportar como vídeo</a></li>
+<li><a href="#clips">Empezar con clips ya cortados</a></li>
+<li><a href="#keys">Atajos de teclado</a></li>
+</ol>
+</nav>
+
+<section id="idea">
+<h2>1. Primero, la idea de CoachTag</h2>
+<p>CoachTag reúne jugadas <strong>“marcando”</strong> el vídeo, no <strong>“cortándolo”</strong>. Esa es la mayor diferencia con los editores de vídeo habituales.</p>
+
+<h3>La diferencia con un editor de vídeo</h3>
+<div class="vs">
+  <div>
+    <div class="head">✂️ Editor de vídeo habitual</div>
+    <svg viewBox="0 0 360 230" role="img" aria-label="Cortar el vídeo con tijeras en muchos archivos">
+      <text x="0" y="14" font-size="13" class="m">Partido</text>
+            <g>
+        <rect x="0" y="24" width="96" height="40" rx="3" class="film"/>
+        <rect x="112" y="24" width="70" height="40" rx="3" class="film"/>
+        <rect x="198" y="24" width="60" height="40" rx="3" class="film"/>
+        <rect x="274" y="24" width="86" height="40" rx="3" class="film"/>
+        <g class="film-hole">
+          <rect x="6" y="28" width="6" height="5"/><rect x="22" y="28" width="6" height="5"/><rect x="38" y="28" width="6" height="5"/><rect x="54" y="28" width="6" height="5"/><rect x="70" y="28" width="6" height="5"/><rect x="86" y="28" width="6" height="5"/>
+          <rect x="6" y="55" width="6" height="5"/><rect x="22" y="55" width="6" height="5"/><rect x="38" y="55" width="6" height="5"/><rect x="54" y="55" width="6" height="5"/><rect x="70" y="55" width="6" height="5"/><rect x="86" y="55" width="6" height="5"/>
+          <rect x="118" y="28" width="6" height="5"/><rect x="134" y="28" width="6" height="5"/><rect x="150" y="28" width="6" height="5"/><rect x="166" y="28" width="6" height="5"/>
+          <rect x="118" y="55" width="6" height="5"/><rect x="134" y="55" width="6" height="5"/><rect x="150" y="55" width="6" height="5"/><rect x="166" y="55" width="6" height="5"/>
+          <rect x="204" y="28" width="6" height="5"/><rect x="220" y="28" width="6" height="5"/><rect x="236" y="28" width="6" height="5"/>
+          <rect x="204" y="55" width="6" height="5"/><rect x="220" y="55" width="6" height="5"/><rect x="236" y="55" width="6" height="5"/>
+          <rect x="280" y="28" width="6" height="5"/><rect x="296" y="28" width="6" height="5"/><rect x="312" y="28" width="6" height="5"/><rect x="328" y="28" width="6" height="5"/><rect x="344" y="28" width="6" height="5"/>
+          <rect x="280" y="55" width="6" height="5"/><rect x="296" y="55" width="6" height="5"/><rect x="312" y="55" width="6" height="5"/><rect x="328" y="55" width="6" height="5"/><rect x="344" y="55" width="6" height="5"/>
+        </g>
+      </g>
+      <text x="96" y="20" font-size="18">✂️</text>
+      <text x="178" y="20" font-size="18">✂️</text>
+      <text x="254" y="20" font-size="18">✂️</text>
+      <path d="M180 76 L180 102" class="ln" marker-end="url(#ah)"/>
+            <g font-size="12">
+        <rect x="20" y="112" width="96" height="26" rx="5" class="b"/><text x="30" y="130">🎞 clip_01.mp4</text>
+        <rect x="132" y="112" width="96" height="26" rx="5" class="b"/><text x="142" y="130">🎞 clip_02.mp4</text>
+        <rect x="244" y="112" width="96" height="26" rx="5" class="b"/><text x="254" y="130">🎞 clip_03.mp4</text>
+        <rect x="20" y="146" width="96" height="26" rx="5" class="b"/><text x="30" y="164">🎞 clip_04.mp4</text>
+        <rect x="132" y="146" width="96" height="26" rx="5" class="b"/><text x="142" y="164">🎞 clip_05.mp4</text>
+        <rect x="244" y="146" width="96" height="26" rx="5" class="b"/><text x="254" y="164" class="m">…… clip_48</text>
+      </g>
+      <text x="0" y="198" font-size="12.5" class="m">Cada corte añade un archivo y ocupa más espacio.</text>
+      <text x="0" y="218" font-size="12.5" class="m">Solo el nombre del archivo indica qué jugada es.</text>
+    </svg>
+    <ol>
+      <li>Ver el partido completo</li>
+      <li>Volver a verlo y buscar las jugadas útiles</li>
+      <li>Cortar y exportar una a una</li>
+      <li>Para cambiar una jugada, cortar de nuevo</li>
+    </ol>
+    <div class="verdict">Ver y cortar son tareas <strong>separadas</strong>, y la preparación lleva varias veces la duración del partido.</div>
+  </div>
+
+  <div class="ours">
+    <div class="head">🏷️ CoachTag</div>
+    <svg viewBox="0 0 360 230" role="img" aria-label="Un solo vídeo permanece entero y recibe marcas de color">
+      <text x="0" y="14" font-size="13" class="m">Vídeo del partido (entero)</text>
+      <rect x="0" y="24" width="360" height="40" rx="3" class="film"/>
+      <g class="film-hole">
+        <rect x="6" y="28" width="348" height="5" opacity="0"/>
+      </g>
+      <g opacity="0.95">
+        <rect x="30" y="30" width="34" height="28" rx="3" class="good"/>
+        <rect x="96" y="30" width="22" height="28" rx="3" class="bad"/>
+        <rect x="150" y="30" width="44" height="28" rx="3" class="good"/>
+        <rect x="222" y="30" width="26" height="28" rx="3" class="blue"/>
+        <rect x="282" y="30" width="38" height="28" rx="3" class="good"/>
+      </g>
+            <g transform="translate(150 78)">
+        <rect x="0" y="0" width="30" height="30" rx="5" class="b"/><text x="10" y="21" font-size="15" font-weight="700">Q</text>
+        <rect x="38" y="0" width="30" height="30" rx="5" class="b"/><text x="47" y="21" font-size="15" font-weight="700">W</text>
+        <rect x="76" y="0" width="30" height="30" rx="5" class="b"/><text x="87" y="21" font-size="15" font-weight="700">E</text>
+      </g>
+      <path d="M165 76 L170 64" class="accent-stroke" marker-end="url(#ahA)"/>
+      <text x="0" y="98" font-size="12" class="m">Basta con pulsar</text>
+      <text x="0" y="114" font-size="12" class="m">una tecla al verlo</text>
+            <g font-size="12">
+        <rect x="20" y="126" width="320" height="58" rx="6" class="b"/>
+        <rect x="30" y="134" width="10" height="10" rx="2" class="good"/><text x="46" y="144">AT Good  12:05〜12:19</text>
+        <rect x="30" y="152" width="10" height="10" rx="2" class="bad"/><text x="46" y="162">AT Bad  18:40〜18:47</text>
+        <rect x="200" y="134" width="10" height="10" rx="2" class="good"/><text x="216" y="144">AT Good  31:12〜</text>
+        <rect x="200" y="152" width="10" height="10" rx="2" class="blue"/><text x="216" y="162">DF Good  44:02〜</text>
+        <text x="46" y="178" class="m">…… lista de marcas (pocos KB)</text>
+      </g>
+      <text x="0" y="208" font-size="12.5" class="m">Sin cortes: ni archivos ni espacio de más.</text>
+      <text x="0" y="226" font-size="12.5" class="m">Cada marca tiene un tipo y se reúnen de una vez.</text>
+    </svg>
+    <ol>
+      <li>Pulsar una tecla en cada jugada mientras miras</li>
+      <li>Al acabar el partido, la lista de jugadas ya está lista</li>
+      <li>Filtrar por tipo o condición y reunir</li>
+      <li>Para cambiar la duración, basta con ajustar la marca</li>
+    </ol>
+    <div class="verdict">Ver y reunir terminan <strong>a la vez</strong>.</div>
+  </div>
+</div>
+
+<h3>Una “etiqueta” es una nota adhesiva en el vídeo</h3>
+<p>Funciona como las notas adhesivas de un libro. Las páginas (vídeo) no cambian; solo aumentan las notas (etiquetas). Si separas tipos como “ataque, bien” y “defensa, mal” por color, luego podrás abrir solo las páginas de ese color.</p>
+<div class="fig">
+<svg viewBox="0 0 760 250" role="img" aria-label="Una línea de tiempo con etiquetas de color. Cada etiqueta guarda tipo, inicio, fin y descriptores">
+  <text x="0" y="16" font-size="14" font-weight="700">Vídeo del partido</text>
+  <text x="0" y="34" font-size="12" class="m">0:00</text>
+  <text x="725" y="34" font-size="12" class="m">90:00</text>
+  <rect x="0" y="42" width="760" height="18" rx="9" class="bf"/>
+    <rect x="70" y="40" width="40" height="22" rx="4" class="good"/>
+  <rect x="160" y="40" width="26" height="22" rx="4" class="bad"/>
+  <rect x="250" y="40" width="58" height="22" rx="4" class="good"/>
+  <rect x="380" y="40" width="30" height="22" rx="4" class="blue"/>
+  <rect x="470" y="40" width="44" height="22" rx="4" class="good"/>
+  <rect x="580" y="40" width="22" height="22" rx="4" class="bad"/>
+  <rect x="660" y="40" width="36" height="22" rx="4" class="blue"/>
+    <path d="M250 64 L210 108" class="dash"/>
+  <path d="M308 64 L560 108" class="dash"/>
+  <rect x="200" y="108" width="370" height="128" rx="10" class="b"/>
+  <rect x="200" y="108" width="370" height="30" rx="10" class="good"/>
+  <rect x="200" y="126" width="370" height="12" class="good"/>
+  <text x="214" y="129" font-size="14" class="wt">Qué contiene una etiqueta</text>
+  <g font-size="13">
+    <text x="214" y="162" class="m">Tipo</text><text x="290" y="162">AT Good (ataque, bien)</text>
+    <text x="214" y="184" class="m">Tiempo</text><text x="290" y="184">31:12 〜 31:26</text>
+    <text x="214" y="206" class="m">Descriptor</text>
+    <rect x="290" y="193" width="64" height="20" rx="10" class="amber"/><text x="301" y="208" font-size="12" class="wt">Centro</text>
+    <rect x="360" y="193" width="72" height="20" rx="10" class="violet"/><text x="371" y="208" font-size="12" class="wt">Tiro</text>
+    <text x="214" y="228" class="m">Nota</text><text x="290" y="228">Movimiento del tercer hombre por la derecha</text>
+  </g>
+  <text x="590" y="150" font-size="12.5" class="m">No es una copia del vídeo:</text>
+  <text x="590" y="170" font-size="12.5" class="m">solo registra inicio, fin</text>
+  <text x="590" y="190" font-size="12.5" class="m">y qué jugada es.</text>
+  <text x="0" y="150" font-size="12.5" class="m">Ajústala o bórrala</text>
+  <text x="0" y="170" font-size="12.5" class="m">cuando quieras. El vídeo</text>
+  <text x="0" y="190" font-size="12.5" class="m">original queda intacto.</text>
+</svg>
+</div>
+
+<h3>Ejemplo: mostrar todos los tiros que vienen de un centro</h3>
+<div class="case">
+  <div>
+    <div class="head">✂️ Con un editor de vídeo</div>
+    <ol>
+      <li>Revisar los 90 minutos para buscar tiros tras un centro</li>
+      <li>En cada uno, fijar inicio y fin, y cortar</li>
+      <li>Ordenar los cortes y exportar</li>
+      <li>En el siguiente partido, otra vez desde cero</li>
+    </ol>
+  </div>
+  <div class="ours">
+    <div class="head">🏷️ Con CoachTag</div>
+    <ol>
+      <li>(Las etiquetas hechas al ver el partido ya están ahí)</li>
+      <li>En la tabla, clic en “AT Good × Centro” → se seleccionan todas las jugadas</li>
+      <li>Añadir a la lista de reproducción y exportar</li>
+      <li>Reunir varios partidos con la misma operación</li>
+    </ol>
+  </div>
+</div>
+
+<h3>Las ventajas de CoachTag</h3>
+<div class="merits">
+  <div><span class="ic">⏱️</span><b>Al terminar de verlo, ya está reunido</b>Etiquetas mientras miras, sin perder tiempo revisando y buscando. También sirve durante el partido o en el descanso.</div>
+  <div><span class="ic">🔎</span><b>Extrae jugadas por condición</b>Filtra al instante por tipo y descriptor, como solo “defensa, mal” o solo “balón parado × CK”.</div>
+  <div><span class="ic">💾</span><b>Ni archivos ni espacio de más</b>Las etiquetas son solo marcas: aunque hagas cientos, sigue siendo un único vídeo. No hay archivos cortados que gestionar.</div>
+  <div><span class="ic">↩️</span><b>Rehaz todas las veces que quieras</b>Para alargar o acortar una jugada, basta con ajustar la marca. El vídeo original siempre queda intacto.</div>
+  <div><span class="ic">📚</span><b>Reúne jugadas de varios partidos</b>Pon etiquetas de varios partidos en una lista. “Goles encajados esta temporada” se prepara enseguida.</div>
+  <div><span class="ic">✏️</span><b>Los dibujos se exportan con el vídeo</b>Dibuja flechas y zonas en una jugada y entrega a tus jugadores un vídeo con ellos integrados.</div>
+</div>
+
+<h3>Flujo general</h3>
+<div class="flow">
+  <a href="#package"><span class="n">1</span><span class="ic">📂</span><b>Abrir</b>Vídeo en un paquete</a>
+  <a href="#tagging"><span class="n">2</span><span class="ic">🏷️</span><b>Etiquetar</b>Etiquetas al ver</a>
+  <a href="#playlist"><span class="n">3</span><span class="ic">📋</span><b>Reunir</b>Crear la lista</a>
+  <a href="#effects"><span class="n">4</span><span class="ic">✏️</span><b>Dibujar</b>Dibujar la táctica</a>
+  <a href="#export"><span class="n">5</span><span class="ic">🎬</span><b>Exportar</b>Vídeo para jugadores</a>
+</div>
+</section>
+
+<section id="words">
+<h2>2. Cinco términos que conviene conocer</h2>
+<div class="fig">
+<svg viewBox="0 0 760 300" role="img" aria-label="Un paquete es una caja con el vídeo, las etiquetas y los dibujos de un partido. La lista de reproducción remite a jugadas de varios paquetes">
+    <rect x="0" y="10" width="300" height="130" rx="12" class="b"/>
+  <text x="14" y="34" font-size="14" font-weight="700">📦 Paquete (Jornada 10 vs A)</text>
+  <g font-size="12.5">
+    <rect x="14" y="46" width="272" height="22" rx="4" class="film"/>
+    <text x="22" y="62" fill="#fff">🎞 Vídeo del partido</text>
+    <rect x="14" y="76" width="34" height="18" rx="3" class="good"/>
+    <rect x="58" y="76" width="22" height="18" rx="3" class="bad"/>
+    <rect x="92" y="76" width="44" height="18" rx="3" class="good"/>
+    <rect x="148" y="76" width="26" height="18" rx="3" class="blue"/>
+    <rect x="186" y="76" width="34" height="18" rx="3" class="good"/>
+    <text x="222" y="90" class="m">🏷 Etiquetas</text>
+    <text x="14" y="122" class="m">✏️ Dibujos, descriptores y notas también</text>
+  </g>
+    <rect x="0" y="160" width="300" height="130" rx="12" class="b"/>
+  <text x="14" y="184" font-size="14" font-weight="700">📦 Paquete (Jornada 11 vs B)</text>
+  <g font-size="12.5">
+    <rect x="14" y="196" width="272" height="22" rx="4" class="film"/>
+    <text x="22" y="212" fill="#fff">🎞 Vídeo del partido</text>
+    <rect x="30" y="226" width="40" height="18" rx="3" class="good"/>
+    <rect x="84" y="226" width="22" height="18" rx="3" class="blue"/>
+    <rect x="124" y="226" width="30" height="18" rx="3" class="bad"/>
+    <rect x="170" y="226" width="40" height="18" rx="3" class="good"/>
+    <text x="222" y="240" class="m">🏷 Etiquetas</text>
+    <text x="14" y="272" class="m">1 partido = 1 paquete (.ccpkg)</text>
+  </g>
+    <rect x="440" y="60" width="320" height="180" rx="12" class="b"/>
+  <text x="456" y="86" font-size="14" font-weight="700">📋 Lista “Buenos ataques”</text>
+  <g font-size="12.5">
+    <rect x="456" y="100" width="288" height="26" rx="5" class="bf"/><rect x="456" y="100" width="8" height="26" rx="2" class="good"/><text x="474" y="118">① vs A 12:05  AT Good</text>
+    <rect x="456" y="132" width="288" height="26" rx="5" class="bf"/><rect x="456" y="132" width="8" height="26" rx="2" class="good"/><text x="474" y="150">② vs A 51:40  AT Good</text>
+    <rect x="456" y="164" width="288" height="26" rx="5" class="bf"/><rect x="456" y="164" width="8" height="26" rx="2" class="good"/><text x="474" y="182">③ vs B 08:22  AT Good</text>
+    <rect x="456" y="196" width="288" height="26" rx="5" class="bf"/><rect x="456" y="196" width="8" height="26" rx="2" class="good"/><text x="474" y="214">④ vs B 77:10  AT Good</text>
+  </g>
+  <path d="M114 86 C 300 86, 330 113, 452 113" class="dash" marker-end="url(#ah)"/>
+  <path d="M206 86 C 330 90, 340 145, 452 145" class="dash" marker-end="url(#ah)"/>
+  <path d="M50 236 C 300 236, 330 177, 452 177" class="dash" marker-end="url(#ah)"/>
+  <path d="M190 236 C 330 236, 350 209, 452 209" class="dash" marker-end="url(#ah)"/>
+  <text x="320" y="266" font-size="12" class="m">No se copia el vídeo;</text>
+  <text x="320" y="284" font-size="12" class="m">remite a los paquetes</text>
+</svg>
+</div>
+<table>
+<tr><th>📦 Paquete<br><small>.ccpkg</small></th><td>Archivo guardado que reúne el vídeo del partido con sus etiquetas y dibujos. Crea uno por partido. Se abre tal cual en Mac, iPad y Windows.</td></tr>
+<tr><th>🏷️ Etiqueta</th><td>Marca de tiempo que indica “esta jugada”. Al pulsar un <strong>botón</strong> como <span class="btn">AT Good</span> (ataque, bien) se crea una etiqueta de ese tipo. Tú decides qué botones tener.</td></tr>
+<tr><th>📌 Descriptor</th><td>Información adicional de una etiqueta. Por ejemplo, añade “Tiro” o “Centro” a una etiqueta “AT Good” y luego podrás reunir solo los “buenos ataques que acabaron en tiro”.</td></tr>
+<tr><th>📋 Lista de reproducción</th><td>Lista de las etiquetas elegidas, en el orden en que quieres mostrarlas. Puede combinar etiquetas de varios partidos (paquetes). El vídeo no se copia; la lista remite a los paquetes originales.</td></tr>
+<tr><th>✏️ Modo Efectos</th><td>Modo para entrar en una jugada y dibujar flechas, zonas, marcadores que siguen a jugadores y más. Los dibujos se integran en el vídeo al exportar.</td></tr>
+</table>
+</section>
+
+<section id="package">
+<h2>3. Abrir el vídeo del partido (crear un paquete)</h2>
+<div class="fig">
+<svg viewBox="0 0 760 170" role="img" aria-label="El archivo de vídeo elegido se copia o se mueve al paquete y se guarda con etiquetas y dibujos">
+  <rect x="0" y="40" width="150" height="90" rx="10" class="b"/>
+  <text x="50" y="82" font-size="34">🎞</text>
+  <text x="18" y="118" font-size="12.5">match.mp4</text>
+  <text x="0" y="24" font-size="13" class="m">Tu archivo de vídeo</text>
+
+  <path d="M160 85 L 300 85" class="ln" marker-end="url(#ah)"/>
+  <text x="178" y="72" font-size="13" font-weight="700">Abrir vídeo</text>
+  <text x="172" y="108" font-size="12" class="m">copiar o mover</text>
+
+  <rect x="320" y="10" width="300" height="150" rx="14" class="b" style="stroke: var(--accent); stroke-width: 2.5"/>
+  <text x="336" y="36" font-size="14" font-weight="700">📦 Jornada 10 vs A.ccpkg</text>
+  <rect x="336" y="50" width="268" height="28" rx="5" class="film"/><text x="346" y="69" font-size="12.5" fill="#fff">🎞 Vídeo del partido</text>
+  <rect x="336" y="86" width="130" height="28" rx="5" class="bf"/><text x="346" y="105" font-size="12.5">🏷 Etiquetas</text>
+  <rect x="474" y="86" width="130" height="28" rx="5" class="bf"/><text x="484" y="105" font-size="12.5">✏️ Dibujos</text>
+  <text x="336" y="144" font-size="12" class="m">El trabajo se guarda automáticamente</text>
+
+  <text x="640" y="70" font-size="12.5" class="m">Se abre tal cual</text>
+  <text x="640" y="90" font-size="12.5" class="m">en Mac, iPad</text>
+  <text x="640" y="110" font-size="12.5" class="m">y Windows</text>
+</svg>
+</div>
+<ol>
+<li>Pulsa <span class="btn">Abrir vídeo</span> y elige el archivo de vídeo del partido.</li>
+<li>Cuando se te pida, define el nombre del paquete y dónde guardarlo (por ejemplo, “Jornada 10 vs XX”).</li>
+<li>Elige si quieres <strong>copiar</strong> o <strong>mover</strong> el vídeo al paquete (Mac, Windows). Para conservar el vídeo también en su ubicación original, elige “Copiar”.</li>
+</ol>
+<div class="note">Si el vídeo está dividido en varios archivos, como primera y segunda parte, selecciónalos juntos y se abrirán unidos por orden de nombre.<br>La próxima vez, usa <span class="btn">Abrir paquete</span> para seguir con tus etiquetas y dibujos.</div>
+</section>
+
+<section id="buttons">
+<h2>4. Preparar los botones de etiqueta</h2>
+<p>Los botones bajo el vídeo sirven para etiquetar. Recomendamos rehacerlos según los criterios de análisis de tu equipo.</p>
+<div class="fig">
+<svg viewBox="0 0 760 150" role="img" aria-label="Ejemplo de botones de etiqueta, cada uno con su color y tecla">
+  <text x="0" y="16" font-size="13" class="m">Botones de etiqueta (ejemplo)</text>
+  <g font-size="13">
+    <rect x="0" y="28" width="118" height="44" rx="8" class="good"/><text x="12" y="56" class="wt">AT Good</text><rect x="88" y="36" width="22" height="22" rx="4" fill="#0003"/><text x="94" y="52" class="wt" font-size="12">Q</text>
+    <rect x="126" y="28" width="118" height="44" rx="8" class="bad"/><text x="138" y="56" class="wt">AT Bad</text><rect x="214" y="36" width="22" height="22" rx="4" fill="#0003"/><text x="219" y="52" class="wt" font-size="12">W</text>
+    <rect x="252" y="28" width="118" height="44" rx="8" class="blue"/><text x="264" y="56" class="wt">DF Good</text><rect x="340" y="36" width="22" height="22" rx="4" fill="#0003"/><text x="347" y="52" class="wt" font-size="12">E</text>
+    <rect x="378" y="28" width="118" height="44" rx="8" class="amber"/><text x="390" y="56" class="wt">DF Bad</text><rect x="466" y="36" width="22" height="22" rx="4" fill="#0003"/><text x="472" y="52" class="wt" font-size="12">R</text>
+  </g>
+  <text x="0" y="98" font-size="13" class="m">Botones de descriptor (ejemplo)</text>
+  <g font-size="12.5">
+    <rect x="0" y="108" width="74" height="28" rx="14" class="bf"/><text x="37" y="127" text-anchor="middle">Tiro</text>
+    <rect x="82" y="108" width="62" height="28" rx="14" class="bf"/><text x="113" y="127" text-anchor="middle">Centro</text>
+    <rect x="152" y="108" width="54" height="28" rx="14" class="bf"/><text x="171" y="127">CK</text>
+    <rect x="214" y="108" width="54" height="28" rx="14" class="bf"/><text x="233" y="127">FK</text>
+  </g>
+  <g font-size="12.5" class="m">
+    <text x="530" y="42" class="m">← Nombre, color y tecla</text>
+    <text x="530" y="62" class="m">   (1 carácter) a tu elección</text>
+    <text x="300" y="127" class="m">← Información adicional de una etiqueta</text>
+  </g>
+</svg>
+</div>
+<ol>
+<li>Abre <span class="btn">⚙️ Ajustes de etiquetas</span>.</li>
+<li>En la pestaña “Etiquetas”, define el nombre, el color y el atajo de teclado (1 carácter) de cada botón. Usa <span class="btn">+ Añadir etiqueta</span> para crear más.</li>
+<li>Si hace falta, crea botones de información adicional (Tiro, Centro, etc.) en la pestaña “Descriptores”.</li>
+</ol>
+
+<h3>Dos formas de etiquetar</h3>
+<div class="vs">
+  <div>
+    <div class="head">👆 Un clic</div>
+    <svg viewBox="0 0 360 120" role="img" aria-label="Los segundos alrededor del momento de pulsar se convierten en la etiqueta">
+      <rect x="0" y="50" width="360" height="10" rx="5" class="bf"/>
+      <rect x="110" y="44" width="150" height="22" rx="4" class="good" opacity="0.9"/>
+      <path d="M190 18 L190 44" class="accent-stroke" marker-end="url(#ahA)"/>
+      <text x="166" y="14" font-size="12.5" font-weight="700">Momento de pulsar</text>
+      <path d="M112 84 L188 84" class="ln" marker-start="url(#ah)" marker-end="url(#ah)"/>
+      <path d="M192 84 L258 84" class="ln" marker-start="url(#ah)" marker-end="url(#ah)"/>
+      <text x="118" y="104" font-size="12" class="m">T. previo</text>
+      <text x="198" y="104" font-size="12" class="m">T. posterior</text>
+    </svg>
+    <p style="font-size:0.9rem;margin:6px 0 0">Los <strong>segundos alrededor</strong> del momento de pulsar se convierten automáticamente en una etiqueta. Puedes definir cuántos segundos antes y después. Ideal para jugadas con un punto claro, como “el instante del tiro”.</p>
+  </div>
+  <div>
+    <div class="head">✌️ Clic inicial → final</div>
+    <svg viewBox="0 0 360 120" role="img" aria-label="La primera pulsación fija el inicio y la segunda el final">
+      <rect x="0" y="50" width="360" height="10" rx="5" class="bf"/>
+      <rect x="80" y="44" width="200" height="22" rx="4" class="good" opacity="0.9"/>
+      <path d="M82 18 L82 44" class="accent-stroke" marker-end="url(#ahA)"/>
+      <path d="M278 18 L278 44" class="accent-stroke" marker-end="url(#ahA)"/>
+      <text x="50" y="14" font-size="12.5" font-weight="700">1.ª pulsación</text>
+      <text x="250" y="14" font-size="12.5" font-weight="700">2.ª pulsación</text>
+      <text x="96" y="96" font-size="12" class="m">De una pulsación a la siguiente</text>
+    </svg>
+    <p style="font-size:0.9rem;margin:6px 0 0">La primera pulsación fija el inicio y la segunda (mismo botón) el final. Ideal para jugadas de duración variable, como “desde que empieza el ataque hasta perder el balón”.</p>
+  </div>
+</div>
+<p>En <span class="btn">⚙️ Ajustes de etiquetas</span> puedes elegir tanto el valor general como la forma de cada etiqueta.</p>
+<div class="note">Guarda como “plantilla” la configuración de botones que más usas y carga los mismos botones en el siguiente partido.</div>
+</section>
+
+<section id="tagging">
+<h2>5. Etiquetar mientras ves el partido</h2>
+<p>Reproduce el vídeo y, cuando llegue la jugada, basta con pulsar el botón (o la tecla asignada).</p>
+<div class="fig">
+<svg viewBox="0 0 760 200" role="img" aria-label="Al pulsar una tecla durante la reproducción aparece una banda en la línea de tiempo y una etiqueta en la lista de la derecha">
+    <rect x="0" y="0" width="470" height="120" rx="8" fill="var(--pitch)"/>
+  <rect x="20" y="14" width="430" height="92" fill="none" stroke="#ffffff80" stroke-width="1.5"/>
+  <line x1="235" y1="14" x2="235" y2="106" stroke="#ffffff80" stroke-width="1.5"/>
+  <circle cx="235" cy="60" r="16" fill="none" stroke="#ffffff80" stroke-width="1.5"/>
+  <g fill="#fff"><circle cx="160" cy="50" r="4"/><circle cx="200" cy="80" r="4"/><circle cx="290" cy="44" r="4"/><circle cx="320" cy="76" r="4"/></g>
+  <g fill="#111"><circle cx="250" cy="58" r="4"/><circle cx="345" cy="58" r="4"/><circle cx="380" cy="86" r="4"/></g>
+  <text x="14" y="26" font-size="14" fill="#fff">▶</text>
+    <rect x="0" y="132" width="470" height="12" rx="6" class="bf"/>
+  <rect x="60" y="130" width="28" height="16" rx="3" class="good"/>
+  <rect x="150" y="130" width="18" height="16" rx="3" class="bad"/>
+  <rect x="236" y="130" width="34" height="16" rx="3" class="good"/>
+  <line x1="300" y1="126" x2="300" y2="150" stroke="var(--accent)" stroke-width="2.5"/>
+    <g font-size="12">
+    <rect x="0" y="160" width="90" height="34" rx="6" class="good"/><text x="10" y="182" class="wt">AT Good  Q</text>
+    <rect x="96" y="160" width="90" height="34" rx="6" class="bad"/><text x="106" y="182" class="wt">AT Bad  W</text>
+    <rect x="192" y="160" width="90" height="34" rx="6" class="blue"/><text x="202" y="182" class="wt">DF Good  E</text>
+    <rect x="288" y="160" width="90" height="34" rx="6" class="amber"/><text x="298" y="182" class="wt">DF Bad  R</text>
+  </g>
+  <text x="392" y="172" font-size="12" class="m">Al pulsar</text>
+  <text x="392" y="188" font-size="12" class="m">sale una banda</text>
+    <rect x="500" y="0" width="260" height="194" rx="8" class="b"/>
+  <text x="514" y="24" font-size="13" font-weight="700">Lista de etiquetas</text>
+  <g font-size="12.5">
+    <rect x="514" y="38" width="232" height="30" rx="5" class="bf"/><rect x="514" y="38" width="6" height="30" class="good"/><text x="528" y="58">AT Good   02:14</text><text x="700" y="58">✏️ ➕</text>
+    <rect x="514" y="74" width="232" height="30" rx="5" class="bf"/><rect x="514" y="74" width="6" height="30" class="bad"/><text x="528" y="94">AT Bad    05:31</text><text x="700" y="94">✏️ ➕</text>
+    <rect x="514" y="110" width="232" height="30" rx="5" class="bf" style="stroke: var(--accent); stroke-width: 2"/><rect x="514" y="110" width="6" height="30" class="good"/><text x="528" y="130">AT Good   08:47</text><text x="700" y="130">✏️ ➕</text>
+    <text x="528" y="164" class="m">Clic para ver la jugada</text>
+  </g>
+</svg>
+</div>
+<ul>
+<li><kbd>Space</kbd> reproduce y pausa, <kbd>←</kbd> <kbd>→</kbd> retroceden y avanzan 3 segundos, y <kbd>J</kbd> <kbd>K</kbd> <kbd>L</kbd> rebobinan, detienen y avanzan rápido.</li>
+<li>Si te equivocas, selecciona la etiqueta en la lista y bórrala, o deshaz con <kbd>⌘</kbd>+<kbd>Z</kbd> (<kbd>Ctrl</kbd>+<kbd>Z</kbd> en Windows).</li>
+<li>Con una etiqueta seleccionada, pulsa un botón de descriptor para añadírselo (pulsa de nuevo para quitarlo).</li>
+<li>Para ver la imagen más grande, usa <span class="btn">⛶ Pantalla completa</span>. Solo los botones más usados flotan sobre el vídeo.</li>
+</ul>
+<div class="note">Al principio no busques la perfección: es mejor etiquetar de más y elegir después. Las etiquetas son solo marcas, así que tener muchas no molesta.</div>
+</section>
+
+<section id="review">
+<h2>6. Revisar y filtrar las etiquetas</h2>
+<p>Abre <span class="btn">📊 Tabla</span> para ver los recuentos de etiqueta × descriptor. Haz clic en un número para seleccionar todas las etiquetas de esa condición.</p>
+<div class="fig">
+<svg viewBox="0 0 760 210" role="img" aria-label="Tabla de etiquetas y descriptores. Al hacer clic en la celda AT Good y Centro se seleccionan las 4 etiquetas correspondientes">
+  <g font-size="13">
+    <rect x="0" y="0" width="460" height="200" rx="8" class="b"/>
+    <text x="16" y="28" class="m">Etiqueta \ Descriptor</text>
+    <text x="172" y="28" font-weight="700" text-anchor="middle">Tiro</text><text x="261" y="28" font-weight="700" text-anchor="middle">Centro</text><text x="320" y="28" font-weight="700">CK</text><text x="390" y="28" font-weight="700">Total</text>
+    <line x1="0" y1="40" x2="460" y2="40" stroke="var(--line)"/>
+    <rect x="16" y="54" width="10" height="10" rx="2" class="good"/><text x="32" y="64">AT Good</text><text x="168" y="64">7</text>
+    <rect x="228" y="46" width="66" height="26" rx="5" class="accent" opacity="0.2"/><rect x="228" y="46" width="66" height="26" rx="5" class="accent-stroke"/><text x="256" y="64" font-weight="700">4</text>
+    <text x="330" y="64">1</text><text x="400" y="64">12</text>
+    <rect x="16" y="88" width="10" height="10" rx="2" class="bad"/><text x="32" y="98">AT Bad</text><text x="168" y="98">2</text><text x="256" y="98">5</text><text x="330" y="98">0</text><text x="400" y="98">9</text>
+    <rect x="16" y="122" width="10" height="10" rx="2" class="blue"/><text x="32" y="132">DF Good</text><text x="168" y="132">0</text><text x="256" y="132">1</text><text x="330" y="132">3</text><text x="400" y="132">6</text>
+    <rect x="16" y="156" width="10" height="10" rx="2" class="amber"/><text x="32" y="166">DF Bad</text><text x="168" y="166">3</text><text x="256" y="166">2</text><text x="330" y="166">2</text><text x="400" y="166">8</text>
+    <text x="276" y="80" font-size="18">👆</text>
+  </g>
+  <path d="M470 60 L 520 60" class="ln" marker-end="url(#ah)"/>
+  <rect x="530" y="0" width="230" height="200" rx="8" class="b"/>
+  <text x="544" y="26" font-size="13" font-weight="700">4 seleccionadas</text>
+  <g font-size="12.5">
+    <rect x="544" y="38" width="202" height="28" rx="5" class="bf" style="stroke: var(--accent); stroke-width: 2"/><rect x="544" y="38" width="6" height="28" class="good"/><text x="558" y="57">AT Good 12:05 Centro</text>
+    <rect x="544" y="72" width="202" height="28" rx="5" class="bf" style="stroke: var(--accent); stroke-width: 2"/><rect x="544" y="72" width="6" height="28" class="good"/><text x="558" y="91">AT Good 31:12 Centro</text>
+    <rect x="544" y="106" width="202" height="28" rx="5" class="bf" style="stroke: var(--accent); stroke-width: 2"/><rect x="544" y="106" width="6" height="28" class="good"/><text x="558" y="125">AT Good 58:40 Centro</text>
+    <rect x="544" y="140" width="202" height="28" rx="5" class="bf" style="stroke: var(--accent); stroke-width: 2"/><rect x="544" y="140" width="6" height="28" class="good"/><text x="558" y="159">AT Good 83:02 Centro</text>
+    <text x="544" y="190" class="m">→ Todas a la lista</text>
+  </g>
+</svg>
+</div>
+<ul>
+<li>Haz clic en una etiqueta de la lista para ver solo esa jugada.</li>
+<li>Usa el orden sobre la lista (Orden de la línea de tiempo, Por etiqueta, Por rótulo) para ver juntas las etiquetas del mismo tipo.</li>
+</ul>
+</section>
+
+<section id="playlist">
+<h2>7. Crear una lista de reproducción</h2>
+<p>La lista de reproducción reúne y ordena las jugadas que quieres mostrar a tus jugadores. Al abrirla, aparece el <strong>tablero de etiquetas</strong> bajo el vídeo.</p>
+<div class="fig">
+<svg viewBox="0 0 760 220" role="img" aria-label="Tablero de etiquetas. Las jugadas aparecen como bandas según su duración en filas por tipo. Arrastra para reordenar y reproduce cada fila seguida">
+  <g font-size="13">
+    <rect x="0" y="0" width="760" height="210" rx="8" class="b"/>
+    <text x="14" y="24" font-weight="700">Tablero de etiquetas</text>
+        <g>
+      <rect x="10" y="38" width="740" height="44" rx="6" class="bf"/>
+      <text x="22" y="66" font-weight="700">▶</text><rect x="44" y="54" width="10" height="10" rx="2" class="good"/><text x="60" y="64">AT Good</text>
+      <rect x="150" y="44" width="110" height="32" rx="5" class="good"/><text x="160" y="65" font-size="12" class="wt">vs A 12:05</text>
+      <rect x="266" y="44" width="80" height="32" rx="5" class="good"/><text x="274" y="65" font-size="12" class="wt">vs A 51:40</text>
+      <rect x="352" y="44" width="140" height="32" rx="5" class="good"/><text x="362" y="65" font-size="12" class="wt">vs B 08:22</text>
+      <rect x="498" y="44" width="90" height="32" rx="5" class="good" opacity="0.35"/>
+    </g>
+    <g>
+      <rect x="10" y="90" width="740" height="44" rx="6" class="bf"/>
+      <text x="22" y="118" font-weight="700">▶</text><rect x="44" y="106" width="10" height="10" rx="2" class="bad"/><text x="60" y="116">AT Bad</text>
+      <rect x="150" y="96" width="84" height="32" rx="5" class="bad"/><text x="160" y="117" font-size="12" class="wt">vs A 18:40</text>
+      <rect x="240" y="96" width="120" height="32" rx="5" class="bad"/><text x="250" y="117" font-size="12" class="wt">vs B 63:15</text>
+    </g>
+    <g>
+      <rect x="10" y="142" width="740" height="44" rx="6" class="bf"/>
+      <text x="22" y="170" font-weight="700">▶</text><text x="44" y="168">Sin clasificar</text>
+      <rect x="150" y="148" width="90" height="32" rx="5" class="m" opacity="0.6"/><text x="160" y="169" font-size="12" class="wt">Diapositiva</text>
+      <rect x="246" y="148" width="96" height="32" rx="5" class="violet"/><text x="254" y="169" font-size="12" class="wt">vs B 77:10</text>
+    </g>
+        <path d="M300 156 C 380 140, 480 110, 540 80" class="accent-stroke" stroke-dasharray="6 4" marker-end="url(#ahA)"/>
+    <text x="560" y="24" font-size="12.5" class="m">Arrastra: reordenar o mover fila</text>
+    <text x="14" y="204" font-size="12" class="m">▶ reproduce la fila de izquierda a derecha / longitud de banda = duración de la jugada</text>
+  </g>
+</svg>
+</div>
+<ol>
+<li>Crea una lista con <span class="btn">Nueva lista de reproducción</span>.</li>
+<li>Añade jugadas con <span class="btn">➕</span> en la lista de etiquetas (o <span class="btn">Añadir a la lista de reproducción</span> para las seleccionadas). También puedes abrir el paquete de otro partido y añadir a la misma lista.</li>
+<li>Arrastra las bandas en el tablero para reordenarlas o pasarlas a otra fila. Crea filas con <span class="btn">➕ Añadir fila</span>.</li>
+<li>Pulsa <span class="btn">▶</span> en una fila para reproducir solo esa fila seguida. Con <span class="btn">Insertar diapositiva</span> puedes poner una página explicativa entre jugadas.</li>
+</ol>
+<div class="note">La lista remite a los paquetes originales; si mueves o borras un paquete, sus jugadas dejarán de reproducirse. Para entregarla a otra persona, usa <span class="btn">📦 Hacer independiente</span> y se abrirá sin los paquetes.</div>
+</section>
+
+<section id="effects">
+<h2>8. Dibujar la táctica (plan Pro)</h2>
+<div class="note pro">El modo Efectos es una función del plan Pro.</div>
+<div class="fig">
+<svg viewBox="0 0 760 260" role="img" aria-label="Modo Efectos. Con las herramientas de la izquierda, dibuja sobre el vídeo discos que siguen a jugadores, flechas y zonas">
+    <rect x="0" y="0" width="56" height="220" rx="8" class="b"/>
+  <g font-size="12" text-anchor="middle">
+    <rect x="8" y="10" width="40" height="40" rx="6" class="accent" opacity="0.18"/><text x="28" y="36" font-size="18">⭕</text>
+    <text x="28" y="80" font-size="18">📍</text>
+    <text x="28" y="122" font-size="18">↗️</text>
+    <text x="28" y="164" font-size="18">⬛</text>
+    <text x="28" y="204" font-size="18">⏸</text>
+  </g>
+    <rect x="68" y="0" width="600" height="220" rx="8" fill="var(--pitch)"/>
+  <g fill="var(--pitch2)"><rect x="68" y="0" width="60" height="220"/><rect x="188" y="0" width="60" height="220"/><rect x="308" y="0" width="60" height="220"/><rect x="428" y="0" width="60" height="220"/><rect x="548" y="0" width="60" height="220"/></g>
+  <rect x="88" y="16" width="560" height="188" fill="none" stroke="#ffffff90" stroke-width="1.5"/>
+  <rect x="548" y="60" width="100" height="100" fill="none" stroke="#ffffff90" stroke-width="1.5"/>
+    <polygon points="430,70 540,60 540,150 430,160" fill="#facc15" opacity="0.28" stroke="#facc15" stroke-width="2"/>
+    <g fill="#fff"><circle cx="260" cy="120" r="6"/><circle cx="350" cy="70" r="6"/><circle cx="400" cy="170" r="6"/><circle cx="470" cy="110" r="6"/></g>
+  <g fill="#1f2937"><circle cx="420" cy="90" r="6"/><circle cx="500" cy="130" r="6"/><circle cx="520" cy="80" r="6"/><circle cx="380" cy="120" r="6"/></g>
+    <path d="M200 160 C 230 150, 245 135, 258 124" stroke="#fff" stroke-width="2" stroke-dasharray="4 4" fill="none" opacity="0.8"/>
+  <ellipse cx="260" cy="128" rx="18" ry="7" fill="none" stroke="#38bdf8" stroke-width="3"/>
+    <path d="M270 112 C 330 60, 400 50, 462 100" stroke="#fff" stroke-width="3.5" fill="none" marker-end="url(#ahW)"/>
+    <g font-size="12.5">
+    <rect x="160" y="182" width="190" height="24" rx="12" fill="#000a"/><text x="172" y="199" fill="#fff">Clic → sigue al jugador</text>
+    <rect x="300" y="26" width="158" height="24" rx="12" fill="#000a"/><text x="312" y="43" fill="#fff">Flechas: movimiento</text>
+    <rect x="442" y="168" width="140" height="24" rx="12" fill="#000a"/><text x="454" y="185" fill="#fff">Zonas: espacio</text>
+  </g>
+    <rect x="68" y="230" width="600" height="26" rx="6" class="bf"/>
+  <rect x="120" y="236" width="300" height="6" rx="3" fill="#38bdf8"/>
+  <rect x="250" y="246" width="250" height="6" rx="3" class="m"/>
+  <rect x="400" y="236" width="18" height="16" rx="2" class="amber"/>
+  <text x="680" y="248" font-size="12" class="m">Duración</text>
+  <text x="680" y="40" font-size="12" class="m">⭕ Disco</text>
+  <text x="680" y="60" font-size="12" class="m">📍 Foco</text>
+  <text x="680" y="80" font-size="12" class="m">↗️ Flecha</text>
+  <text x="680" y="100" font-size="12" class="m">⬛ Zona</text>
+  <text x="680" y="120" font-size="12" class="m">⏸ Congelar</text>
+</svg>
+</div>
+<ol>
+<li>Pulsa <span class="btn">✏️</span> en la lista de etiquetas (o en una jugada de la lista de reproducción) para entrar en el modo Efectos de esa jugada.</li>
+<li>Elige una herramienta a la izquierda, como Disco, Foco, Flecha o Zona, y dibuja sobre el vídeo. Disco y Foco <strong>siguen al jugador automáticamente con un solo clic</strong>.</li>
+<li>En la línea de tiempo inferior, ajusta cuándo aparece cada dibujo. También puedes insertar una “Congelación” para detener el vídeo en el instante que quieres explicar.</li>
+<li>Los dibujos se guardan automáticamente. Pulsa <span class="btn">Salir del modo Efectos</span> para volver a la pantalla anterior.</li>
+</ol>
+</section>
+
+<section id="export">
+<h2>9. Exportar como vídeo</h2>
+<div class="fig">
+<svg viewBox="0 0 760 230" role="img" aria-label="Tres formas de exportar: una jugada, la lista en un solo vídeo o un archivo por jugada">
+  <g font-size="13">
+        <text x="0" y="18" font-weight="700">Una jugada</text>
+    <rect x="0" y="30" width="60" height="30" rx="4" class="good"/>
+    <path d="M70 45 L 120 45" class="ln" marker-end="url(#ah)"/>
+    <rect x="130" y="28" width="110" height="34" rx="6" class="b"/><text x="142" y="50">🎬 Un mp4</text>
+
+        <text x="0" y="98" font-weight="700">Lista en un solo vídeo</text>
+    <rect x="0" y="110" width="50" height="30" rx="4" class="good"/>
+    <rect x="54" y="110" width="36" height="30" rx="4" class="good"/>
+    <rect x="94" y="110" width="30" height="30" rx="4" class="m" opacity="0.6"/>
+    <rect x="128" y="110" width="56" height="30" rx="4" class="good"/>
+    <path d="M194 125 L 244 125" class="ln" marker-end="url(#ah)"/>
+    <rect x="254" y="108" width="230" height="34" rx="6" class="b"/><text x="266" y="130">🎬 Un mp4 con los dibujos</text>
+
+        <text x="0" y="178" font-weight="700">Un archivo por jugada</text>
+    <rect x="0" y="190" width="50" height="30" rx="4" class="good"/>
+    <rect x="54" y="190" width="36" height="30" rx="4" class="good"/>
+    <rect x="94" y="190" width="56" height="30" rx="4" class="good"/>
+    <path d="M160 205 L 210 205" class="ln" marker-end="url(#ah)"/>
+    <rect x="220" y="186" width="300" height="38" rx="6" class="b"/>
+    <text x="230" y="210">🗂 Carpeta</text>
+    <text x="310" y="210" font-size="12" class="m">01.mp4 · 02.mp4 · 03.mp4</text>
+  </g>
+  <g font-size="12.5" class="m">
+    <text x="560" y="40" class="m">Los dibujos quedan</text>
+    <text x="560" y="58" class="m">integrados en el vídeo</text>
+    <text x="560" y="110" class="m">Vídeo original y etiquetas</text>
+    <text x="560" y="128" class="m">no cambian</text>
+    <text x="560" y="180" class="m">Los archivos exportados</text>
+    <text x="560" y="198" class="m">se ven en cualquier equipo</text>
+  </g>
+</svg>
+</div>
+<ul>
+<li>Solo una jugada: <span class="btn">🎬 Exportar este clip</span> en la etiqueta</li>
+<li>Toda la lista en un solo vídeo: <span class="btn">🎬 Exportar como vídeo</span> Marca filas en el tablero para exportar solo esas.</li>
+<li>Un archivo por jugada: <span class="btn">🗂 Exportar clips por separado</span></li>
+</ul>
+</section>
+
+<section id="clips">
+<h2>10. Empezar con clips ya cortados</h2>
+<p>Si ya tienes archivos de vídeo cortados por jugada, puedes saltarte los pasos de etiquetado.</p>
+<div class="fig">
+<svg viewBox="0 0 760 130" role="img" aria-label="Al elegir varios archivos de vídeo se crea una lista con una jugada por archivo">
+  <g font-size="12.5">
+    <rect x="0" y="10" width="140" height="28" rx="5" class="b"/><text x="10" y="29">🎞 Gol 1.mp4</text>
+    <rect x="0" y="46" width="140" height="28" rx="5" class="b"/><text x="10" y="65">🎞 Gol 2.mp4</text>
+    <rect x="0" y="82" width="140" height="28" rx="5" class="b"/><text x="10" y="101">🎞 Defensa CK.mp4</text>
+  </g>
+  <path d="M152 60 L 260 60" class="ln" marker-end="url(#ah)"/>
+  <text x="160" y="32" font-size="12" font-weight="700">Nueva lista</text><text x="160" y="50" font-size="12" font-weight="700">desde vídeos</text>
+  <rect x="272" y="0" width="300" height="122" rx="10" class="b"/>
+  <text x="286" y="24" font-size="13" font-weight="700">📋 Lista de reproducción</text>
+  <g font-size="12">
+    <rect x="286" y="34" width="70" height="18" rx="3" class="m" opacity="0.7"/><text x="292" y="47" class="wt" font-size="11">Gol 1</text>
+    <rect x="360" y="34" width="56" height="18" rx="3" class="m" opacity="0.7"/><text x="366" y="47" class="wt" font-size="11">Gol 2</text>
+    <rect x="420" y="34" width="86" height="18" rx="3" class="m" opacity="0.7"/><text x="426" y="47" class="wt" font-size="11">Defensa CK</text>
+    <text x="286" y="78" class="m">1 archivo = 1 jugada. Después:</text>
+    <text x="286" y="96" class="m">reordenar, dibujar y exportar</text>
+  </g>
+</svg>
+</div>
+<ol>
+<li>Pulsa <span class="btn">Nueva lista desde vídeos</span> y selecciona los archivos de vídeo juntos.</li>
+<li>Cada archivo se convierte en una jugada y la lista queda lista.</li>
+<li>A partir de ahí puedes reordenar, dibujar y exportar como en los apartados <a href="#playlist">7</a> a <a href="#export">9</a>.</li>
+</ol>
+</section>
+
+<section id="keys">
+<h2>11. Atajos de teclado</h2>
+<table>
+<tr><th>Space</th><td>Reproducir / Pausar</td></tr>
+<tr><th>← / →</th><td>Retroceder 3 segundos / Avanzar 3 segundos</td></tr>
+<tr><th>J / K / L</th><td>Rebobinar / Detener / Avance rápido</td></tr>
+<tr><th>I / O</th><td>Marcar inicio / final</td></tr>
+<tr><th>El carácter asignado</th><td>Igual que pulsar el botón de esa etiqueta</td></tr>
+<tr><th>⌘Z / ⌘⇧Z</th><td>Deshacer / Rehacer (Ctrl en Windows)</td></tr>
+</table>
+<p>En iPad, toca los botones de la pantalla.</p>
+<p>Este contenido también está en la app, en el menú “Ayuda” > “Cómo usar CoachTag” (“⚙️ Ajustes” en iPad). Si tienes dudas, escríbenos desde la página de <a href="support-es.html">Soporte</a>.</p>
+</section>
+
+<footer>&copy; 2026 CoachTag</footer>
+</body>
+</html>

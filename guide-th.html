@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>คู่มือการใช้งาน | CoachTag</title>
+<style>
+  :root { color-scheme: light dark; --fg: #1b1e22; --bg: #ffffff; --muted: #6b7280; --line: #d9dde3; --card: #f4f6f8; --accent: #2563eb; --good: #16a34a; --bad: #dc2626; --blue: #2563eb; --amber: #d97706; --violet: #7c3aed; --pitch: #2f7a3b; --pitch2: #2a6e35; }
+  @media (prefers-color-scheme: dark) { :root { --fg: #e6e8eb; --bg: #14161a; --muted: #9aa1ab; --line: #343841; --card: #1d2026; --accent: #7db4ff; --good: #22c55e; --bad: #ef4444; --blue: #60a5fa; --amber: #f59e0b; --violet: #a78bfa; --pitch: #24602e; --pitch2: #1f5628; } }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Thonburi", "Leelawadee UI", "Noto Sans Thai", sans-serif; line-height: 1.8; max-width: 860px; margin: 0 auto; padding: 32px 16px 80px; color: var(--fg); background: var(--bg); }
+  a { color: var(--accent); }
+  .home { margin: 0 0 1em; font-weight: 600; } .home a { text-decoration: none; }
+  h1 { font-size: 1.7rem; margin-bottom: 0.25em; }
+  .lead { color: var(--muted); margin-bottom: 2em; }
+  section { margin-bottom: 3.5em; }
+  section h2 { font-size: 1.3rem; border-bottom: 1px solid var(--line); padding-bottom: 0.4em; margin-bottom: 0.8em; }
+  h3 { font-size: 1.08rem; margin: 1.8em 0 0.5em; }
+  ul, ol { padding-left: 1.4em; } li { margin-bottom: 0.4em; }
+  .toc { background: var(--card); border-radius: 10px; padding: 14px 20px; margin-bottom: 2.5em; }
+  .toc ol { margin: 0.3em 0 0; columns: 2 260px; } .toc li { margin-bottom: 0.15em; }
+  .btn { display: inline-block; border: 1px solid var(--line); background: var(--card); border-radius: 6px; padding: 0 7px; font-size: 0.9em; line-height: 1.6; white-space: nowrap; font-weight: 600; }
+  kbd { display: inline-block; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 4px; padding: 0 6px; font-family: ui-monospace, Menlo, monospace; font-size: 0.85em; background: var(--card); }
+  .note { border-left: 4px solid var(--accent); background: var(--card); padding: 10px 14px; border-radius: 0 8px 8px 0; margin: 1em 0; }
+  .note.pro { border-left-color: var(--amber); }
+  figure { margin: 1.2em 0; }
+  figcaption { font-size: 0.85rem; color: var(--muted); margin-top: 0.4em; }
+  .placeholder { aspect-ratio: 16 / 9; border: 2px dashed var(--line); border-radius: 10px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: var(--muted); font-size: 0.9rem; padding: 12px; background: var(--card); }
+  .placeholder strong { color: var(--fg); font-family: ui-monospace, Menlo, monospace; font-size: 0.85rem; }
+  table { border-collapse: collapse; width: 100%; font-size: 0.93rem; }
+  th, td { border-bottom: 1px solid var(--line); padding: 8px 6px; text-align: left; vertical-align: top; }
+  th { white-space: nowrap; }
+  .fig { background: var(--card); border-radius: 12px; padding: 14px; }
+  .fig svg { width: 100%; height: auto; display: block; overflow: visible; }
+  @media (max-width: 640px) { .fig { overflow-x: auto; } .fig svg { min-width: 620px; } }
+  svg text { fill: var(--fg); font-family: -apple-system, BlinkMacSystemFont, "Thonburi", "Leelawadee UI", "Noto Sans Thai", sans-serif; }
+  svg text[fill="#fff"] { fill: #fff; }
+  svg .m { fill: var(--muted); }
+  svg .b { fill: var(--bg); stroke: var(--line); stroke-width: 1.5; }
+  svg .bf { fill: var(--card); stroke: var(--line); stroke-width: 1.5; }
+  svg .ln { stroke: var(--muted); stroke-width: 2; fill: none; }
+  svg .dash { stroke: var(--muted); stroke-width: 1.6; fill: none; stroke-dasharray: 5 4; }
+  svg .ah { fill: var(--muted); }
+  svg .good { fill: var(--good); } svg .bad { fill: var(--bad); } svg .blue { fill: var(--blue); } svg .amber { fill: var(--amber); } svg .violet { fill: var(--violet); }
+  svg .wt { fill: #fff; font-weight: 700; }
+  svg .film { fill: #3b414b; } svg .film-hole { fill: #9aa1ab; }
+  svg .accent-stroke { stroke: var(--accent); stroke-width: 2.5; fill: none; }
+  svg .accent { fill: var(--accent); }
+
+  .vs { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 1em 0; }
+  @media (max-width: 640px) { .vs { grid-template-columns: 1fr; } }
+  .vs > div { background: var(--card); border-radius: 12px; padding: 14px; }
+  .vs .head { font-weight: 700; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+  .vs .tagline { font-size: 0.8rem; color: var(--muted); font-weight: 400; }
+  .vs .ours { outline: 2px solid var(--accent); }
+  .vs ol { font-size: 0.9rem; margin: 8px 0 0; }
+  .vs .verdict { font-size: 0.88rem; margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--line); }
+
+  .merits { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; margin: 1em 0; }
+  .merits div { background: var(--card); border-radius: 12px; padding: 12px 14px; font-size: 0.9rem; }
+  .merits .ic { font-size: 1.5rem; line-height: 1; }
+  .merits b { display: block; margin: 6px 0 2px; font-size: 0.98rem; }
+
+  .flow { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin: 1em 0; }
+  @media (max-width: 640px) { .flow { grid-template-columns: 1fr; } }
+  .flow a { display: block; text-decoration: none; color: inherit; background: var(--card); border-radius: 10px; padding: 10px; text-align: center; font-size: 0.85rem; position: relative; }
+  .flow .ic { font-size: 1.6rem; display: block; }
+  .flow b { display: block; font-size: 1rem; }
+  .flow .n { position: absolute; top: 6px; left: 8px; font-size: 0.75rem; color: var(--muted); font-weight: 700; }
+
+  .case { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 640px) { .case { grid-template-columns: 1fr; } }
+  .case > div { border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; font-size: 0.9rem; }
+  .case .head { font-weight: 700; margin-bottom: 4px; }
+  .case ol { margin: 6px 0 0; }
+  .case .ours { border: 2px solid var(--accent); }
+
+  footer { margin-top: 3em; font-size: 0.85rem; color: var(--muted); }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="ah"/></marker>
+    <marker id="ahA" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="accent"/></marker>
+    <marker id="ahW" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#fff"/></marker>
+  </defs>
+</svg>
+
+<p class="home"><a href="th.html">← CoachTag</a> · <a href="support-th.html">ฝ่ายสนับสนุน</a></p>
+<h1>คู่มือการใช้งาน CoachTag</h1>
+<p class="lead">รวบรวมจังหวะที่ต้องการจากวิดีโอการแข่งขัน วาดแทคติกลงไป แล้วสร้างวิดีโอให้นักเตะดู คู่มือนี้อธิบายขั้นตอนพื้นฐานของ CoachTag สำหรับผู้เริ่มต้น</p>
+
+<nav class="toc"><strong>สารบัญ</strong>
+<ol>
+<li><a href="#idea">เริ่มจากแนวคิดของ CoachTag</a></li>
+<li><a href="#words">5 คำที่ควรรู้</a></li>
+<li><a href="#package">เปิดวิดีโอการแข่งขัน</a></li>
+<li><a href="#buttons">เตรียมปุ่มแท็ก</a></li>
+<li><a href="#tagging">ติดแท็กระหว่างดู</a></li>
+<li><a href="#review">ดูย้อนหลังและกรองแท็ก</a></li>
+<li><a href="#playlist">รวมเป็นเพลย์ลิสต์</a></li>
+<li><a href="#effects">วาดแทคติก (แผนโปร)</a></li>
+<li><a href="#export">ส่งออกเป็นวิดีโอ</a></li>
+<li><a href="#clips">เริ่มจากคลิปที่ตัดไว้แล้ว</a></li>
+<li><a href="#keys">รายการปุ่มลัด</a></li>
+</ol>
+</nav>
+
+<section id="idea">
+<h2>1. เริ่มจากแนวคิดของ CoachTag</h2>
+<p>CoachTag รวบรวมจังหวะด้วยการ <strong>“ทำเครื่องหมาย”</strong> ไม่ใช่การ <strong>“ตัด”</strong> วิดีโอ นี่คือข้อแตกต่างที่ใหญ่ที่สุดจากโปรแกรมตัดต่อวิดีโอทั่วไป</p>
+
+<h3>ความแตกต่างจากโปรแกรมตัดต่อวิดีโอ</h3>
+<div class="vs">
+  <div>
+    <div class="head">✂️ โปรแกรมตัดต่อวิดีโอทั่วไป</div>
+    <svg viewBox="0 0 360 230" role="img" aria-label="ตัดวิดีโอด้วยกรรไกรแยกเป็นไฟล์จำนวนมาก">
+      <text x="0" y="14" font-size="13" class="m">วิดีโอการแข่งขัน</text>
+            <g>
+        <rect x="0" y="24" width="96" height="40" rx="3" class="film"/>
+        <rect x="112" y="24" width="70" height="40" rx="3" class="film"/>
+        <rect x="198" y="24" width="60" height="40" rx="3" class="film"/>
+        <rect x="274" y="24" width="86" height="40" rx="3" class="film"/>
+        <g class="film-hole">
+          <rect x="6" y="28" width="6" height="5"/><rect x="22" y="28" width="6" height="5"/><rect x="38" y="28" width="6" height="5"/><rect x="54" y="28" width="6" height="5"/><rect x="70" y="28" width="6" height="5"/><rect x="86" y="28" width="6" height="5"/>
+          <rect x="6" y="55" width="6" height="5"/><rect x="22" y="55" width="6" height="5"/><rect x="38" y="55" width="6" height="5"/><rect x="54" y="55" width="6" height="5"/><rect x="70" y="55" width="6" height="5"/><rect x="86" y="55" width="6" height="5"/>
+          <rect x="118" y="28" width="6" height="5"/><rect x="134" y="28" width="6" height="5"/><rect x="150" y="28" width="6" height="5"/><rect x="166" y="28" width="6" height="5"/>
+          <rect x="118" y="55" width="6" height="5"/><rect x="134" y="55" width="6" height="5"/><rect x="150" y="55" width="6" height="5"/><rect x="166" y="55" width="6" height="5"/>
+          <rect x="204" y="28" width="6" height="5"/><rect x="220" y="28" width="6" height="5"/><rect x="236" y="28" width="6" height="5"/>
+          <rect x="204" y="55" width="6" height="5"/><rect x="220" y="55" width="6" height="5"/><rect x="236" y="55" width="6" height="5"/>
+          <rect x="280" y="28" width="6" height="5"/><rect x="296" y="28" width="6" height="5"/><rect x="312" y="28" width="6" height="5"/><rect x="328" y="28" width="6" height="5"/><rect x="344" y="28" width="6" height="5"/>
+          <rect x="280" y="55" width="6" height="5"/><rect x="296" y="55" width="6" height="5"/><rect x="312" y="55" width="6" height="5"/><rect x="328" y="55" width="6" height="5"/><rect x="344" y="55" width="6" height="5"/>
+        </g>
+      </g>
+      <text x="96" y="20" font-size="18">✂️</text>
+      <text x="178" y="20" font-size="18">✂️</text>
+      <text x="254" y="20" font-size="18">✂️</text>
+      <path d="M180 76 L180 102" class="ln" marker-end="url(#ah)"/>
+            <g font-size="12">
+        <rect x="20" y="112" width="96" height="26" rx="5" class="b"/><text x="30" y="130">🎞 clip_01.mp4</text>
+        <rect x="132" y="112" width="96" height="26" rx="5" class="b"/><text x="142" y="130">🎞 clip_02.mp4</text>
+        <rect x="244" y="112" width="96" height="26" rx="5" class="b"/><text x="254" y="130">🎞 clip_03.mp4</text>
+        <rect x="20" y="146" width="96" height="26" rx="5" class="b"/><text x="30" y="164">🎞 clip_04.mp4</text>
+        <rect x="132" y="146" width="96" height="26" rx="5" class="b"/><text x="142" y="164">🎞 clip_05.mp4</text>
+        <rect x="244" y="146" width="96" height="26" rx="5" class="b"/><text x="254" y="164" class="m">…… clip_48</text>
+      </g>
+      <text x="0" y="198" font-size="12.5" class="m">ตัดแต่ละครั้ง ไฟล์และพื้นที่ก็เพิ่มขึ้น</text>
+      <text x="0" y="218" font-size="12.5" class="m">รู้ว่าเป็นจังหวะไหนได้จากชื่อไฟล์เท่านั้น</text>
+    </svg>
+    <ol>
+      <li>ดูการแข่งขันจนจบ</li>
+      <li>ดูย้อนหลังเพื่อหาจังหวะที่จะใช้</li>
+      <li>ตัดและส่งออกทีละจังหวะ</li>
+      <li>ถ้าอยากเปลี่ยนจังหวะ ต้องตัดใหม่</li>
+    </ol>
+    <div class="verdict">การดูและการตัดเป็นงาน <strong>แยกกัน</strong> การเตรียมจึงใช้เวลาหลายเท่าของการแข่งขัน</div>
+  </div>
+
+  <div class="ours">
+    <div class="head">🏷️ CoachTag</div>
+    <svg viewBox="0 0 360 230" role="img" aria-label="วิดีโอยังคงเป็นไฟล์เดียว และเพิ่มเครื่องหมายสีลงด้านบน">
+      <text x="0" y="14" font-size="13" class="m">วิดีโอการแข่งขัน (ไฟล์เดียว)</text>
+      <rect x="0" y="24" width="360" height="40" rx="3" class="film"/>
+      <g class="film-hole">
+        <rect x="6" y="28" width="348" height="5" opacity="0"/>
+      </g>
+      <g opacity="0.95">
+        <rect x="30" y="30" width="34" height="28" rx="3" class="good"/>
+        <rect x="96" y="30" width="22" height="28" rx="3" class="bad"/>
+        <rect x="150" y="30" width="44" height="28" rx="3" class="good"/>
+        <rect x="222" y="30" width="26" height="28" rx="3" class="blue"/>
+        <rect x="282" y="30" width="38" height="28" rx="3" class="good"/>
+      </g>
+            <g transform="translate(150 78)">
+        <rect x="0" y="0" width="30" height="30" rx="5" class="b"/><text x="10" y="21" font-size="15" font-weight="700">Q</text>
+        <rect x="38" y="0" width="30" height="30" rx="5" class="b"/><text x="47" y="21" font-size="15" font-weight="700">W</text>
+        <rect x="76" y="0" width="30" height="30" rx="5" class="b"/><text x="87" y="21" font-size="15" font-weight="700">E</text>
+      </g>
+      <path d="M165 76 L170 64" class="accent-stroke" marker-end="url(#ahA)"/>
+      <text x="0" y="98" font-size="12" class="m">แค่กดปุ่มระหว่างดู</text>
+      <text x="0" y="114" font-size="12" class="m">ก็ทำเครื่องหมายได้</text>
+            <g font-size="12">
+        <rect x="20" y="126" width="320" height="58" rx="6" class="b"/>
+        <rect x="30" y="134" width="10" height="10" rx="2" class="good"/><text x="46" y="144">AT Good  12:05〜12:19</text>
+        <rect x="30" y="152" width="10" height="10" rx="2" class="bad"/><text x="46" y="162">AT Bad  18:40〜18:47</text>
+        <rect x="200" y="134" width="10" height="10" rx="2" class="good"/><text x="216" y="144">AT Good  31:12〜</text>
+        <rect x="200" y="152" width="10" height="10" rx="2" class="blue"/><text x="216" y="162">DF Good  44:02〜</text>
+        <text x="46" y="178" class="m">…… รายการเครื่องหมาย (ไม่กี่ KB)</text>
+      </g>
+      <text x="0" y="208" font-size="12.5" class="m">ไม่ตัดวิดีโอ ไฟล์และพื้นที่จึงไม่เพิ่ม</text>
+      <text x="0" y="226" font-size="12.5" class="m">เครื่องหมายมี “ประเภท” จึงรวบรวมภายหลังได้ในครั้งเดียว</text>
+    </svg>
+    <ol>
+      <li>ดูการแข่งขันและกดปุ่มในแต่ละจังหวะ</li>
+      <li>จบการแข่งขันก็ได้รายการจังหวะพร้อมแล้ว</li>
+      <li>กรองตามประเภทหรือเงื่อนไขแล้วรวบรวมได้เลย</li>
+      <li>จะเปลี่ยนความยาวก็แค่แก้เครื่องหมาย</li>
+    </ol>
+    <div class="verdict">การดูและการรวบรวมเสร็จ <strong>พร้อมกัน</strong></div>
+  </div>
+</div>
+
+<h3>“แท็ก” คือกระดาษโน้ตที่ติดบนวิดีโอ</h3>
+<p>เหมือนการติดกระดาษโน้ตในหนังสือ หน้าหนังสือ (วิดีโอ) ยังเหมือนเดิม มีเพียงกระดาษโน้ต (แท็ก) ที่เพิ่มขึ้น ถ้าแยกประเภทด้วยสี เช่น “เกมรุก ดี” หรือ “เกมรับ ไม่ดี” ภายหลังก็เปิดเฉพาะหน้าที่มีโน้ตสีเดียวกันได้</p>
+<div class="fig">
+<svg viewBox="0 0 760 250" role="img" aria-label="ไทม์ไลน์วิดีโอหนึ่งเส้นและแท็กสีที่ติดอยู่ แท็กบันทึกประเภท จุดเริ่ม จุดสิ้นสุด และแฟล็ก">
+  <text x="0" y="16" font-size="14" font-weight="700">วิดีโอการแข่งขัน</text>
+  <text x="0" y="34" font-size="12" class="m">0:00</text>
+  <text x="725" y="34" font-size="12" class="m">90:00</text>
+  <rect x="0" y="42" width="760" height="18" rx="9" class="bf"/>
+    <rect x="70" y="40" width="40" height="22" rx="4" class="good"/>
+  <rect x="160" y="40" width="26" height="22" rx="4" class="bad"/>
+  <rect x="250" y="40" width="58" height="22" rx="4" class="good"/>
+  <rect x="380" y="40" width="30" height="22" rx="4" class="blue"/>
+  <rect x="470" y="40" width="44" height="22" rx="4" class="good"/>
+  <rect x="580" y="40" width="22" height="22" rx="4" class="bad"/>
+  <rect x="660" y="40" width="36" height="22" rx="4" class="blue"/>
+    <path d="M250 64 L210 108" class="dash"/>
+  <path d="M308 64 L560 108" class="dash"/>
+  <rect x="200" y="108" width="370" height="128" rx="10" class="b"/>
+  <rect x="200" y="108" width="370" height="30" rx="10" class="good"/>
+  <rect x="200" y="126" width="370" height="12" class="good"/>
+  <text x="214" y="129" font-size="14" class="wt">สิ่งที่อยู่ในแท็ก 1 อัน</text>
+  <g font-size="13">
+    <text x="214" y="162" class="m">ประเภท</text><text x="290" y="162">AT Good (เกมรุก ดี)</text>
+    <text x="214" y="184" class="m">เวลา</text><text x="290" y="184">31:12 〜 31:26</text>
+    <text x="214" y="206" class="m">แฟล็ก</text>
+    <rect x="290" y="193" width="64" height="20" rx="10" class="amber"/><text x="301" y="208" font-size="12" class="wt">ครอส</text>
+    <rect x="360" y="193" width="72" height="20" rx="10" class="violet"/><text x="371" y="208" font-size="12" class="wt">ยิง</text>
+    <text x="214" y="228" class="m">บันทึก</text><text x="290" y="228">การเคลื่อนที่ของคนที่สามทางขวา</text>
+  </g>
+  <text x="590" y="150" font-size="12.5" class="m">ไม่ใช่สำเนาวิดีโอ</text>
+  <text x="590" y="170" font-size="12.5" class="m">บันทึกแค่ “ช่วงเวลา”</text>
+  <text x="590" y="190" font-size="12.5" class="m">และ “จังหวะอะไร”</text>
+  <text x="0" y="150" font-size="12.5" class="m">แก้ความยาวหรือลบ</text>
+  <text x="0" y="170" font-size="12.5" class="m">ภายหลังได้อิสระ</text>
+  <text x="0" y="190" font-size="12.5" class="m">วิดีโอต้นฉบับไม่เสียหาย</text>
+</svg>
+</div>
+
+<h3>ตัวอย่าง: เมื่ออยากแสดงการยิงจากการครอสทั้งหมด</h3>
+<div class="case">
+  <div>
+    <div class="head">✂️ ถ้าใช้โปรแกรมตัดต่อวิดีโอ</div>
+    <ol>
+      <li>ดูวิดีโอ 90 นาทีย้อนหลังเพื่อหาการยิงจากการครอส</li>
+      <li>พบเมื่อไรก็กำหนดจุดเริ่ม จุดจบ แล้วตัด</li>
+      <li>เรียงคลิปที่ตัดแล้วส่งออก</li>
+      <li>นัดถัดไปก็ต้องเริ่มใหม่หมด</li>
+    </ol>
+  </div>
+  <div class="ours">
+    <div class="head">🏷️ ถ้าใช้ CoachTag</div>
+    <ol>
+      <li>(มีแท็กที่ติดระหว่างดูการแข่งขันอยู่แล้ว)</li>
+      <li>คลิก “AT Good × ครอส” ในตาราง → จังหวะที่ตรงทั้งหมดถูกเลือก</li>
+      <li>เพิ่มลงเพลย์ลิสต์แล้วส่งออก</li>
+      <li>กี่นัดก็รวมได้ด้วยวิธีเดียวกัน</li>
+    </ol>
+  </div>
+</div>
+
+<h3>จุดเด่นของ CoachTag</h3>
+<div class="merits">
+  <div><span class="ic">⏱️</span><b>ดูจบก็รวบรวมเสร็จ</b>ติดแท็กระหว่างดู จึงไม่ต้องเสียเวลาดูย้อนหลังเพื่อหาจังหวะ ใช้ระหว่างการแข่งขันหรือช่วงพักครึ่งได้ด้วย</div>
+  <div><span class="ic">🔎</span><b>ดึงจังหวะตามเงื่อนไขได้</b>กรองด้วยประเภทและแฟล็กได้ทันที เช่น เฉพาะ “เกมรับ ไม่ดี” หรือเฉพาะ “ลูกตั้งเตะ × CK”</div>
+  <div><span class="ic">💾</span><b>ไฟล์และพื้นที่ไม่เพิ่ม</b>แท็กเป็นแค่เครื่องหมาย ติดกี่ร้อยอันก็ยังเป็นวิดีโอเดียว ไม่ต้องกังวลเรื่องจัดการไฟล์ที่ตัดไว้</div>
+  <div><span class="ic">↩️</span><b>แก้ไขได้ไม่จำกัด</b>อยากให้จังหวะยาวขึ้นหรือสั้นลงก็แค่แก้เครื่องหมาย วิดีโอต้นฉบับไม่เสียหายเลย</div>
+  <div><span class="ic">📚</span><b>รวบรวมข้ามนัดได้</b>รวมแท็กจากหลายนัดไว้ในเพลย์ลิสต์เดียว “จังหวะเสียประตูของฤดูกาลนี้” ก็ทำได้ทันที</div>
+  <div><span class="ic">✏️</span><b>ส่งออกพร้อมภาพที่วาด</b>วาดลูกศรหรือโซนลงในจังหวะ แล้วส่งให้นักเตะเป็นวิดีโอที่ฝังภาพวาดแล้ว</div>
+</div>
+
+<h3>ขั้นตอนทั้งหมด</h3>
+<div class="flow">
+  <a href="#package"><span class="n">1</span><span class="ic">📂</span><b>เปิด</b>นำวิดีโอเข้าแพ็กเกจ</a>
+  <a href="#tagging"><span class="n">2</span><span class="ic">🏷️</span><b>ติดแท็ก</b>ติดแท็กระหว่างดู</a>
+  <a href="#playlist"><span class="n">3</span><span class="ic">📋</span><b>รวบรวม</b>รวมเป็นเพลย์ลิสต์</a>
+  <a href="#effects"><span class="n">4</span><span class="ic">✏️</span><b>วาด</b>วาดแทคติก</a>
+  <a href="#export"><span class="n">5</span><span class="ic">🎬</span><b>ส่งออก</b>เป็นวิดีโอให้นักเตะดู</a>
+</div>
+</section>
+
+<section id="words">
+<h2>2. 5 คำที่ควรรู้</h2>
+<div class="fig">
+<svg viewBox="0 0 760 300" role="img" aria-label="แพ็กเกจคือกล่องที่เก็บวิดีโอ แท็ก และภาพวาดของหนึ่งนัด เพลย์ลิสต์อ้างอิงจังหวะจากหลายแพ็กเกจ">
+    <rect x="0" y="10" width="300" height="130" rx="12" class="b"/>
+  <text x="14" y="34" font-size="14" font-weight="700">📦 แพ็กเกจ (นัดที่ 10 vs A)</text>
+  <g font-size="12.5">
+    <rect x="14" y="46" width="272" height="22" rx="4" class="film"/>
+    <text x="22" y="62" fill="#fff">🎞 วิดีโอการแข่งขัน</text>
+    <rect x="14" y="76" width="34" height="18" rx="3" class="good"/>
+    <rect x="58" y="76" width="22" height="18" rx="3" class="bad"/>
+    <rect x="92" y="76" width="44" height="18" rx="3" class="good"/>
+    <rect x="148" y="76" width="26" height="18" rx="3" class="blue"/>
+    <rect x="186" y="76" width="34" height="18" rx="3" class="good"/>
+    <text x="230" y="90" class="m">🏷 แท็ก</text>
+    <text x="14" y="122" class="m">✏️ บันทึกภาพวาด แฟล็ก และบันทึกย่อไว้ด้วยกัน</text>
+  </g>
+    <rect x="0" y="160" width="300" height="130" rx="12" class="b"/>
+  <text x="14" y="184" font-size="14" font-weight="700">📦 แพ็กเกจ (นัดที่ 11 vs B)</text>
+  <g font-size="12.5">
+    <rect x="14" y="196" width="272" height="22" rx="4" class="film"/>
+    <text x="22" y="212" fill="#fff">🎞 วิดีโอการแข่งขัน</text>
+    <rect x="30" y="226" width="40" height="18" rx="3" class="good"/>
+    <rect x="84" y="226" width="22" height="18" rx="3" class="blue"/>
+    <rect x="124" y="226" width="30" height="18" rx="3" class="bad"/>
+    <rect x="170" y="226" width="40" height="18" rx="3" class="good"/>
+    <text x="230" y="240" class="m">🏷 แท็ก</text>
+    <text x="14" y="272" class="m">1 นัด = 1 แพ็กเกจ (.ccpkg)</text>
+  </g>
+    <rect x="440" y="60" width="320" height="180" rx="12" class="b"/>
+  <text x="456" y="86" font-size="14" font-weight="700">📋 เพลย์ลิสต์ “เกมรุกที่ดี”</text>
+  <g font-size="12.5">
+    <rect x="456" y="100" width="288" height="26" rx="5" class="bf"/><rect x="456" y="100" width="8" height="26" rx="2" class="good"/><text x="474" y="118">① vs A 12:05  AT Good</text>
+    <rect x="456" y="132" width="288" height="26" rx="5" class="bf"/><rect x="456" y="132" width="8" height="26" rx="2" class="good"/><text x="474" y="150">② vs A 51:40  AT Good</text>
+    <rect x="456" y="164" width="288" height="26" rx="5" class="bf"/><rect x="456" y="164" width="8" height="26" rx="2" class="good"/><text x="474" y="182">③ vs B 08:22  AT Good</text>
+    <rect x="456" y="196" width="288" height="26" rx="5" class="bf"/><rect x="456" y="196" width="8" height="26" rx="2" class="good"/><text x="474" y="214">④ vs B 77:10  AT Good</text>
+  </g>
+  <path d="M114 86 C 300 86, 330 113, 452 113" class="dash" marker-end="url(#ah)"/>
+  <path d="M206 86 C 330 90, 340 145, 452 145" class="dash" marker-end="url(#ah)"/>
+  <path d="M50 236 C 300 236, 330 177, 452 177" class="dash" marker-end="url(#ah)"/>
+  <path d="M190 236 C 330 236, 350 209, 452 209" class="dash" marker-end="url(#ah)"/>
+  <text x="320" y="266" font-size="12" class="m">ไม่คัดลอกวิดีโอ</text>
+  <text x="320" y="284" font-size="12" class="m">แต่อ้างอิงแพ็กเกจเดิม</text>
+</svg>
+</div>
+<table>
+<tr><th>📦 แพ็กเกจ<br><small>.ccpkg</small></th><td>ไฟล์บันทึกที่รวมวิดีโอการแข่งขันกับแท็กและภาพวาดไว้ด้วยกัน สร้างหนึ่งไฟล์ต่อหนึ่งนัด เปิดได้ทันทีทั้งบน Mac, iPad และ Windows</td></tr>
+<tr><th>🏷️ แท็ก</th><td>เครื่องหมายเวลาที่บอกว่า “จังหวะนี้” เมื่อกด <strong>ปุ่ม</strong> เช่น <span class="btn">AT Good</span> (เกมรุก ดี) จะเกิดแท็กประเภทนั้นหนึ่งอัน กำหนดเองได้ว่าจะมีปุ่มอะไรบ้าง</td></tr>
+<tr><th>📌 แฟล็ก</th><td>ข้อมูลเสริมที่เพิ่มให้แท็ก เช่น เพิ่ม “ยิง” หรือ “ครอส” ให้แท็ก “AT Good” แล้วภายหลังจะรวบรวมเฉพาะ “เกมรุกที่ดีซึ่งจบด้วยการยิง” ได้</td></tr>
+<tr><th>📋 เพลย์ลิสต์</th><td>รายการแท็กที่เลือก เรียงตามลำดับที่อยากแสดง รวมแท็กจากหลายนัด (แพ็กเกจ) ได้ ไม่คัดลอกวิดีโอ แต่อ้างอิงแพ็กเกจเดิม</td></tr>
+<tr><th>✏️ โหมดเอฟเฟกต์</th><td>โหมดสำหรับเข้าไปในจังหวะเดียวแล้ววาดลูกศร โซน เครื่องหมายที่ติดตามนักเตะ และอื่นๆ ภาพที่วาดจะถูกฝังลงในวิดีโอตอนส่งออก</td></tr>
+</table>
+</section>
+
+<section id="package">
+<h2>3. เปิดวิดีโอการแข่งขัน (สร้างแพ็กเกจ)</h2>
+<div class="fig">
+<svg viewBox="0 0 760 170" role="img" aria-label="เมื่อเลือกไฟล์วิดีโอ ไฟล์จะถูกคัดลอกหรือย้ายเข้าแพ็กเกจ และบันทึกพร้อมแท็กและภาพวาด">
+  <rect x="0" y="40" width="150" height="90" rx="10" class="b"/>
+  <text x="50" y="82" font-size="34">🎞</text>
+  <text x="18" y="118" font-size="12.5">match.mp4</text>
+  <text x="0" y="24" font-size="13" class="m">ไฟล์วิดีโอของคุณ</text>
+
+  <path d="M160 85 L 300 85" class="ln" marker-end="url(#ah)"/>
+  <text x="178" y="72" font-size="13" font-weight="700">เปิดวิดีโอ</text>
+  <text x="172" y="108" font-size="12" class="m">คัดลอก หรือ ย้าย</text>
+
+  <rect x="320" y="10" width="300" height="150" rx="14" class="b" style="stroke: var(--accent); stroke-width: 2.5"/>
+  <text x="336" y="36" font-size="14" font-weight="700">📦 นัดที่ 10 vs A.ccpkg</text>
+  <rect x="336" y="50" width="268" height="28" rx="5" class="film"/><text x="346" y="69" font-size="12.5" fill="#fff">🎞 วิดีโอการแข่งขัน</text>
+  <rect x="336" y="86" width="130" height="28" rx="5" class="bf"/><text x="346" y="105" font-size="12.5">🏷 แท็ก·แฟล็ก</text>
+  <rect x="474" y="86" width="130" height="28" rx="5" class="bf"/><text x="484" y="105" font-size="12.5">✏️ ภาพวาด</text>
+  <text x="336" y="144" font-size="12" class="m">บันทึกอัตโนมัติเมื่อทำงาน</text>
+
+  <text x="640" y="70" font-size="12.5" class="m">เปิดได้ทันที</text>
+  <text x="640" y="90" font-size="12.5" class="m">บน Mac, iPad</text>
+  <text x="640" y="110" font-size="12.5" class="m">และ Windows</text>
+</svg>
+</div>
+<ol>
+<li>กด <span class="btn">เปิดวิดีโอ</span> แล้วเลือกไฟล์วิดีโอการแข่งขัน</li>
+<li>เมื่อมีคำถาม ให้กำหนดชื่อแพ็กเกจและตำแหน่งบันทึก (เช่น “นัดที่ 10 vs ○○”)</li>
+<li>เลือกว่าจะ <strong>คัดลอก</strong> หรือ <strong>ย้าย</strong> วิดีโอเข้าแพ็กเกจ (Mac, Windows) ถ้าต้องการเก็บวิดีโอไว้ที่เดิมด้วย ให้เลือก “คัดลอก”</li>
+</ol>
+<div class="note">ถ้าวิดีโอแยกเป็นหลายไฟล์ เช่น ครึ่งแรกและครึ่งหลัง เลือกพร้อมกันแล้วระบบจะเปิดต่อกันตามลำดับชื่อไฟล์<br>ครั้งต่อไป ใช้ <span class="btn">เปิดแพ็กเกจ</span> เพื่อทำงานต่อพร้อมแท็กและภาพวาด</div>
+</section>
+
+<section id="buttons">
+<h2>4. เตรียมปุ่มแท็ก</h2>
+<p>ปุ่มที่เรียงอยู่ใต้วิดีโอคือปุ่มสำหรับติดแท็ก แนะนำให้สร้างใหม่ตามมุมมองการวิเคราะห์ของทีม</p>
+<div class="fig">
+<svg viewBox="0 0 760 150" role="img" aria-label="ตัวอย่างปุ่มแท็ก แต่ละประเภทมีสีและปุ่มคีย์บอร์ดของตัวเอง">
+  <text x="0" y="16" font-size="13" class="m">ปุ่มแท็ก (ตัวอย่าง)</text>
+  <g font-size="13">
+    <rect x="0" y="28" width="118" height="44" rx="8" class="good"/><text x="12" y="56" class="wt">AT Good</text><rect x="88" y="36" width="22" height="22" rx="4" fill="#0003"/><text x="94" y="52" class="wt" font-size="12">Q</text>
+    <rect x="126" y="28" width="118" height="44" rx="8" class="bad"/><text x="138" y="56" class="wt">AT Bad</text><rect x="214" y="36" width="22" height="22" rx="4" fill="#0003"/><text x="219" y="52" class="wt" font-size="12">W</text>
+    <rect x="252" y="28" width="118" height="44" rx="8" class="blue"/><text x="264" y="56" class="wt">DF Good</text><rect x="340" y="36" width="22" height="22" rx="4" fill="#0003"/><text x="347" y="52" class="wt" font-size="12">E</text>
+    <rect x="378" y="28" width="118" height="44" rx="8" class="amber"/><text x="390" y="56" class="wt">DF Bad</text><rect x="466" y="36" width="22" height="22" rx="4" fill="#0003"/><text x="472" y="52" class="wt" font-size="12">R</text>
+  </g>
+  <text x="0" y="98" font-size="13" class="m">ปุ่มแฟล็ก (ตัวอย่าง)</text>
+  <g font-size="12.5">
+    <rect x="0" y="108" width="74" height="28" rx="14" class="bf"/><text x="37" y="127" text-anchor="middle">ยิง</text>
+    <rect x="82" y="108" width="62" height="28" rx="14" class="bf"/><text x="113" y="127" text-anchor="middle">ครอส</text>
+    <rect x="152" y="108" width="54" height="28" rx="14" class="bf"/><text x="171" y="127">CK</text>
+    <rect x="214" y="108" width="54" height="28" rx="14" class="bf"/><text x="233" y="127">FK</text>
+  </g>
+  <g font-size="12.5" class="m">
+    <text x="530" y="42" class="m">← ชื่อ สี และปุ่ม (1 ตัวอักษร)</text>
+    <text x="530" y="62" class="m">   กำหนดเองได้อิสระ</text>
+    <text x="300" y="127" class="m">← ข้อมูลเสริมที่เพิ่มให้แท็ก</text>
+  </g>
+</svg>
+</div>
+<ol>
+<li>เปิด <span class="btn">⚙️ ตั้งค่าแท็ก</span></li>
+<li>ในแท็บ “แท็ก” กำหนดชื่อ สี และปุ่มลัด (1 ตัวอักษร) ของปุ่ม เพิ่มได้ด้วย <span class="btn">+ เพิ่มแท็ก</span></li>
+<li>ถ้าจำเป็น ให้สร้างปุ่มข้อมูลเสริม (ยิง ครอส ฯลฯ) ในแท็บ “แฟล็ก” ด้วย</li>
+</ol>
+
+<h3>วิธีติดแท็กมี 2 แบบ</h3>
+<div class="vs">
+  <div>
+    <div class="head">👆 คลิกเดียว</div>
+    <svg viewBox="0 0 360 120" role="img" aria-label="ช่วงไม่กี่วินาทีก่อนและหลังตอนกดจะกลายเป็นแท็ก">
+      <rect x="0" y="50" width="360" height="10" rx="5" class="bf"/>
+      <rect x="110" y="44" width="150" height="22" rx="4" class="good" opacity="0.9"/>
+      <path d="M190 18 L190 44" class="accent-stroke" marker-end="url(#ahA)"/>
+      <text x="166" y="14" font-size="12.5" font-weight="700">ตอนที่กด</text>
+      <path d="M112 84 L188 84" class="ln" marker-start="url(#ah)" marker-end="url(#ah)"/>
+      <path d="M192 84 L258 84" class="ln" marker-start="url(#ah)" marker-end="url(#ah)"/>
+      <text x="118" y="104" font-size="12" class="m">เวลาก่อน</text>
+      <text x="198" y="104" font-size="12" class="m">เวลาหลัง</text>
+    </svg>
+    <p style="font-size:0.9rem;margin:6px 0 0">ช่วง <strong>ไม่กี่วินาทีก่อนและหลัง</strong> ตอนกดจะกลายเป็นแท็กโดยอัตโนมัติ ตั้งค่าได้ว่าก่อนและหลังกี่วินาที เหมาะกับจังหวะที่มีจุดชัดเจน เช่น “ตอนยิง”</p>
+  </div>
+  <div>
+    <div class="head">✌️ คลิกเริ่ม → สิ้นสุด</div>
+    <svg viewBox="0 0 360 120" role="img" aria-label="กดครั้งแรกกำหนดจุดเริ่ม ครั้งที่สองกำหนดจุดสิ้นสุด">
+      <rect x="0" y="50" width="360" height="10" rx="5" class="bf"/>
+      <rect x="80" y="44" width="200" height="22" rx="4" class="good" opacity="0.9"/>
+      <path d="M82 18 L82 44" class="accent-stroke" marker-end="url(#ahA)"/>
+      <path d="M278 18 L278 44" class="accent-stroke" marker-end="url(#ahA)"/>
+      <text x="50" y="14" font-size="12.5" font-weight="700">ครั้งแรก</text>
+      <text x="250" y="14" font-size="12.5" font-weight="700">ครั้งที่สอง</text>
+      <text x="96" y="96" font-size="12" class="m">ตั้งแต่กดจนถึงกดอีกครั้ง</text>
+    </svg>
+    <p style="font-size:0.9rem;margin:6px 0 0">กดครั้งแรกเพื่อเริ่ม และกดครั้งที่สอง (ปุ่มเดิม) เพื่อจบ เหมาะกับจังหวะที่ยาวไม่เท่ากัน เช่น “ตั้งแต่เริ่มเกมรุกจนเสียบอล”</p>
+  </div>
+</div>
+<p>ใน <span class="btn">⚙️ ตั้งค่าแท็ก</span> เลือกวิธีติดแท็กได้ทั้งค่าเริ่มต้นรวมและรายแท็ก</p>
+<div class="note">บันทึกชุดปุ่มที่ใช้บ่อยเป็น “พรีเซ็ต” แล้วเรียกปุ่มชุดเดิมมาใช้ในนัดถัดไปได้</div>
+</section>
+
+<section id="tagging">
+<h2>5. ติดแท็กระหว่างดู</h2>
+<p>เล่นวิดีโอ เมื่อถึงจังหวะก็แค่กดปุ่ม (หรือคีย์ที่กำหนดไว้)</p>
+<div class="fig">
+<svg viewBox="0 0 760 200" role="img" aria-label="เมื่อกดคีย์ระหว่างเล่น แถบบนไทม์ไลน์จะเพิ่มขึ้น และแท็กจะปรากฏในรายการด้านขวา">
+    <rect x="0" y="0" width="470" height="120" rx="8" fill="var(--pitch)"/>
+  <rect x="20" y="14" width="430" height="92" fill="none" stroke="#ffffff80" stroke-width="1.5"/>
+  <line x1="235" y1="14" x2="235" y2="106" stroke="#ffffff80" stroke-width="1.5"/>
+  <circle cx="235" cy="60" r="16" fill="none" stroke="#ffffff80" stroke-width="1.5"/>
+  <g fill="#fff"><circle cx="160" cy="50" r="4"/><circle cx="200" cy="80" r="4"/><circle cx="290" cy="44" r="4"/><circle cx="320" cy="76" r="4"/></g>
+  <g fill="#111"><circle cx="250" cy="58" r="4"/><circle cx="345" cy="58" r="4"/><circle cx="380" cy="86" r="4"/></g>
+  <text x="14" y="26" font-size="14" fill="#fff">▶</text>
+    <rect x="0" y="132" width="470" height="12" rx="6" class="bf"/>
+  <rect x="60" y="130" width="28" height="16" rx="3" class="good"/>
+  <rect x="150" y="130" width="18" height="16" rx="3" class="bad"/>
+  <rect x="236" y="130" width="34" height="16" rx="3" class="good"/>
+  <line x1="300" y1="126" x2="300" y2="150" stroke="var(--accent)" stroke-width="2.5"/>
+    <g font-size="12">
+    <rect x="0" y="160" width="90" height="34" rx="6" class="good"/><text x="10" y="182" class="wt">AT Good  Q</text>
+    <rect x="96" y="160" width="90" height="34" rx="6" class="bad"/><text x="106" y="182" class="wt">AT Bad  W</text>
+    <rect x="192" y="160" width="90" height="34" rx="6" class="blue"/><text x="202" y="182" class="wt">DF Good  E</text>
+    <rect x="288" y="160" width="90" height="34" rx="6" class="amber"/><text x="298" y="182" class="wt">DF Bad  R</text>
+  </g>
+  <text x="392" y="172" font-size="12" class="m">กดแล้ว</text>
+  <text x="392" y="188" font-size="12" class="m">แถบเพิ่มขึ้น</text>
+    <rect x="500" y="0" width="260" height="194" rx="8" class="b"/>
+  <text x="514" y="24" font-size="13" font-weight="700">รายการแท็ก</text>
+  <g font-size="12.5">
+    <rect x="514" y="38" width="232" height="30" rx="5" class="bf"/><rect x="514" y="38" width="6" height="30" class="good"/><text x="528" y="58">AT Good   02:14</text><text x="700" y="58">✏️ ➕</text>
+    <rect x="514" y="74" width="232" height="30" rx="5" class="bf"/><rect x="514" y="74" width="6" height="30" class="bad"/><text x="528" y="94">AT Bad    05:31</text><text x="700" y="94">✏️ ➕</text>
+    <rect x="514" y="110" width="232" height="30" rx="5" class="bf" style="stroke: var(--accent); stroke-width: 2"/><rect x="514" y="110" width="6" height="30" class="good"/><text x="528" y="130">AT Good   08:47</text><text x="700" y="130">✏️ ➕</text>
+    <text x="528" y="164" class="m">คลิกเพื่อเล่นจังหวะนั้น</text>
+  </g>
+</svg>
+</div>
+<ul>
+<li><kbd>Space</kbd> เล่น/หยุดชั่วคราว <kbd>←</kbd> <kbd>→</kbd> ย้อน/ไปข้างหน้า 3 วินาที <kbd>J</kbd> <kbd>K</kbd> <kbd>L</kbd> กรอกลับ/หยุด/กรอไปข้างหน้า</li>
+<li>ถ้าติดผิด ให้เลือกในรายการแล้วลบ หรือยกเลิกด้วย <kbd>⌘</kbd>+<kbd>Z</kbd> (Windows ใช้ <kbd>Ctrl</kbd>+<kbd>Z</kbd>)</li>
+<li>เมื่อเลือกแท็กอยู่แล้วกดปุ่มแฟล็ก แท็กนั้นจะได้แฟล็ก (กดอีกครั้งเพื่อเอาออก)</li>
+<li>ถ้าอยากดูภาพใหญ่ ให้ใช้ <span class="btn">⛶ เต็มหน้าจอ</span> ปุ่มที่ใช้บ่อยจะลอยอยู่บนวิดีโอ</li>
+</ul>
+<div class="note">ช่วงแรกไม่ต้องเน้นความสมบูรณ์แบบ แนะนำให้ “ติดไว้เยอะๆ ก่อนแล้วค่อยเลือก” แท็กเป็นแค่เครื่องหมาย มีมากก็ไม่เป็นปัญหา</div>
+</section>
+
+<section id="review">
+<h2>6. ดูย้อนหลังและกรองแท็ก</h2>
+<p>เปิด <span class="btn">📊 ตาราง</span> เพื่อดูจำนวนแท็ก × แฟล็ก คลิกตัวเลขเพื่อเลือกแท็กที่ตรงเงื่อนไขทั้งหมด</p>
+<div class="fig">
+<svg viewBox="0 0 760 210" role="img" aria-label="ตารางสรุปแท็กและแฟล็ก คลิกช่อง AT Good กับครอสแล้วแท็กที่ตรง 4 อันจะถูกเลือก">
+  <g font-size="13">
+    <rect x="0" y="0" width="460" height="200" rx="8" class="b"/>
+    <text x="16" y="28" class="m">แท็ก \ แฟล็ก</text>
+    <text x="172" y="28" font-weight="700" text-anchor="middle">ยิง</text><text x="261" y="28" font-weight="700" text-anchor="middle">ครอส</text><text x="320" y="28" font-weight="700">CK</text><text x="390" y="28" font-weight="700">รวม</text>
+    <line x1="0" y1="40" x2="460" y2="40" stroke="var(--line)"/>
+    <rect x="16" y="54" width="10" height="10" rx="2" class="good"/><text x="32" y="64">AT Good</text><text x="168" y="64">7</text>
+    <rect x="228" y="46" width="66" height="26" rx="5" class="accent" opacity="0.2"/><rect x="228" y="46" width="66" height="26" rx="5" class="accent-stroke"/><text x="256" y="64" font-weight="700">4</text>
+    <text x="330" y="64">1</text><text x="400" y="64">12</text>
+    <rect x="16" y="88" width="10" height="10" rx="2" class="bad"/><text x="32" y="98">AT Bad</text><text x="168" y="98">2</text><text x="256" y="98">5</text><text x="330" y="98">0</text><text x="400" y="98">9</text>
+    <rect x="16" y="122" width="10" height="10" rx="2" class="blue"/><text x="32" y="132">DF Good</text><text x="168" y="132">0</text><text x="256" y="132">1</text><text x="330" y="132">3</text><text x="400" y="132">6</text>
+    <rect x="16" y="156" width="10" height="10" rx="2" class="amber"/><text x="32" y="166">DF Bad</text><text x="168" y="166">3</text><text x="256" y="166">2</text><text x="330" y="166">2</text><text x="400" y="166">8</text>
+    <text x="276" y="80" font-size="18">👆</text>
+  </g>
+  <path d="M470 60 L 520 60" class="ln" marker-end="url(#ah)"/>
+  <rect x="530" y="0" width="230" height="200" rx="8" class="b"/>
+  <text x="544" y="26" font-size="13" font-weight="700">เลือกแล้ว 4 รายการ</text>
+  <g font-size="12.5">
+    <rect x="544" y="38" width="202" height="28" rx="5" class="bf" style="stroke: var(--accent); stroke-width: 2"/><rect x="544" y="38" width="6" height="28" class="good"/><text x="558" y="57">AT Good 12:05 ครอส</text>
+    <rect x="544" y="72" width="202" height="28" rx="5" class="bf" style="stroke: var(--accent); stroke-width: 2"/><rect x="544" y="72" width="6" height="28" class="good"/><text x="558" y="91">AT Good 31:12 ครอส</text>
+    <rect x="544" y="106" width="202" height="28" rx="5" class="bf" style="stroke: var(--accent); stroke-width: 2"/><rect x="544" y="106" width="6" height="28" class="good"/><text x="558" y="125">AT Good 58:40 ครอส</text>
+    <rect x="544" y="140" width="202" height="28" rx="5" class="bf" style="stroke: var(--accent); stroke-width: 2"/><rect x="544" y="140" width="6" height="28" class="good"/><text x="558" y="159">AT Good 83:02 ครอส</text>
+    <text x="544" y="190" class="m">→ ส่งไปเพลย์ลิสต์ทั้งหมด</text>
+  </g>
+</svg>
+</div>
+<ul>
+<li>คลิกแท็กในรายการเพื่อเล่นเฉพาะจังหวะนั้น</li>
+<li>ใช้การเรียงด้านบนรายการ (ตามไทม์ไลน์ ตามแท็ก ตามป้ายชื่อ) เพื่อดูแท็กประเภทเดียวกันรวมกัน</li>
+</ul>
+</section>
+
+<section id="playlist">
+<h2>7. รวมเป็นเพลย์ลิสต์</h2>
+<p>เพลย์ลิสต์คือการรวบรวมและเรียงจังหวะที่อยากให้นักเตะดู เมื่อเปิดเพลย์ลิสต์ <strong>กระดานแท็ก</strong> จะปรากฏใต้วิดีโอ</p>
+<div class="fig">
+<svg viewBox="0 0 760 220" role="img" aria-label="กระดานแท็ก จังหวะเรียงเป็นแถบตามความยาวในแถวตามประเภท ลากเพื่อจัดเรียง และเล่นต่อเนื่องทีละแถวได้">
+  <g font-size="13">
+    <rect x="0" y="0" width="760" height="210" rx="8" class="b"/>
+    <text x="14" y="24" font-weight="700">กระดานแท็ก</text>
+        <g>
+      <rect x="10" y="38" width="740" height="44" rx="6" class="bf"/>
+      <text x="22" y="66" font-weight="700">▶</text><rect x="44" y="54" width="10" height="10" rx="2" class="good"/><text x="60" y="64">AT Good</text>
+      <rect x="150" y="44" width="110" height="32" rx="5" class="good"/><text x="160" y="65" font-size="12" class="wt">vs A 12:05</text>
+      <rect x="266" y="44" width="80" height="32" rx="5" class="good"/><text x="274" y="65" font-size="12" class="wt">vs A 51:40</text>
+      <rect x="352" y="44" width="140" height="32" rx="5" class="good"/><text x="362" y="65" font-size="12" class="wt">vs B 08:22</text>
+      <rect x="498" y="44" width="90" height="32" rx="5" class="good" opacity="0.35"/>
+    </g>
+    <g>
+      <rect x="10" y="90" width="740" height="44" rx="6" class="bf"/>
+      <text x="22" y="118" font-weight="700">▶</text><rect x="44" y="106" width="10" height="10" rx="2" class="bad"/><text x="60" y="116">AT Bad</text>
+      <rect x="150" y="96" width="84" height="32" rx="5" class="bad"/><text x="160" y="117" font-size="12" class="wt">vs A 18:40</text>
+      <rect x="240" y="96" width="120" height="32" rx="5" class="bad"/><text x="250" y="117" font-size="12" class="wt">vs B 63:15</text>
+    </g>
+    <g>
+      <rect x="10" y="142" width="740" height="44" rx="6" class="bf"/>
+      <text x="22" y="170" font-weight="700">▶</text><text x="44" y="168">ไม่ได้จัดหมวด</text>
+      <rect x="150" y="148" width="90" height="32" rx="5" class="m" opacity="0.6"/><text x="160" y="169" font-size="12" class="wt">สไลด์</text>
+      <rect x="246" y="148" width="96" height="32" rx="5" class="violet"/><text x="254" y="169" font-size="12" class="wt">vs B 77:10</text>
+    </g>
+        <path d="M300 156 C 380 140, 480 110, 540 80" class="accent-stroke" stroke-dasharray="6 4" marker-end="url(#ahA)"/>
+    <text x="560" y="24" font-size="12.5" class="m">ลากเพื่อจัดเรียงหรือย้ายแถว</text>
+    <text x="14" y="204" font-size="12" class="m">▶ เล่นแถวนั้นจากซ้ายไปขวา / ความยาวแถบ = ความยาวจังหวะ</text>
+  </g>
+</svg>
+</div>
+<ol>
+<li>สร้างเพลย์ลิสต์ด้วย <span class="btn">เพลย์ลิสต์ใหม่</span></li>
+<li>เพิ่มจังหวะด้วย <span class="btn">➕</span> ในรายการแท็ก (หรือ <span class="btn">เพิ่มลงเพลย์ลิสต์</span> สำหรับแท็กที่เลือก) จะเปิดแพ็กเกจของนัดอื่นแล้วเพิ่มลงเพลย์ลิสต์เดียวกันก็ได้</li>
+<li>ลากแถบบนกระดานแท็กเพื่อจัดเรียงหรือย้ายไปแถวอื่น เพิ่มแถวได้ด้วย <span class="btn">➕ เพิ่มแถว</span></li>
+<li>กด <span class="btn">▶</span> ของแถวเพื่อเล่นเฉพาะแถวนั้นต่อเนื่อง ใช้ <span class="btn">แทรกสไลด์</span> เพื่อใส่หน้าคำอธิบายระหว่างจังหวะได้</li>
+</ol>
+<div class="note">เพลย์ลิสต์อ้างอิงแพ็กเกจเดิม ถ้าย้ายหรือลบแพ็กเกจ จังหวะนั้นจะเล่นไม่ได้ โปรดระวัง เมื่อส่งให้ผู้อื่น ใช้ <span class="btn">📦 ทำเป็นสแตนด์อโลน</span> เพื่อให้เปิดได้โดยไม่ต้องมีแพ็กเกจ</div>
+</section>
+
+<section id="effects">
+<h2>8. วาดแทคติก (แผนโปร)</h2>
+<div class="note pro">โหมดเอฟเฟกต์เป็นฟีเจอร์ของแผนโปร</div>
+<div class="fig">
+<svg viewBox="0 0 760 260" role="img" aria-label="โหมดเอฟเฟกต์ ใช้เครื่องมือด้านซ้ายวาดดิสก์ที่ติดตามนักเตะ ลูกศร และโซนบนวิดีโอ">
+    <rect x="0" y="0" width="56" height="220" rx="8" class="b"/>
+  <g font-size="12" text-anchor="middle">
+    <rect x="8" y="10" width="40" height="40" rx="6" class="accent" opacity="0.18"/><text x="28" y="36" font-size="18">⭕</text>
+    <text x="28" y="80" font-size="18">📍</text>
+    <text x="28" y="122" font-size="18">↗️</text>
+    <text x="28" y="164" font-size="18">⬛</text>
+    <text x="28" y="204" font-size="18">⏸</text>
+  </g>
+    <rect x="68" y="0" width="600" height="220" rx="8" fill="var(--pitch)"/>
+  <g fill="var(--pitch2)"><rect x="68" y="0" width="60" height="220"/><rect x="188" y="0" width="60" height="220"/><rect x="308" y="0" width="60" height="220"/><rect x="428" y="0" width="60" height="220"/><rect x="548" y="0" width="60" height="220"/></g>
+  <rect x="88" y="16" width="560" height="188" fill="none" stroke="#ffffff90" stroke-width="1.5"/>
+  <rect x="548" y="60" width="100" height="100" fill="none" stroke="#ffffff90" stroke-width="1.5"/>
+    <polygon points="430,70 540,60 540,150 430,160" fill="#facc15" opacity="0.28" stroke="#facc15" stroke-width="2"/>
+    <g fill="#fff"><circle cx="260" cy="120" r="6"/><circle cx="350" cy="70" r="6"/><circle cx="400" cy="170" r="6"/><circle cx="470" cy="110" r="6"/></g>
+  <g fill="#1f2937"><circle cx="420" cy="90" r="6"/><circle cx="500" cy="130" r="6"/><circle cx="520" cy="80" r="6"/><circle cx="380" cy="120" r="6"/></g>
+    <path d="M200 160 C 230 150, 245 135, 258 124" stroke="#fff" stroke-width="2" stroke-dasharray="4 4" fill="none" opacity="0.8"/>
+  <ellipse cx="260" cy="128" rx="18" ry="7" fill="none" stroke="#38bdf8" stroke-width="3"/>
+    <path d="M270 112 C 330 60, 400 50, 462 100" stroke="#fff" stroke-width="3.5" fill="none" marker-end="url(#ahW)"/>
+    <g font-size="12.5">
+    <rect x="160" y="182" width="190" height="24" rx="12" fill="#000a"/><text x="172" y="199" fill="#fff">คลิกนักเตะ → ติดตามอัตโนมัติ</text>
+    <rect x="300" y="26" width="158" height="24" rx="12" fill="#000a"/><text x="312" y="43" fill="#fff">ลูกศรแสดงการเคลื่อนที่</text>
+    <rect x="442" y="168" width="140" height="24" rx="12" fill="#000a"/><text x="454" y="185" fill="#fff">โซนแสดงพื้นที่</text>
+  </g>
+    <rect x="68" y="230" width="600" height="26" rx="6" class="bf"/>
+  <rect x="120" y="236" width="300" height="6" rx="3" fill="#38bdf8"/>
+  <rect x="250" y="246" width="250" height="6" rx="3" class="m"/>
+  <rect x="400" y="236" width="18" height="16" rx="2" class="amber"/>
+  <text x="680" y="248" font-size="12" class="m">เวลาแสดง</text>
+  <text x="680" y="40" font-size="12" class="m">⭕ ดิสก์</text>
+  <text x="680" y="60" font-size="12" class="m">📍 สปอตไลต์</text>
+  <text x="680" y="80" font-size="12" class="m">↗️ ลูกศร</text>
+  <text x="680" y="100" font-size="12" class="m">⬛ โซน</text>
+  <text x="680" y="120" font-size="12" class="m">⏸ ภาพนิ่ง</text>
+</svg>
+</div>
+<ol>
+<li>กด <span class="btn">✏️</span> ในรายการแท็ก (หรือจังหวะในเพลย์ลิสต์) เพื่อเข้าสู่โหมดเอฟเฟกต์ของจังหวะนั้น</li>
+<li>เลือกเครื่องมือด้านซ้าย เช่น ดิสก์ สปอตไลต์ ลูกศร หรือโซน แล้ววาดบนวิดีโอ ดิสก์และสปอตไลต์ <strong>แค่คลิกนักเตะก็ติดตามอัตโนมัติ</strong></li>
+<li>ปรับเวลาแสดงภาพที่วาดบนไทม์ไลน์ด้านล่าง และใส่ “ภาพนิ่ง” เพื่อหยุดวิดีโอในตอนที่อยากอธิบายได้</li>
+<li>ภาพที่วาดจะบันทึกอัตโนมัติ กด <span class="btn">ออกจากโหมดเอฟเฟกต์</span> เพื่อกลับหน้าจอเดิม</li>
+</ol>
+</section>
+
+<section id="export">
+<h2>9. ส่งออกเป็นวิดีโอ</h2>
+<div class="fig">
+<svg viewBox="0 0 760 230" role="img" aria-label="ส่งออกได้ 3 แบบ: จังหวะเดียว เพลย์ลิสต์เป็นวิดีโอเดียว หรือแยกไฟล์ตามจังหวะ">
+  <g font-size="13">
+        <text x="0" y="18" font-weight="700">จังหวะเดียว</text>
+    <rect x="0" y="30" width="60" height="30" rx="4" class="good"/>
+    <path d="M70 45 L 120 45" class="ln" marker-end="url(#ah)"/>
+    <rect x="130" y="28" width="110" height="34" rx="6" class="b"/><text x="142" y="50">🎬 mp4 1 ไฟล์</text>
+
+        <text x="0" y="98" font-weight="700">เพลย์ลิสต์เป็นไฟล์เดียว</text>
+    <rect x="0" y="110" width="50" height="30" rx="4" class="good"/>
+    <rect x="54" y="110" width="36" height="30" rx="4" class="good"/>
+    <rect x="94" y="110" width="30" height="30" rx="4" class="m" opacity="0.6"/>
+    <rect x="128" y="110" width="56" height="30" rx="4" class="good"/>
+    <path d="M194 125 L 244 125" class="ln" marker-end="url(#ah)"/>
+    <rect x="254" y="108" width="230" height="34" rx="6" class="b"/><text x="266" y="130">🎬 mp4 ไฟล์เดียว (มีภาพวาด)</text>
+
+        <text x="0" y="178" font-weight="700">แยกไฟล์ตามจังหวะ</text>
+    <rect x="0" y="190" width="50" height="30" rx="4" class="good"/>
+    <rect x="54" y="190" width="36" height="30" rx="4" class="good"/>
+    <rect x="94" y="190" width="56" height="30" rx="4" class="good"/>
+    <path d="M160 205 L 210 205" class="ln" marker-end="url(#ah)"/>
+    <rect x="220" y="186" width="300" height="38" rx="6" class="b"/>
+    <text x="230" y="210">🗂 โฟลเดอร์</text>
+    <text x="310" y="210" font-size="12" class="m">01.mp4 · 02.mp4 · 03.mp4</text>
+  </g>
+  <g font-size="12.5" class="m">
+    <text x="560" y="40" class="m">ภาพที่วาดจะถูกฝัง</text>
+    <text x="560" y="58" class="m">ลงในวิดีโอ</text>
+    <text x="560" y="110" class="m">วิดีโอต้นฉบับและแท็ก</text>
+    <text x="560" y="128" class="m">ยังคงอยู่เหมือนเดิม</text>
+    <text x="560" y="180" class="m">ไฟล์ที่ส่งออก</text>
+    <text x="560" y="198" class="m">เล่นได้บนทุกอุปกรณ์</text>
+  </g>
+</svg>
+</div>
+<ul>
+<li>เฉพาะจังหวะเดียว: <span class="btn">🎬 ส่งออกคลิปนี้</span> ของแท็ก</li>
+<li>ทั้งเพลย์ลิสต์เป็นไฟล์เดียว: <span class="btn">🎬 ส่งออกเป็นวิดีโอ</span> ถ้าติ๊กแถวบนกระดานแท็กไว้ จะส่งออกเฉพาะแถวนั้น</li>
+<li>แยกไฟล์ตามจังหวะ: <span class="btn">🗂 ส่งออกคลิปแยกกัน</span></li>
+</ul>
+</section>
+
+<section id="clips">
+<h2>10. เริ่มจากคลิปที่ตัดไว้แล้ว</h2>
+<p>ถ้ามีไฟล์วิดีโอที่ตัดตามจังหวะไว้แล้ว ข้ามขั้นตอนการติดแท็กได้</p>
+<div class="fig">
+<svg viewBox="0 0 760 130" role="img" aria-label="เมื่อเลือกไฟล์วิดีโอหลายไฟล์ จะได้เพลย์ลิสต์ที่ 1 ไฟล์เท่ากับ 1 จังหวะ">
+  <g font-size="12.5">
+    <rect x="0" y="10" width="140" height="28" rx="5" class="b"/><text x="10" y="29">🎞 ประตู1.mp4</text>
+    <rect x="0" y="46" width="140" height="28" rx="5" class="b"/><text x="10" y="65">🎞 ประตู2.mp4</text>
+    <rect x="0" y="82" width="140" height="28" rx="5" class="b"/><text x="10" y="101">🎞 รับ CK.mp4</text>
+  </g>
+  <path d="M152 60 L 260 60" class="ln" marker-end="url(#ah)"/>
+  <text x="160" y="32" font-size="12" font-weight="700">เพลย์ลิสต์ใหม่</text><text x="160" y="50" font-size="12" font-weight="700">จากวิดีโอ</text>
+  <rect x="272" y="0" width="300" height="122" rx="10" class="b"/>
+  <text x="286" y="24" font-size="13" font-weight="700">📋 เพลย์ลิสต์</text>
+  <g font-size="12">
+    <rect x="286" y="34" width="70" height="18" rx="3" class="m" opacity="0.7"/><text x="292" y="47" class="wt" font-size="11">ประตู1</text>
+    <rect x="360" y="34" width="56" height="18" rx="3" class="m" opacity="0.7"/><text x="366" y="47" class="wt" font-size="11">ประตู2</text>
+    <rect x="420" y="34" width="86" height="18" rx="3" class="m" opacity="0.7"/><text x="426" y="47" class="wt" font-size="11">รับ CK</text>
+    <text x="286" y="78" class="m">1 ไฟล์ = 1 จังหวะ จากนั้น</text>
+    <text x="286" y="96" class="m">จัดเรียง วาด และส่งออก</text>
+  </g>
+</svg>
+</div>
+<ol>
+<li>กด <span class="btn">เพลย์ลิสต์ใหม่จากวิดีโอ</span> แล้วเลือกไฟล์วิดีโอพร้อมกัน</li>
+<li>แต่ละไฟล์จะเป็น 1 จังหวะ และได้เพลย์ลิสต์ทันที</li>
+<li>จากนั้นจัดเรียง วาด และส่งออกได้เหมือนหัวข้อ <a href="#playlist">7</a>–<a href="#export">9</a></li>
+</ol>
+</section>
+
+<section id="keys">
+<h2>11. รายการปุ่มลัด</h2>
+<table>
+<tr><th>Space</th><td>เล่น / หยุดชั่วคราว</td></tr>
+<tr><th>← / →</th><td>ย้อน 3 วินาที / ไปข้างหน้า 3 วินาที</td></tr>
+<tr><th>J / K / L</th><td>กรอกลับ / หยุด / กรอไปข้างหน้า</td></tr>
+<tr><th>I / O</th><td>ติดจุดเริ่ม / จุดสิ้นสุด</td></tr>
+<tr><th>อักษร 1 ตัวที่กำหนด</th><td>เหมือนกดปุ่มแท็กนั้น</td></tr>
+<tr><th>⌘Z / ⌘⇧Z</th><td>เลิกทำ / ทำซ้ำ (Windows ใช้ Ctrl)</td></tr>
+</table>
+<p>บน iPad ให้แตะปุ่มบนหน้าจอ</p>
+<p>เนื้อหานี้ดูได้จากเมนู “วิธีใช้” > “วิธีใช้ CoachTag” ในแอปด้วย (iPad: “⚙️ การตั้งค่า”) หากมีข้อสงสัย ติดต่อเราได้ที่หน้า <a href="support-th.html">ฝ่ายสนับสนุน</a></p>
+</section>
+
+<footer>&copy; 2026 CoachTag</footer>
+</body>
+</html>

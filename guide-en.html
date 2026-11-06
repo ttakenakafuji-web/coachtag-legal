@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Guide | CoachTag</title>
+<style>
+  :root { color-scheme: light dark; --fg: #1b1e22; --bg: #ffffff; --muted: #6b7280; --line: #d9dde3; --card: #f4f6f8; --accent: #2563eb; --good: #16a34a; --bad: #dc2626; --blue: #2563eb; --amber: #d97706; --violet: #7c3aed; --pitch: #2f7a3b; --pitch2: #2a6e35; }
+  @media (prefers-color-scheme: dark) { :root { --fg: #e6e8eb; --bg: #14161a; --muted: #9aa1ab; --line: #343841; --card: #1d2026; --accent: #7db4ff; --good: #22c55e; --bad: #ef4444; --blue: #60a5fa; --amber: #f59e0b; --violet: #a78bfa; --pitch: #24602e; --pitch2: #1f5628; } }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; line-height: 1.8; max-width: 860px; margin: 0 auto; padding: 32px 16px 80px; color: var(--fg); background: var(--bg); }
+  a { color: var(--accent); }
+  .home { margin: 0 0 1em; font-weight: 600; } .home a { text-decoration: none; }
+  h1 { font-size: 1.7rem; margin-bottom: 0.25em; }
+  .lead { color: var(--muted); margin-bottom: 2em; }
+  section { margin-bottom: 3.5em; }
+  section h2 { font-size: 1.3rem; border-bottom: 1px solid var(--line); padding-bottom: 0.4em; margin-bottom: 0.8em; }
+  h3 { font-size: 1.08rem; margin: 1.8em 0 0.5em; }
+  ul, ol { padding-left: 1.4em; } li { margin-bottom: 0.4em; }
+  .toc { background: var(--card); border-radius: 10px; padding: 14px 20px; margin-bottom: 2.5em; }
+  .toc ol { margin: 0.3em 0 0; columns: 2 260px; } .toc li { margin-bottom: 0.15em; }
+  .btn { display: inline-block; border: 1px solid var(--line); background: var(--card); border-radius: 6px; padding: 0 7px; font-size: 0.9em; line-height: 1.6; white-space: nowrap; font-weight: 600; }
+  kbd { display: inline-block; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 4px; padding: 0 6px; font-family: ui-monospace, Menlo, monospace; font-size: 0.85em; background: var(--card); }
+  .note { border-left: 4px solid var(--accent); background: var(--card); padding: 10px 14px; border-radius: 0 8px 8px 0; margin: 1em 0; }
+  .note.pro { border-left-color: var(--amber); }
+  figure { margin: 1.2em 0; }
+  figcaption { font-size: 0.85rem; color: var(--muted); margin-top: 0.4em; }
+  .placeholder { aspect-ratio: 16 / 9; border: 2px dashed var(--line); border-radius: 10px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: var(--muted); font-size: 0.9rem; padding: 12px; background: var(--card); }
+  .placeholder strong { color: var(--fg); font-family: ui-monospace, Menlo, monospace; font-size: 0.85rem; }
+  table { border-collapse: collapse; width: 100%; font-size: 0.93rem; }
+  th, td { border-bottom: 1px solid var(--line); padding: 8px 6px; text-align: left; vertical-align: top; }
+  th { white-space: nowrap; }
+  .fig { background: var(--card); border-radius: 12px; padding: 14px; }
+  .fig svg { width: 100%; height: auto; display: block; overflow: visible; }
+  @media (max-width: 640px) { .fig { overflow-x: auto; } .fig svg { min-width: 620px; } }
+  svg text { fill: var(--fg); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+  svg text[fill="#fff"] { fill: #fff; }
+  svg .m { fill: var(--muted); }
+  svg .b { fill: var(--bg); stroke: var(--line); stroke-width: 1.5; }
+  svg .bf { fill: var(--card); stroke: var(--line); stroke-width: 1.5; }
+  svg .ln { stroke: var(--muted); stroke-width: 2; fill: none; }
+  svg .dash { stroke: var(--muted); stroke-width: 1.6; fill: none; stroke-dasharray: 5 4; }
+  svg .ah { fill: var(--muted); }
+  svg .good { fill: var(--good); } svg .bad { fill: var(--bad); } svg .blue { fill: var(--blue); } svg .amber { fill: var(--amber); } svg .violet { fill: var(--violet); }
+  svg .wt { fill: #fff; font-weight: 700; }
+  svg .film { fill: #3b414b; } svg .film-hole { fill: #9aa1ab; }
+  svg .accent-stroke { stroke: var(--accent); stroke-width: 2.5; fill: none; }
+  svg .accent { fill: var(--accent); }
+
+  .vs { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 1em 0; }
+  @media (max-width: 640px) { .vs { grid-template-columns: 1fr; } }
+  .vs > div { background: var(--card); border-radius: 12px; padding: 14px; }
+  .vs .head { font-weight: 700; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+  .vs .tagline { font-size: 0.8rem; color: var(--muted); font-weight: 400; }
+  .vs .ours { outline: 2px solid var(--accent); }
+  .vs ol { font-size: 0.9rem; margin: 8px 0 0; }
+  .vs .verdict { font-size: 0.88rem; margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--line); }
+
+  .merits { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; margin: 1em 0; }
+  .merits div { background: var(--card); border-radius: 12px; padding: 12px 14px; font-size: 0.9rem; }
+  .merits .ic { font-size: 1.5rem; line-height: 1; }
+  .merits b { display: block; margin: 6px 0 2px; font-size: 0.98rem; }
+
+  .flow { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin: 1em 0; }
+  @media (max-width: 640px) { .flow { grid-template-columns: 1fr; } }
+  .flow a { display: block; text-decoration: none; color: inherit; background: var(--card); border-radius: 10px; padding: 10px; text-align: center; font-size: 0.85rem; position: relative; }
+  .flow .ic { font-size: 1.6rem; display: block; }
+  .flow b { display: block; font-size: 1rem; }
+  .flow .n { position: absolute; top: 6px; left: 8px; font-size: 0.75rem; color: var(--muted); font-weight: 700; }
+
+  .case { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 640px) { .case { grid-template-columns: 1fr; } }
+  .case > div { border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; font-size: 0.9rem; }
+  .case .head { font-weight: 700; margin-bottom: 4px; }
+  .case ol { margin: 6px 0 0; }
+  .case .ours { border: 2px solid var(--accent); }
+
+  footer { margin-top: 3em; font-size: 0.85rem; color: var(--muted); }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="ah"/></marker>
+    <marker id="ahA" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="accent"/></marker>
+    <marker id="ahW" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#fff"/></marker>
+  </defs>
+</svg>
+
+<p class="home"><a href="en.html">← CoachTag</a> · <a href="support-en.html">Support</a></p>
+<h1>CoachTag User Guide</h1>
+<p class="lead">Collect the moments you want from match video, draw your tactics on them, and make a video to show your players. This guide walks new users through the basic CoachTag workflow.</p>
+
+<nav class="toc"><strong>Contents</strong>
+<ol>
+<li><a href="#idea">First, how CoachTag works</a></li>
+<li><a href="#words">Five terms to know</a></li>
+<li><a href="#package">Open match video</a></li>
+<li><a href="#buttons">Set up tag buttons</a></li>
+<li><a href="#tagging">Tag while you watch</a></li>
+<li><a href="#review">Review and filter your tags</a></li>
+<li><a href="#playlist">Build a playlist</a></li>
+<li><a href="#effects">Draw tactics (Pro plan)</a></li>
+<li><a href="#export">Export as video</a></li>
+<li><a href="#clips">Start from ready-made clips</a></li>
+<li><a href="#keys">Keyboard shortcuts</a></li>
+</ol>
+</nav>
+
+<section id="idea">
+<h2>1. First, how CoachTag works</h2>
+<p>CoachTag collects moments by <strong>“marking”</strong> the video, not by <strong>“cutting”</strong> it. That is the biggest difference from ordinary video editors.</p>
+
+<h3>How it differs from a video editor</h3>
+<div class="vs">
+  <div>
+    <div class="head">✂️ Typical video editor</div>
+    <svg viewBox="0 0 360 230" role="img" aria-label="Cutting the video with scissors into many files">
+      <text x="0" y="14" font-size="13" class="m">Match video</text>
+            <g>
+        <rect x="0" y="24" width="96" height="40" rx="3" class="film"/>
+        <rect x="112" y="24" width="70" height="40" rx="3" class="film"/>
+        <rect x="198" y="24" width="60" height="40" rx="3" class="film"/>
+        <rect x="274" y="24" width="86" height="40" rx="3" class="film"/>
+        <g class="film-hole">
+          <rect x="6" y="28" width="6" height="5"/><rect x="22" y="28" width="6" height="5"/><rect x="38" y="28" width="6" height="5"/><rect x="54" y="28" width="6" height="5"/><rect x="70" y="28" width="6" height="5"/><rect x="86" y="28" width="6" height="5"/>
+          <rect x="6" y="55" width="6" height="5"/><rect x="22" y="55" width="6" height="5"/><rect x="38" y="55" width="6" height="5"/><rect x="54" y="55" width="6" height="5"/><rect x="70" y="55" width="6" height="5"/><rect x="86" y="55" width="6" height="5"/>
+          <rect x="118" y="28" width="6" height="5"/><rect x="134" y="28" width="6" height="5"/><rect x="150" y="28" width="6" height="5"/><rect x="166" y="28" width="6" height="5"/>
+          <rect x="118" y="55" width="6" height="5"/><rect x="134" y="55" width="6" height="5"/><rect x="150" y="55" width="6" height="5"/><rect x="166" y="55" width="6" height="5"/>
+          <rect x="204" y="28" width="6" height="5"/><rect x="220" y="28" width="6" height="5"/><rect x="236" y="28" width="6" height="5"/>
+          <rect x="204" y="55" width="6" height="5"/><rect x="220" y="55" width="6" height="5"/><rect x="236" y="55" width="6" height="5"/>
+          <rect x="280" y="28" width="6" height="5"/><rect x="296" y="28" width="6" height="5"/><rect x="312" y="28" width="6" height="5"/><rect x="328" y="28" width="6" height="5"/><rect x="344" y="28" width="6" height="5"/>
+          <rect x="280" y="55" width="6" height="5"/><rect x="296" y="55" width="6" height="5"/><rect x="312" y="55" width="6" height="5"/><rect x="328" y="55" width="6" height="5"/><rect x="344" y="55" width="6" height="5"/>
+        </g>
+      </g>
+      <text x="96" y="20" font-size="18">✂️</text>
+      <text x="178" y="20" font-size="18">✂️</text>
+      <text x="254" y="20" font-size="18">✂️</text>
+      <path d="M180 76 L180 102" class="ln" marker-end="url(#ah)"/>
+            <g font-size="12">
+        <rect x="20" y="112" width="96" height="26" rx="5" class="b"/><text x="30" y="130">🎞 clip_01.mp4</text>
+        <rect x="132" y="112" width="96" height="26" rx="5" class="b"/><text x="142" y="130">🎞 clip_02.mp4</text>
+        <rect x="244" y="112" width="96" height="26" rx="5" class="b"/><text x="254" y="130">🎞 clip_03.mp4</text>
+        <rect x="20" y="146" width="96" height="26" rx="5" class="b"/><text x="30" y="164">🎞 clip_04.mp4</text>
+        <rect x="132" y="146" width="96" height="26" rx="5" class="b"/><text x="142" y="164">🎞 clip_05.mp4</text>
+        <rect x="244" y="146" width="96" height="26" rx="5" class="b"/><text x="254" y="164" class="m">…… clip_48</text>
+      </g>
+      <text x="0" y="198" font-size="12.5" class="m">Every cut adds another file and uses more storage.</text>
+      <text x="0" y="218" font-size="12.5" class="m">Only the file name tells you what each clip is.</text>
+    </svg>
+    <ol>
+      <li>Watch the whole match</li>
+      <li>Go back and find the moments you need</li>
+      <li>Cut and export them one by one</li>
+      <li>To change a moment, cut it again</li>
+    </ol>
+    <div class="verdict">Watching and cutting are <strong>separate</strong> jobs, so preparation takes many times the length of the match.</div>
+  </div>
+
+  <div class="ours">
+    <div class="head">🏷️ CoachTag</div>
+    <svg viewBox="0 0 360 230" role="img" aria-label="One video stays whole while colored marks are added on top">
+      <text x="0" y="14" font-size="13" class="m">Match video (stays whole)</text>
+      <rect x="0" y="24" width="360" height="40" rx="3" class="film"/>
+      <g class="film-hole">
+        <rect x="6" y="28" width="348" height="5" opacity="0"/>
+      </g>
+      <g opacity="0.95">
+        <rect x="30" y="30" width="34" height="28" rx="3" class="good"/>
+        <rect x="96" y="30" width="22" height="28" rx="3" class="bad"/>
+        <rect x="150" y="30" width="44" height="28" rx="3" class="good"/>
+        <rect x="222" y="30" width="26" height="28" rx="3" class="blue"/>
+        <rect x="282" y="30" width="38" height="28" rx="3" class="good"/>
+      </g>
+            <g transform="translate(150 78)">
+        <rect x="0" y="0" width="30" height="30" rx="5" class="b"/><text x="10" y="21" font-size="15" font-weight="700">Q</text>
+        <rect x="38" y="0" width="30" height="30" rx="5" class="b"/><text x="47" y="21" font-size="15" font-weight="700">W</text>
+        <rect x="76" y="0" width="30" height="30" rx="5" class="b"/><text x="87" y="21" font-size="15" font-weight="700">E</text>
+      </g>
+      <path d="M165 76 L170 64" class="accent-stroke" marker-end="url(#ahA)"/>
+      <text x="0" y="98" font-size="12" class="m">Press a key as you</text>
+      <text x="0" y="114" font-size="12" class="m">watch to add a mark</text>
+            <g font-size="12">
+        <rect x="20" y="126" width="320" height="58" rx="6" class="b"/>
+        <rect x="30" y="134" width="10" height="10" rx="2" class="good"/><text x="46" y="144">AT Good  12:05〜12:19</text>
+        <rect x="30" y="152" width="10" height="10" rx="2" class="bad"/><text x="46" y="162">AT Bad  18:40〜18:47</text>
+        <rect x="200" y="134" width="10" height="10" rx="2" class="good"/><text x="216" y="144">AT Good  31:12〜</text>
+        <rect x="200" y="152" width="10" height="10" rx="2" class="blue"/><text x="216" y="162">DF Good  44:02〜</text>
+        <text x="46" y="178" class="m">…… list of marks (a few KB)</text>
+      </g>
+      <text x="0" y="208" font-size="12.5" class="m">No cutting, so no extra files or storage.</text>
+      <text x="0" y="226" font-size="12.5" class="m">Each mark has a type, so you can gather them in one step.</text>
+    </svg>
+    <ol>
+      <li>Press a key for each moment as you watch</li>
+      <li>When the match ends, your list of moments is ready</li>
+      <li>Filter by type or condition, and collect</li>
+      <li>To change a moment's length, just adjust the mark</li>
+    </ol>
+    <div class="verdict">Watching and collecting finish <strong>at the same time</strong>.</div>
+  </div>
+</div>
+
+<h3>A “tag” is a sticky note on the video</h3>
+<p>It works like sticky notes in a book. The pages (video) stay as they are; only the notes (tags) are added. If you use note colors for types such as “attack, good” or “defense, bad,” you can later open only the pages with a given color.</p>
+<div class="fig">
+<svg viewBox="0 0 760 250" role="img" aria-label="One video timeline with colored tags on it. Each tag records a type, start, end and flags">
+  <text x="0" y="16" font-size="14" font-weight="700">Match video</text>
+  <text x="0" y="34" font-size="12" class="m">0:00</text>
+  <text x="725" y="34" font-size="12" class="m">90:00</text>
+  <rect x="0" y="42" width="760" height="18" rx="9" class="bf"/>
+    <rect x="70" y="40" width="40" height="22" rx="4" class="good"/>
+  <rect x="160" y="40" width="26" height="22" rx="4" class="bad"/>
+  <rect x="250" y="40" width="58" height="22" rx="4" class="good"/>
+  <rect x="380" y="40" width="30" height="22" rx="4" class="blue"/>
+  <rect x="470" y="40" width="44" height="22" rx="4" class="good"/>
+  <rect x="580" y="40" width="22" height="22" rx="4" class="bad"/>
+  <rect x="660" y="40" width="36" height="22" rx="4" class="blue"/>
+    <path d="M250 64 L210 108" class="dash"/>
+  <path d="M308 64 L560 108" class="dash"/>
+  <rect x="200" y="108" width="370" height="128" rx="10" class="b"/>
+  <rect x="200" y="108" width="370" height="30" rx="10" class="good"/>
+  <rect x="200" y="126" width="370" height="12" class="good"/>
+  <text x="214" y="129" font-size="14" class="wt">What's in one tag</text>
+  <g font-size="13">
+    <text x="214" y="162" class="m">Type</text><text x="290" y="162">AT Good (attack, good)</text>
+    <text x="214" y="184" class="m">Time</text><text x="290" y="184">31:12 〜 31:26</text>
+    <text x="214" y="206" class="m">Flags</text>
+    <rect x="290" y="193" width="64" height="20" rx="10" class="amber"/><text x="301" y="208" font-size="12" class="wt">Cross</text>
+    <rect x="360" y="193" width="72" height="20" rx="10" class="violet"/><text x="371" y="208" font-size="12" class="wt">Shot</text>
+    <text x="214" y="228" class="m">Note</text><text x="290" y="228">Third-man run on the right</text>
+  </g>
+  <text x="590" y="150" font-size="12.5" class="m">Not a copy of the video,</text>
+  <text x="590" y="170" font-size="12.5" class="m">just a record of when it</text>
+  <text x="590" y="190" font-size="12.5" class="m">starts, ends and what it is.</text>
+  <text x="0" y="150" font-size="12.5" class="m">You can adjust or delete</text>
+  <text x="0" y="170" font-size="12.5" class="m">it later. The original</text>
+  <text x="0" y="190" font-size="12.5" class="m">video stays untouched.</text>
+</svg>
+</div>
+
+<h3>Example: you want to show every shot that came from a cross</h3>
+<div class="case">
+  <div>
+    <div class="head">✂️ With a video editor</div>
+    <ol>
+      <li>Rewatch 90 minutes to find shots from crosses</li>
+      <li>Each time, set a start and end, then cut</li>
+      <li>Line up the cuts and export</li>
+      <li>Start over for the next match</li>
+    </ol>
+  </div>
+  <div class="ours">
+    <div class="head">🏷️ With CoachTag</div>
+    <ol>
+      <li>(The tags you added while watching are already there)</li>
+      <li>In the table, click “AT Good × Cross” → every matching moment is selected</li>
+      <li>Add them to a playlist and export</li>
+      <li>Collect from any number of matches the same way</li>
+    </ol>
+  </div>
+</div>
+
+<h3>What CoachTag does well</h3>
+<div class="merits">
+  <div><span class="ic">⏱️</span><b>Done watching, already collected</b>You tag as you watch, so there is no time spent rewatching and searching. It works during a match or at half-time too.</div>
+  <div><span class="ic">🔎</span><b>Pull moments out by condition</b>Filter instantly by type and flag, such as only “defense, bad” or only “set piece × CK.”</div>
+  <div><span class="ic">💾</span><b>No extra files or storage</b>Tags are only marks, so hundreds of them still leave you with one video. There are no cut files to manage.</div>
+  <div><span class="ic">↩️</span><b>Redo as often as you like</b>To lengthen or shorten a moment, just adjust the mark. The original video always stays intact.</div>
+  <div><span class="ic">📚</span><b>Collect across matches</b>Put tags from several matches in one playlist. A “goals conceded this season” reel takes no time.</div>
+  <div><span class="ic">✏️</span><b>Drawings export with the video</b>Draw arrows and zones on a moment and give players a video with them burned in.</div>
+</div>
+
+<h3>Overall workflow</h3>
+<div class="flow">
+  <a href="#package"><span class="n">1</span><span class="ic">📂</span><b>Open</b>Match video into a package</a>
+  <a href="#tagging"><span class="n">2</span><span class="ic">🏷️</span><b>Tag</b>Tag while you watch</a>
+  <a href="#playlist"><span class="n">3</span><span class="ic">📋</span><b>Collect</b>Build a playlist</a>
+  <a href="#effects"><span class="n">4</span><span class="ic">✏️</span><b>Draw</b>Draw your tactics</a>
+  <a href="#export"><span class="n">5</span><span class="ic">🎬</span><b>Export</b>A video for your players</a>
+</div>
+</section>
+
+<section id="words">
+<h2>2. Five terms to know</h2>
+<div class="fig">
+<svg viewBox="0 0 760 300" role="img" aria-label="A package is a box holding one match's video, tags and drawings. A playlist refers to moments in several packages">
+    <rect x="0" y="10" width="300" height="130" rx="12" class="b"/>
+  <text x="14" y="34" font-size="14" font-weight="700">📦 Package (Matchday 10 vs A)</text>
+  <g font-size="12.5">
+    <rect x="14" y="46" width="272" height="22" rx="4" class="film"/>
+    <text x="22" y="62" fill="#fff">🎞 Match video</text>
+    <rect x="14" y="76" width="34" height="18" rx="3" class="good"/>
+    <rect x="58" y="76" width="22" height="18" rx="3" class="bad"/>
+    <rect x="92" y="76" width="44" height="18" rx="3" class="good"/>
+    <rect x="148" y="76" width="26" height="18" rx="3" class="blue"/>
+    <rect x="186" y="76" width="34" height="18" rx="3" class="good"/>
+    <text x="230" y="90" class="m">🏷 Tags</text>
+    <text x="14" y="122" class="m">✏️ Drawings, flags and notes saved too</text>
+  </g>
+    <rect x="0" y="160" width="300" height="130" rx="12" class="b"/>
+  <text x="14" y="184" font-size="14" font-weight="700">📦 Package (Matchday 11 vs B)</text>
+  <g font-size="12.5">
+    <rect x="14" y="196" width="272" height="22" rx="4" class="film"/>
+    <text x="22" y="212" fill="#fff">🎞 Match video</text>
+    <rect x="30" y="226" width="40" height="18" rx="3" class="good"/>
+    <rect x="84" y="226" width="22" height="18" rx="3" class="blue"/>
+    <rect x="124" y="226" width="30" height="18" rx="3" class="bad"/>
+    <rect x="170" y="226" width="40" height="18" rx="3" class="good"/>
+    <text x="230" y="240" class="m">🏷 Tags</text>
+    <text x="14" y="272" class="m">1 match = 1 package (.ccpkg)</text>
+  </g>
+    <rect x="440" y="60" width="320" height="180" rx="12" class="b"/>
+  <text x="456" y="86" font-size="14" font-weight="700">📋 Playlist “Good attacks”</text>
+  <g font-size="12.5">
+    <rect x="456" y="100" width="288" height="26" rx="5" class="bf"/><rect x="456" y="100" width="8" height="26" rx="2" class="good"/><text x="474" y="118">① vs A 12:05  AT Good</text>
+    <rect x="456" y="132" width="288" height="26" rx="5" class="bf"/><rect x="456" y="132" width="8" height="26" rx="2" class="good"/><text x="474" y="150">② vs A 51:40  AT Good</text>
+    <rect x="456" y="164" width="288" height="26" rx="5" class="bf"/><rect x="456" y="164" width="8" height="26" rx="2" class="good"/><text x="474" y="182">③ vs B 08:22  AT Good</text>
+    <rect x="456" y="196" width="288" height="26" rx="5" class="bf"/><rect x="456" y="196" width="8" height="26" rx="2" class="good"/><text x="474" y="214">④ vs B 77:10  AT Good</text>
+  </g>
+  <path d="M114 86 C 300 86, 330 113, 452 113" class="dash" marker-end="url(#ah)"/>
+  <path d="M206 86 C 330 90, 340 145, 452 145" class="dash" marker-end="url(#ah)"/>
+  <path d="M50 236 C 300 236, 330 177, 452 177" class="dash" marker-end="url(#ah)"/>
+  <path d="M190 236 C 330 236, 350 209, 452 209" class="dash" marker-end="url(#ah)"/>
+  <text x="320" y="266" font-size="12" class="m">No video is copied;</text>
+  <text x="320" y="284" font-size="12" class="m">it refers to the packages</text>
+</svg>
+</div>
+<table>
+<tr><th>📦 Package<br><small>.ccpkg</small></th><td>A saved file that holds the match video with its tags and drawings. Make one per match. It opens as is on Mac, iPad and Windows.</td></tr>
+<tr><th>🏷️ Tag</th><td>A time mark meaning “this moment.” Pressing a <strong>button</strong> such as <span class="btn">AT Good</span> (attack, good) adds one tag of that type. You decide which buttons to have.</td></tr>
+<tr><th>📌 Flag</th><td>Extra information added to a tag. For example, add “Shot” or “Cross” to an “AT Good” tag, and you can later collect only “good attacks that ended in a shot.”</td></tr>
+<tr><th>📋 Playlist</th><td>A list of selected tags in the order you want to show them. It can combine tags from several matches (packages). No video is copied; it refers to the original packages.</td></tr>
+<tr><th>✏️ Effects mode</th><td>A mode for working inside one moment, drawing arrows, zones, markers that follow players and more. Your drawings are burned into the video on export.</td></tr>
+</table>
+</section>
+
+<section id="package">
+<h2>3. Open match video (create a package)</h2>
+<div class="fig">
+<svg viewBox="0 0 760 170" role="img" aria-label="Choosing a video file copies or moves it into the package, where it is saved with tags and drawings">
+  <rect x="0" y="40" width="150" height="90" rx="10" class="b"/>
+  <text x="50" y="82" font-size="34">🎞</text>
+  <text x="18" y="118" font-size="12.5">match.mp4</text>
+  <text x="0" y="24" font-size="13" class="m">Your video file</text>
+
+  <path d="M160 85 L 300 85" class="ln" marker-end="url(#ah)"/>
+  <text x="178" y="72" font-size="13" font-weight="700">Open Video</text>
+  <text x="172" y="108" font-size="12" class="m">copy or move</text>
+
+  <rect x="320" y="10" width="300" height="150" rx="14" class="b" style="stroke: var(--accent); stroke-width: 2.5"/>
+  <text x="336" y="36" font-size="14" font-weight="700">📦 Matchday 10 vs A.ccpkg</text>
+  <rect x="336" y="50" width="268" height="28" rx="5" class="film"/><text x="346" y="69" font-size="12.5" fill="#fff">🎞 Match video</text>
+  <rect x="336" y="86" width="130" height="28" rx="5" class="bf"/><text x="346" y="105" font-size="12.5">🏷 Tags, flags</text>
+  <rect x="474" y="86" width="130" height="28" rx="5" class="bf"/><text x="484" y="105" font-size="12.5">✏️ Drawings</text>
+  <text x="336" y="144" font-size="12" class="m">Your work is saved automatically</text>
+
+  <text x="640" y="70" font-size="12.5" class="m">Opens as is</text>
+  <text x="640" y="90" font-size="12.5" class="m">on Mac, iPad</text>
+  <text x="640" y="110" font-size="12.5" class="m">and Windows</text>
+</svg>
+</div>
+<ol>
+<li>Press <span class="btn">Open Video</span> and choose the match video file.</li>
+<li>When asked, set the package name and save location (for example “Matchday 10 vs XX”).</li>
+<li>Choose whether to <strong>copy</strong> or <strong>move</strong> the video into the package (Mac, Windows). To keep the video in its original location too, choose “Copy.”</li>
+</ol>
+<div class="note">If the video is split into several files, such as first and second half, select them together and they open joined in file name order.<br>Next time, use <span class="btn">Open Package</span> to carry on with your tags and drawings.</div>
+</section>
+
+<section id="buttons">
+<h2>4. Set up tag buttons</h2>
+<p>The buttons below the video are the ones you tag with. We recommend rebuilding them to match your team's analysis points.</p>
+<div class="fig">
+<svg viewBox="0 0 760 150" role="img" aria-label="Example tag buttons, each with its own color and key">
+  <text x="0" y="16" font-size="13" class="m">Tag buttons (example)</text>
+  <g font-size="13">
+    <rect x="0" y="28" width="118" height="44" rx="8" class="good"/><text x="12" y="56" class="wt">AT Good</text><rect x="88" y="36" width="22" height="22" rx="4" fill="#0003"/><text x="94" y="52" class="wt" font-size="12">Q</text>
+    <rect x="126" y="28" width="118" height="44" rx="8" class="bad"/><text x="138" y="56" class="wt">AT Bad</text><rect x="214" y="36" width="22" height="22" rx="4" fill="#0003"/><text x="219" y="52" class="wt" font-size="12">W</text>
+    <rect x="252" y="28" width="118" height="44" rx="8" class="blue"/><text x="264" y="56" class="wt">DF Good</text><rect x="340" y="36" width="22" height="22" rx="4" fill="#0003"/><text x="347" y="52" class="wt" font-size="12">E</text>
+    <rect x="378" y="28" width="118" height="44" rx="8" class="amber"/><text x="390" y="56" class="wt">DF Bad</text><rect x="466" y="36" width="22" height="22" rx="4" fill="#0003"/><text x="472" y="52" class="wt" font-size="12">R</text>
+  </g>
+  <text x="0" y="98" font-size="13" class="m">Flag buttons (example)</text>
+  <g font-size="12.5">
+    <rect x="0" y="108" width="74" height="28" rx="14" class="bf"/><text x="37" y="127" text-anchor="middle">Shot</text>
+    <rect x="82" y="108" width="62" height="28" rx="14" class="bf"/><text x="113" y="127" text-anchor="middle">Cross</text>
+    <rect x="152" y="108" width="54" height="28" rx="14" class="bf"/><text x="171" y="127">CK</text>
+    <rect x="214" y="108" width="54" height="28" rx="14" class="bf"/><text x="233" y="127">FK</text>
+  </g>
+  <g font-size="12.5" class="m">
+    <text x="530" y="42" class="m">← You choose the name,</text>
+    <text x="530" y="62" class="m">   color and key (1 character)</text>
+    <text x="300" y="127" class="m">← Extra information added to a tag</text>
+  </g>
+</svg>
+</div>
+<ol>
+<li>Open <span class="btn">⚙️ Tag Settings</span>.</li>
+<li>In the “Tags” tab, set each button's name, color and keyboard shortcut (1 character). Use <span class="btn">+ Add Tag</span> to add more.</li>
+<li>If needed, create extra-information buttons (Shot, Cross and so on) in the “Flags” tab.</li>
+</ol>
+
+<h3>Two ways to tag</h3>
+<div class="vs">
+  <div>
+    <div class="head">👆 One click</div>
+    <svg viewBox="0 0 360 120" role="img" aria-label="The few seconds around the moment you press become the tag">
+      <rect x="0" y="50" width="360" height="10" rx="5" class="bf"/>
+      <rect x="110" y="44" width="150" height="22" rx="4" class="good" opacity="0.9"/>
+      <path d="M190 18 L190 44" class="accent-stroke" marker-end="url(#ahA)"/>
+      <text x="166" y="14" font-size="12.5" font-weight="700">Moment you press</text>
+      <path d="M112 84 L188 84" class="ln" marker-start="url(#ah)" marker-end="url(#ah)"/>
+      <path d="M192 84 L258 84" class="ln" marker-start="url(#ah)" marker-end="url(#ah)"/>
+      <text x="118" y="104" font-size="12" class="m">Lead time</text>
+      <text x="198" y="104" font-size="12" class="m">Lag time</text>
+    </svg>
+    <p style="font-size:0.9rem;margin:6px 0 0">The <strong>few seconds around</strong> the moment you press automatically become a tag. You can set how many seconds before and after. Best for moments with one clear point, such as “the instant of a shot.”</p>
+  </div>
+  <div>
+    <div class="head">✌️ Start → End click</div>
+    <svg viewBox="0 0 360 120" role="img" aria-label="The first press sets the start, the second sets the end">
+      <rect x="0" y="50" width="360" height="10" rx="5" class="bf"/>
+      <rect x="80" y="44" width="200" height="22" rx="4" class="good" opacity="0.9"/>
+      <path d="M82 18 L82 44" class="accent-stroke" marker-end="url(#ahA)"/>
+      <path d="M278 18 L278 44" class="accent-stroke" marker-end="url(#ahA)"/>
+      <text x="50" y="14" font-size="12.5" font-weight="700">1st press</text>
+      <text x="250" y="14" font-size="12.5" font-weight="700">2nd press</text>
+      <text x="96" y="96" font-size="12" class="m">From one press to the next</text>
+    </svg>
+    <p style="font-size:0.9rem;margin:6px 0 0">The first press sets the start, and the second press of the same button sets the end. Best for moments of varying length, such as “from the start of an attack until we lose the ball.”</p>
+  </div>
+</div>
+<p>In <span class="btn">⚙️ Tag Settings</span> you can choose both the overall default and a method for each tag.</p>
+<div class="note">Save a button layout you use often as a “preset,” and you can load the same buttons for the next match.</div>
+</section>
+
+<section id="tagging">
+<h2>5. Tag while you watch</h2>
+<p>Play the video, and when a moment comes, just press the button (or its key).</p>
+<div class="fig">
+<svg viewBox="0 0 760 200" role="img" aria-label="Pressing a key during playback adds a band to the timeline and a tag to the list on the right">
+    <rect x="0" y="0" width="470" height="120" rx="8" fill="var(--pitch)"/>
+  <rect x="20" y="14" width="430" height="92" fill="none" stroke="#ffffff80" stroke-width="1.5"/>
+  <line x1="235" y1="14" x2="235" y2="106" stroke="#ffffff80" stroke-width="1.5"/>
+  <circle cx="235" cy="60" r="16" fill="none" stroke="#ffffff80" stroke-width="1.5"/>
+  <g fill="#fff"><circle cx="160" cy="50" r="4"/><circle cx="200" cy="80" r="4"/><circle cx="290" cy="44" r="4"/><circle cx="320" cy="76" r="4"/></g>
+  <g fill="#111"><circle cx="250" cy="58" r="4"/><circle cx="345" cy="58" r="4"/><circle cx="380" cy="86" r="4"/></g>
+  <text x="14" y="26" font-size="14" fill="#fff">▶</text>
+    <rect x="0" y="132" width="470" height="12" rx="6" class="bf"/>
+  <rect x="60" y="130" width="28" height="16" rx="3" class="good"/>
+  <rect x="150" y="130" width="18" height="16" rx="3" class="bad"/>
+  <rect x="236" y="130" width="34" height="16" rx="3" class="good"/>
+  <line x1="300" y1="126" x2="300" y2="150" stroke="var(--accent)" stroke-width="2.5"/>
+    <g font-size="12">
+    <rect x="0" y="160" width="90" height="34" rx="6" class="good"/><text x="10" y="182" class="wt">AT Good  Q</text>
+    <rect x="96" y="160" width="90" height="34" rx="6" class="bad"/><text x="106" y="182" class="wt">AT Bad  W</text>
+    <rect x="192" y="160" width="90" height="34" rx="6" class="blue"/><text x="202" y="182" class="wt">DF Good  E</text>
+    <rect x="288" y="160" width="90" height="34" rx="6" class="amber"/><text x="298" y="182" class="wt">DF Bad  R</text>
+  </g>
+  <text x="392" y="172" font-size="12" class="m">Press to</text>
+  <text x="392" y="188" font-size="12" class="m">add a band</text>
+    <rect x="500" y="0" width="260" height="194" rx="8" class="b"/>
+  <text x="514" y="24" font-size="13" font-weight="700">Tag list</text>
+  <g font-size="12.5">
+    <rect x="514" y="38" width="232" height="30" rx="5" class="bf"/><rect x="514" y="38" width="6" height="30" class="good"/><text x="528" y="58">AT Good   02:14</text><text x="700" y="58">✏️ ➕</text>
+    <rect x="514" y="74" width="232" height="30" rx="5" class="bf"/><rect x="514" y="74" width="6" height="30" class="bad"/><text x="528" y="94">AT Bad    05:31</text><text x="700" y="94">✏️ ➕</text>
+    <rect x="514" y="110" width="232" height="30" rx="5" class="bf" style="stroke: var(--accent); stroke-width: 2"/><rect x="514" y="110" width="6" height="30" class="good"/><text x="528" y="130">AT Good   08:47</text><text x="700" y="130">✏️ ➕</text>
+    <text x="528" y="164" class="m">Click to play that moment</text>
+  </g>
+</svg>
+</div>
+<ul>
+<li><kbd>Space</kbd> plays and pauses, <kbd>←</kbd> <kbd>→</kbd> go back and forward 3 seconds, and <kbd>J</kbd> <kbd>K</kbd> <kbd>L</kbd> rewind, stop and fast-forward.</li>
+<li>If you make a mistake, select the tag in the list and delete it, or undo with <kbd>⌘</kbd>+<kbd>Z</kbd> (<kbd>Ctrl</kbd>+<kbd>Z</kbd> on Windows).</li>
+<li>With a tag selected, press a flag button to add that flag to it (press again to remove it).</li>
+<li>To see the picture larger, switch to <span class="btn">⛶ Full Screen</span>. Only your most-used buttons float over the video.</li>
+</ul>
+<div class="note">Don't aim for perfection at first. It's better to tag generously and choose later. Tags are only marks, so having extra does no harm.</div>
+</section>
+
+<section id="review">
+<h2>6. Review and filter your tags</h2>
+<p>Open <span class="btn">📊 Table</span> to see tag × flag counts. Click a number to select all the tags that match it.</p>
+<div class="fig">
+<svg viewBox="0 0 760 210" role="img" aria-label="Table of tags and flags. Clicking the AT Good and Cross cell selects the 4 matching tags">
+  <g font-size="13">
+    <rect x="0" y="0" width="460" height="200" rx="8" class="b"/>
+    <text x="16" y="28" class="m">Tag \ Flag</text>
+    <text x="172" y="28" font-weight="700" text-anchor="middle">Shot</text><text x="261" y="28" font-weight="700" text-anchor="middle">Cross</text><text x="320" y="28" font-weight="700">CK</text><text x="390" y="28" font-weight="700">Total</text>
+    <line x1="0" y1="40" x2="460" y2="40" stroke="var(--line)"/>
+    <rect x="16" y="54" width="10" height="10" rx="2" class="good"/><text x="32" y="64">AT Good</text><text x="168" y="64">7</text>
+    <rect x="228" y="46" width="66" height="26" rx="5" class="accent" opacity="0.2"/><rect x="228" y="46" width="66" height="26" rx="5" class="accent-stroke"/><text x="256" y="64" font-weight="700">4</text>
+    <text x="330" y="64">1</text><text x="400" y="64">12</text>
+    <rect x="16" y="88" width="10" height="10" rx="2" class="bad"/><text x="32" y="98">AT Bad</text><text x="168" y="98">2</text><text x="256" y="98">5</text><text x="330" y="98">0</text><text x="400" y="98">9</text>
+    <rect x="16" y="122" width="10" height="10" rx="2" class="blue"/><text x="32" y="132">DF Good</text><text x="168" y="132">0</text><text x="256" y="132">1</text><text x="330" y="132">3</text><text x="400" y="132">6</text>
+    <rect x="16" y="156" width="10" height="10" rx="2" class="amber"/><text x="32" y="166">DF Bad</text><text x="168" y="166">3</text><text x="256" y="166">2</text><text x="330" y="166">2</text><text x="400" y="166">8</text>
+    <text x="276" y="80" font-size="18">👆</text>
+  </g>
+  <path d="M470 60 L 520 60" class="ln" marker-end="url(#ah)"/>
+  <rect x="530" y="0" width="230" height="200" rx="8" class="b"/>
+  <text x="544" y="26" font-size="13" font-weight="700">4 selected</text>
+  <g font-size="12.5">
+    <rect x="544" y="38" width="202" height="28" rx="5" class="bf" style="stroke: var(--accent); stroke-width: 2"/><rect x="544" y="38" width="6" height="28" class="good"/><text x="558" y="57">AT Good 12:05 Cross</text>
+    <rect x="544" y="72" width="202" height="28" rx="5" class="bf" style="stroke: var(--accent); stroke-width: 2"/><rect x="544" y="72" width="6" height="28" class="good"/><text x="558" y="91">AT Good 31:12 Cross</text>
+    <rect x="544" y="106" width="202" height="28" rx="5" class="bf" style="stroke: var(--accent); stroke-width: 2"/><rect x="544" y="106" width="6" height="28" class="good"/><text x="558" y="125">AT Good 58:40 Cross</text>
+    <rect x="544" y="140" width="202" height="28" rx="5" class="bf" style="stroke: var(--accent); stroke-width: 2"/><rect x="544" y="140" width="6" height="28" class="good"/><text x="558" y="159">AT Good 83:02 Cross</text>
+    <text x="544" y="190" class="m">→ All to a playlist</text>
+  </g>
+</svg>
+</div>
+<ul>
+<li>Click a tag in the list to play just that moment.</li>
+<li>Use the sort options above the list (Timeline order, By tag, By label) to view tags of the same type together.</li>
+</ul>
+</section>
+
+<section id="playlist">
+<h2>7. Build a playlist</h2>
+<p>A playlist gathers the moments you want to show your players and puts them in order. When you open a playlist, the <strong>Tag Board</strong> appears below the video.</p>
+<div class="fig">
+<svg viewBox="0 0 760 220" role="img" aria-label="The Tag Board. Moments appear as bands sized by length in rows by type. Drag to reorder and play each row in sequence">
+  <g font-size="13">
+    <rect x="0" y="0" width="760" height="210" rx="8" class="b"/>
+    <text x="14" y="24" font-weight="700">Tag Board</text>
+        <g>
+      <rect x="10" y="38" width="740" height="44" rx="6" class="bf"/>
+      <text x="22" y="66" font-weight="700">▶</text><rect x="44" y="54" width="10" height="10" rx="2" class="good"/><text x="60" y="64">AT Good</text>
+      <rect x="150" y="44" width="110" height="32" rx="5" class="good"/><text x="160" y="65" font-size="12" class="wt">vs A 12:05</text>
+      <rect x="266" y="44" width="80" height="32" rx="5" class="good"/><text x="274" y="65" font-size="12" class="wt">vs A 51:40</text>
+      <rect x="352" y="44" width="140" height="32" rx="5" class="good"/><text x="362" y="65" font-size="12" class="wt">vs B 08:22</text>
+      <rect x="498" y="44" width="90" height="32" rx="5" class="good" opacity="0.35"/>
+    </g>
+    <g>
+      <rect x="10" y="90" width="740" height="44" rx="6" class="bf"/>
+      <text x="22" y="118" font-weight="700">▶</text><rect x="44" y="106" width="10" height="10" rx="2" class="bad"/><text x="60" y="116">AT Bad</text>
+      <rect x="150" y="96" width="84" height="32" rx="5" class="bad"/><text x="160" y="117" font-size="12" class="wt">vs A 18:40</text>
+      <rect x="240" y="96" width="120" height="32" rx="5" class="bad"/><text x="250" y="117" font-size="12" class="wt">vs B 63:15</text>
+    </g>
+    <g>
+      <rect x="10" y="142" width="740" height="44" rx="6" class="bf"/>
+      <text x="22" y="170" font-weight="700">▶</text><text x="44" y="168">Unsorted</text>
+      <rect x="150" y="148" width="90" height="32" rx="5" class="m" opacity="0.6"/><text x="160" y="169" font-size="12" class="wt">Slide</text>
+      <rect x="246" y="148" width="96" height="32" rx="5" class="violet"/><text x="254" y="169" font-size="12" class="wt">vs B 77:10</text>
+    </g>
+        <path d="M300 156 C 380 140, 480 110, 540 80" class="accent-stroke" stroke-dasharray="6 4" marker-end="url(#ahA)"/>
+    <text x="560" y="24" font-size="12.5" class="m">Drag to reorder or move rows</text>
+    <text x="14" y="204" font-size="12" class="m">▶ plays that row from left to right / band length = moment length</text>
+  </g>
+</svg>
+</div>
+<ol>
+<li>Create a playlist with <span class="btn">New Playlist</span>.</li>
+<li>Add moments with <span class="btn">➕</span> in the tag list (or <span class="btn">Add to Playlist</span> for selected tags). You can also open another match's package and add to the same playlist.</li>
+<li>Drag bands on the Tag Board to reorder them or move them to another row. Add rows with <span class="btn">➕ Add Row</span>.</li>
+<li>Press <span class="btn">▶</span> on a row to play just that row in sequence. Use <span class="btn">Insert Slide</span> to put an explanation page between moments.</li>
+</ol>
+<div class="note">A playlist refers to the original packages, so moving or deleting a package stops its moments from playing. When giving a playlist to someone else, use <span class="btn">📦 Make Standalone</span> so it opens without the packages.</div>
+</section>
+
+<section id="effects">
+<h2>8. Draw tactics (Pro plan)</h2>
+<div class="note pro">Effects mode is a Pro plan feature.</div>
+<div class="fig">
+<svg viewBox="0 0 760 260" role="img" aria-label="Effects mode. With the tools on the left, draw discs that follow players, arrows and zones over the video">
+    <rect x="0" y="0" width="56" height="220" rx="8" class="b"/>
+  <g font-size="12" text-anchor="middle">
+    <rect x="8" y="10" width="40" height="40" rx="6" class="accent" opacity="0.18"/><text x="28" y="36" font-size="18">⭕</text>
+    <text x="28" y="80" font-size="18">📍</text>
+    <text x="28" y="122" font-size="18">↗️</text>
+    <text x="28" y="164" font-size="18">⬛</text>
+    <text x="28" y="204" font-size="18">⏸</text>
+  </g>
+    <rect x="68" y="0" width="600" height="220" rx="8" fill="var(--pitch)"/>
+  <g fill="var(--pitch2)"><rect x="68" y="0" width="60" height="220"/><rect x="188" y="0" width="60" height="220"/><rect x="308" y="0" width="60" height="220"/><rect x="428" y="0" width="60" height="220"/><rect x="548" y="0" width="60" height="220"/></g>
+  <rect x="88" y="16" width="560" height="188" fill="none" stroke="#ffffff90" stroke-width="1.5"/>
+  <rect x="548" y="60" width="100" height="100" fill="none" stroke="#ffffff90" stroke-width="1.5"/>
+    <polygon points="430,70 540,60 540,150 430,160" fill="#facc15" opacity="0.28" stroke="#facc15" stroke-width="2"/>
+    <g fill="#fff"><circle cx="260" cy="120" r="6"/><circle cx="350" cy="70" r="6"/><circle cx="400" cy="170" r="6"/><circle cx="470" cy="110" r="6"/></g>
+  <g fill="#1f2937"><circle cx="420" cy="90" r="6"/><circle cx="500" cy="130" r="6"/><circle cx="520" cy="80" r="6"/><circle cx="380" cy="120" r="6"/></g>
+    <path d="M200 160 C 230 150, 245 135, 258 124" stroke="#fff" stroke-width="2" stroke-dasharray="4 4" fill="none" opacity="0.8"/>
+  <ellipse cx="260" cy="128" rx="18" ry="7" fill="none" stroke="#38bdf8" stroke-width="3"/>
+    <path d="M270 112 C 330 60, 400 50, 462 100" stroke="#fff" stroke-width="3.5" fill="none" marker-end="url(#ahW)"/>
+    <g font-size="12.5">
+    <rect x="160" y="182" width="190" height="24" rx="12" fill="#000a"/><text x="172" y="199" fill="#fff">Click player → auto-track</text>
+    <rect x="300" y="26" width="158" height="24" rx="12" fill="#000a"/><text x="312" y="43" fill="#fff">Arrows show movement</text>
+    <rect x="442" y="168" width="140" height="24" rx="12" fill="#000a"/><text x="454" y="185" fill="#fff">Zones show space</text>
+  </g>
+    <rect x="68" y="230" width="600" height="26" rx="6" class="bf"/>
+  <rect x="120" y="236" width="300" height="6" rx="3" fill="#38bdf8"/>
+  <rect x="250" y="246" width="250" height="6" rx="3" class="m"/>
+  <rect x="400" y="236" width="18" height="16" rx="2" class="amber"/>
+  <text x="680" y="248" font-size="12" class="m">Timing</text>
+  <text x="680" y="40" font-size="12" class="m">⭕ Disc</text>
+  <text x="680" y="60" font-size="12" class="m">📍 Spotlight</text>
+  <text x="680" y="80" font-size="12" class="m">↗️ Arrow</text>
+  <text x="680" y="100" font-size="12" class="m">⬛ Zone</text>
+  <text x="680" y="120" font-size="12" class="m">⏸ Freeze</text>
+</svg>
+</div>
+<ol>
+<li>Press <span class="btn">✏️</span> in the tag list (or on a playlist moment) to enter Effects mode for that moment.</li>
+<li>Choose a tool on the left, such as Disc, Spotlight, Arrow or Zone, and draw over the video. Disc and Spotlight <strong>follow a player automatically with a single click</strong>.</li>
+<li>Use the timeline below to adjust when each drawing appears. You can also add a “Freeze” to stop the video at the moment you want to explain.</li>
+<li>Your drawings are saved automatically. Press <span class="btn">Exit Effects Mode</span> to return to the previous screen.</li>
+</ol>
+</section>
+
+<section id="export">
+<h2>9. Export as video</h2>
+<div class="fig">
+<svg viewBox="0 0 760 230" role="img" aria-label="Three ways to export: one moment, a whole playlist as one video, or a separate file per moment">
+  <g font-size="13">
+        <text x="0" y="18" font-weight="700">One moment</text>
+    <rect x="0" y="30" width="60" height="30" rx="4" class="good"/>
+    <path d="M70 45 L 120 45" class="ln" marker-end="url(#ah)"/>
+    <rect x="130" y="28" width="110" height="34" rx="6" class="b"/><text x="142" y="50">🎬 One mp4</text>
+
+        <text x="0" y="98" font-weight="700">Whole playlist as one video</text>
+    <rect x="0" y="110" width="50" height="30" rx="4" class="good"/>
+    <rect x="54" y="110" width="36" height="30" rx="4" class="good"/>
+    <rect x="94" y="110" width="30" height="30" rx="4" class="m" opacity="0.6"/>
+    <rect x="128" y="110" width="56" height="30" rx="4" class="good"/>
+    <path d="M194 125 L 244 125" class="ln" marker-end="url(#ah)"/>
+    <rect x="254" y="108" width="230" height="34" rx="6" class="b"/><text x="266" y="130">🎬 One mp4 with drawings</text>
+
+        <text x="0" y="178" font-weight="700">A separate file per moment</text>
+    <rect x="0" y="190" width="50" height="30" rx="4" class="good"/>
+    <rect x="54" y="190" width="36" height="30" rx="4" class="good"/>
+    <rect x="94" y="190" width="56" height="30" rx="4" class="good"/>
+    <path d="M160 205 L 210 205" class="ln" marker-end="url(#ah)"/>
+    <rect x="220" y="186" width="300" height="38" rx="6" class="b"/>
+    <text x="230" y="210">🗂 Folder</text>
+    <text x="310" y="210" font-size="12" class="m">01.mp4 · 02.mp4 · 03.mp4</text>
+  </g>
+  <g font-size="12.5" class="m">
+    <text x="560" y="40" class="m">Drawings are burned</text>
+    <text x="560" y="58" class="m">into the video</text>
+    <text x="560" y="110" class="m">Original video and tags</text>
+    <text x="560" y="128" class="m">stay as they are</text>
+    <text x="560" y="180" class="m">Exported files play</text>
+    <text x="560" y="198" class="m">on any device</text>
+  </g>
+</svg>
+</div>
+<ul>
+<li>One moment only: <span class="btn">🎬 Export this clip</span> on the tag</li>
+<li>The whole playlist as one video: <span class="btn">🎬 Export as Video</span> Check rows on the Tag Board to export only those rows.</li>
+<li>A separate file per moment: <span class="btn">🗂 Export Clips Separately</span></li>
+</ul>
+</section>
+
+<section id="clips">
+<h2>10. Start from ready-made clips</h2>
+<p>If you already have video files cut by moment, you can skip the tagging steps.</p>
+<div class="fig">
+<svg viewBox="0 0 760 130" role="img" aria-label="Choosing several video files creates a playlist with one moment per file">
+  <g font-size="12.5">
+    <rect x="0" y="10" width="140" height="28" rx="5" class="b"/><text x="10" y="29">🎞 Goal 1.mp4</text>
+    <rect x="0" y="46" width="140" height="28" rx="5" class="b"/><text x="10" y="65">🎞 Goal 2.mp4</text>
+    <rect x="0" y="82" width="140" height="28" rx="5" class="b"/><text x="10" y="101">🎞 CK defense.mp4</text>
+  </g>
+  <path d="M152 60 L 260 60" class="ln" marker-end="url(#ah)"/>
+  <text x="160" y="32" font-size="12" font-weight="700">New Playlist</text><text x="160" y="50" font-size="12" font-weight="700">from Videos</text>
+  <rect x="272" y="0" width="300" height="122" rx="10" class="b"/>
+  <text x="286" y="24" font-size="13" font-weight="700">📋 Playlist</text>
+  <g font-size="12">
+    <text x="286" y="46" class="m">Unsorted</text>
+    <rect x="336" y="34" width="70" height="18" rx="3" class="m" opacity="0.7"/><text x="342" y="47" class="wt" font-size="11">Goal 1</text>
+    <rect x="410" y="34" width="56" height="18" rx="3" class="m" opacity="0.7"/><text x="416" y="47" class="wt" font-size="11">Goal 2</text>
+    <rect x="470" y="34" width="86" height="18" rx="3" class="m" opacity="0.7"/><text x="476" y="47" class="wt" font-size="11">CK defense</text>
+    <text x="286" y="78" class="m">1 file = 1 moment. Then</text>
+    <text x="286" y="96" class="m">reorder, draw and export</text>
+  </g>
+</svg>
+</div>
+<ol>
+<li>Press <span class="btn">New Playlist from Videos</span> and select your video files together.</li>
+<li>Each file becomes one moment, and the playlist is ready.</li>
+<li>From there you can reorder, draw and export as in sections <a href="#playlist">7</a>–<a href="#export">9</a>.</li>
+</ol>
+</section>
+
+<section id="keys">
+<h2>11. Keyboard shortcuts</h2>
+<table>
+<tr><th>Space</th><td>Play / Pause</td></tr>
+<tr><th>← / →</th><td>Back 3 seconds / Forward 3 seconds</td></tr>
+<tr><th>J / K / L</th><td>Rewind / Stop / Fast-forward</td></tr>
+<tr><th>I / O</th><td>Mark start / end</td></tr>
+<tr><th>The character you set</th><td>Same as pressing that tag's button</td></tr>
+<tr><th>⌘Z / ⌘⇧Z</th><td>Undo / Redo (Ctrl on Windows)</td></tr>
+</table>
+<p>On iPad, tap the on-screen buttons.</p>
+<p>You can also find this content in the app under the “Help” menu > “How to use CoachTag” (“⚙️ Settings” on iPad). If you have any questions, please contact us through <a href="support-en.html">Support</a>.</p>
+</section>
+
+<footer>&copy; 2026 CoachTag</footer>
+</body>
+</html>
